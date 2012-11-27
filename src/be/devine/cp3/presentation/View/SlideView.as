@@ -1,16 +1,16 @@
 /**
  * Created with IntelliJ IDEA.
  * User: Sabatino
- * Date: 23/11/12
- * Time: 11:07
+ * Date: 28/11/12
+ * Time: 00:28
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.presentation {
+package be.devine.cp3.presentation.View {
 import be.devine.cp3.presentation.model.AppModel;
 
 import starling.display.Sprite;
 
-public class Presentation extends starling.display.Sprite {
+public class SlideView extends starling.display.Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -19,18 +19,14 @@ public class Presentation extends starling.display.Sprite {
     private var _appModel:AppModel;
 
     //Constructor
-    public function Presentation() {
-        trace("[Presentation] Construct");
+    public function SlideView() {
+        trace("[SlideView] Construct");
         _appModel = AppModel.getInstance();
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
-
-    public function resize(w:Number, h:Number):void{
-
-    }
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************

@@ -1,34 +1,53 @@
 /**
  * Created with IntelliJ IDEA.
  * User: Sabatino
- * Date: 23/11/12
- * Time: 11:07
+ * Date: 28/11/12
+ * Time: 00:26
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.presentation {
-import be.devine.cp3.presentation.model.AppModel;
+package be.devine.cp3.presentation.model {
+import be.devine.cp3.presentation.SlideVO;
 
-import starling.display.Sprite;
-
-public class Presentation extends starling.display.Sprite {
+public class AppModel {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
      **************************************************************************************************************************************/
 
-    private var _appModel:AppModel;
+    public static const DATA_CHANGED:String = "dataChanged";
+    public static const MENU_STATE_CHANGED:String = "menuStringChanged";
+    public static const XML_CHANGED:String = "xmlChanged";
+
+    private var _vectorSlides:Vector.<SlideVO>;
+    private var _menuVisible:Boolean = false;
+    private var _xmlPath:String;
+
+    private static var _instance:AppModel;
 
     //Constructor
-    public function Presentation() {
-        trace("[Presentation] Construct");
-        _appModel = AppModel.getInstance();
+    public function AppModel(e:Enforcer) {
+        if(e == null){
+            throw new Error("Use .getInstance()");
+        }
+        trace("[AppModel] Construct");
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function resize(w:Number, h:Number):void{
+    public static function getInstance():AppModel{
+        if(_instance == null){
+            _instance = new AppModel(new Enforcer());
+        }
+        return _instance;
+    }
+
+    public function goToNext():void{
+
+    }
+
+    public function goToPrev():void{
 
     }
 
@@ -37,3 +56,6 @@ public class Presentation extends starling.display.Sprite {
      **************************************************************************************************************************************/
 }
 }
+
+// Singleton enforcer
+internal class Enforcer{}
