@@ -14,6 +14,8 @@ import flash.events.Event;
 import flash.net.URLLoader;
 import flash.net.URLRequest;
 
+import starling.animation.Tween;
+
 import starling.events.Event;
 
 public class DataParser {

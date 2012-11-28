@@ -4,7 +4,7 @@
     </slide>
 
     <slide type="imageWithTitle">
-        <image src="/path/image.jpg"></image>
+        <image src="/assets/images.jpg"></image>
         <title>Dit is een titel</title>
     </slide>
 
