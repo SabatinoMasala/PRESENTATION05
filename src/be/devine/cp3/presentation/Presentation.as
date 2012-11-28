@@ -8,9 +8,11 @@
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.events.Event;
+
 import starling.display.Sprite;
 
-public class Presentation extends starling.display.Sprite {
+public class Presentation extends Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -22,7 +24,7 @@ public class Presentation extends starling.display.Sprite {
     public function Presentation() {
         trace("[Presentation] Construct");
         _appModel = AppModel.getInstance();
-        this.addEventListener(flash.events.Event.ADDED_TO_STAGE, addedToStageHandler);
+        this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
         
         _appModel.addEventListener(AppModel.XML_CHANGED, xmlChangedHandler);
 
@@ -32,6 +34,16 @@ public class Presentation extends starling.display.Sprite {
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
+
+    private function addedToStageHandler(event:Event):void {
+    }
+
+    private function init():void {
+
+    }
+
+    private function xmlChangedHandler(event:Event):void {
+    }
 
     public function resize(w:Number, h:Number):void{
 
