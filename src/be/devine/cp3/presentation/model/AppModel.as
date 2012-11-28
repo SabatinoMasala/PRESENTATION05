@@ -65,7 +65,6 @@ public class AppModel extends flash.events.EventDispatcher {
             _menuVisible = value;
 
             //dispatchen
-
             dispatchEvent(new flash.events.Event(MENU_STATE_CHANGED, true));
         }
     }
