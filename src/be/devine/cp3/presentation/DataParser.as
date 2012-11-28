@@ -6,7 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
-import be.devine.cp3.presentation.model.AppModel;
+
+import flash.events.Event;
+
+import flash.net.URLLoader;
+import flash.net.URLRequest;
 
 public class DataParser {
 
@@ -15,7 +19,7 @@ public class DataParser {
      **************************************************************************************************************************************/
 
     private var _vectorSlides:Vector.<SlideVO>;
-    private var _appModel:AppModel;
+    private var _xml:XML;
 
     //Constructor
     public function DataParser() {
@@ -27,14 +31,56 @@ public class DataParser {
      **************************************************************************************************************************************/
 
     public function parse(xml:String):void {
+        var urlLoader:URLLoader = new URLLoader();
+        urlLoader.load(new URLRequest(xml));
+        urlLoader.addEventListener(flash.events.Event.COMPLETE, loadedHandler);
         // XML inladen met URLLoader
         // XML parsen -> SlideVO's aanmaken
         // SlideVO's in Vector steken
         // SlideVO's naar appModel sturen
     }
 
+    private function parseXML():void{
+        for each(var slide:XML in _xml.slide){
+            var slideType:String;
+            switch(slide.@type){
+                default:
+                case SlideType.TITLE:
+                        slideType = SlideType.TITLE;
+                    break;
+                case SlideType.BULLETS:
+                        slideType = SlideType.BULLETS;
+                    break;
+                case SlideType.IMAGE_ONLY:
+                        slideType = SlideType.IMAGE_ONLY;
+                    break;
+                case SlideType.IMAGE_TITLE:
+                        slideType = SlideType.IMAGE_TITLE;
+                    break;
+            }
+            var slideVO:SlideVO = new SlideVO();
+            slideVO.type = slideType;
+        }
+    }
+
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+
+    private function loadedHandler(event:flash.events.Event):void {
+        var l:URLLoader = event.currentTarget as URLLoader;
+        xml = XML(l.data);
+    }
+
+    public function get xml():XML {
+        return _xml;
+    }
+
+    public function set xml(value:XML):void {
+        if(_xml != value){
+            _xml = value;
+            parseXML();
+        }
+    }
 }
 }

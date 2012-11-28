@@ -8,9 +8,8 @@
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
-import flash.events.Event;
-
 import starling.display.Sprite;
+import starling.events.Event;
 
 public class Presentation extends Sprite {
 
@@ -37,10 +36,10 @@ public class Presentation extends Sprite {
 
     private function init():void {
         _dataParser = new DataParser();
-        _appModel.xmlPath = "assets/assets.xml";
+        _appModel.xmlPath = "assets/slides.xml";
     }
 
-    private function xmlChangedHandler(event:Event):void {
+    private function xmlChangedHandler(event:starling.events.Event):void {
         trace("XML Path is aangepast");
         _dataParser.parse(_appModel.xmlPath);
     }
