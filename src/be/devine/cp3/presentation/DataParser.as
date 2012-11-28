@@ -7,10 +7,14 @@
  */
 package be.devine.cp3.presentation {
 
+import be.devine.cp3.presentation.model.AppModel;
+
 import flash.events.Event;
 
 import flash.net.URLLoader;
 import flash.net.URLRequest;
+
+import starling.events.Event;
 
 public class DataParser {
 
@@ -20,51 +24,64 @@ public class DataParser {
 
     private var _vectorSlides:Vector.<SlideVO>;
     private var _xml:XML;
+    private var _appModel:AppModel;
 
     //Constructor
     public function DataParser() {
         trace("[DataParser] Construct");
+        _vectorSlides = new Vector.<SlideVO>();
+        _appModel = AppModel.getInstance();
+        _appModel.addEventListener(AppModel.XML_CHANGED, xmlChangedHandler);
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function parse(xml:String):void {
+    private function parse():void {
         var urlLoader:URLLoader = new URLLoader();
-        urlLoader.load(new URLRequest(xml));
+        urlLoader.load(new URLRequest(_appModel.xmlPath));
         urlLoader.addEventListener(flash.events.Event.COMPLETE, loadedHandler);
-        // XML inladen met URLLoader
-        // XML parsen -> SlideVO's aanmaken
-        // SlideVO's in Vector steken
-        // SlideVO's naar appModel sturen
     }
 
     private function parseXML():void{
         for each(var slide:XML in _xml.slide){
             var slideType:String;
-            //var slideVO:SlideVO = new SlideVO();
-            trace("type", slide.@type);
+            var slideVO:SlideVO = new SlideVO();
             var type:String = slide.@type;
 
             switch (type){
-                case SlideType.TITLE:
                 default:
-                    trace("enkel een titel");
-                    slideType = SlideType.TITLE;
-                    break;
+                case SlideType.TITLE:
+                        slideType = SlideType.TITLE;
+                        slideVO.title = slide.title;
+                break;
                 case SlideType.BULLETS:
+                    var vectorBullets:Vector.<String> = new Vector.<String>();
+                    for each(var bullet:XML in slide.bullet){
+                        vectorBullets.push(bullet);
+                    }
+                    slideVO.bullets = vectorBullets;
                     slideType = SlideType.BULLETS;
                     break;
                 case SlideType.IMAGE_ONLY:
+                    slideVO.imagePath = slide.image.@src;
                     slideType = SlideType.IMAGE_ONLY;
                     break;
                 case SlideType.IMAGE_TITLE:
+                    slideVO.title = slide.title;
+                    slideVO.imagePath = slide.image.@src;
                     slideType = SlideType.IMAGE_TITLE;
                     break;
             }
-            //slideVO.type = slideType;
+            slideVO.type = slideType;
+            _vectorSlides.push(slideVO);
         }
+        _appModel.vectorSlides = _vectorSlides;
+    }
+
+    private function xmlChangedHandler(event:starling.events.Event):void {
+        this.parse();
     }
 
     /**************************************************************************************************************************************

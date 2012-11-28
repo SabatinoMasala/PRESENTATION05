@@ -2,24 +2,30 @@
  * Created with IntelliJ IDEA.
  * User: Sabatino
  * Date: 28/11/12
- * Time: 00:29
+ * Time: 22:55
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.presentation {
-public class SlideVO {
+package be.devine.cp3.presentation.View {
+import be.devine.cp3.presentation.SlideVO;
+
+import starling.display.Sprite;
+import starling.text.TextField;
+
+public class Slide extends starling.display.Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
      **************************************************************************************************************************************/
 
-    public var type:String;
-    public var imagePath:String;
-    public var bullets:Vector.<String>;
-    public var title:String;
+    private var _slideVO:SlideVO;
 
     //Constructor
-    public function SlideVO() {
-        trace("[SlideVO] Construct");
+    public function Slide(slideVO:SlideVO) {
+        trace("[slide] construct");
+        this._slideVO = slideVO;
+        var tf:starling.text.TextField = new starling.text.TextField(200, 100, this._slideVO.title);
+        tf.color = 0x000000;
+        addChild(tf);
     }
 
     /**************************************************************************************************************************************
