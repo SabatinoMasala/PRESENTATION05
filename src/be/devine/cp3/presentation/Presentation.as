@@ -8,25 +8,42 @@
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.events.Event;
+
 import starling.display.Sprite;
 
-public class Presentation extends starling.display.Sprite {
+public class Presentation extends Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
+    private var _dataParser:DataParser;
 
     //Constructor
     public function Presentation() {
         trace("[Presentation] Construct");
         _appModel = AppModel.getInstance();
+
+        _appModel.addEventListener(AppModel.XML_CHANGED, xmlChangedHandler);
+
+        init();
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
+
+    private function init():void {
+        _dataParser = new DataParser();
+        _appModel.xmlPath = "assets/assets.xml";
+    }
+
+    private function xmlChangedHandler(event:Event):void {
+        trace("XML Path is aangepast");
+        _dataParser.parse(_appModel.xmlPath);
+    }
 
     public function resize(w:Number, h:Number):void{
 

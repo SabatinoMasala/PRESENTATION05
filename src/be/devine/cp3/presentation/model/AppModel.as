@@ -8,7 +8,11 @@
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideVO;
 
-public class AppModel {
+import starling.events.Event;
+
+import starling.events.EventDispatcher;
+
+public class AppModel extends EventDispatcher{
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -54,6 +58,17 @@ public class AppModel {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+
+    public function get xmlPath():String {
+        return _xmlPath;
+    }
+
+    public function set xmlPath(value:String):void {
+        if(_xmlPath != value){
+            _xmlPath = value;
+            dispatchEvent(new Event(XML_CHANGED));
+        }
+    }
 }
 }
 
