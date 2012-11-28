@@ -43,24 +43,27 @@ public class DataParser {
     private function parseXML():void{
         for each(var slide:XML in _xml.slide){
             var slideType:String;
-            var slideVO:SlideVO = new SlideVO();
-            switch(slide.@type){
-                default:
+            //var slideVO:SlideVO = new SlideVO();
+            trace("type", slide.@type);
+            var type:String = slide.@type;
+
+            switch (type){
                 case SlideType.TITLE:
-                        slideType = SlideType.TITLE;
-                        trace(slide);
+                default:
+                    trace("enkel een titel");
+                    slideType = SlideType.TITLE;
                     break;
                 case SlideType.BULLETS:
-                        slideType = SlideType.BULLETS;
+                    slideType = SlideType.BULLETS;
                     break;
                 case SlideType.IMAGE_ONLY:
-                        slideType = SlideType.IMAGE_ONLY;
+                    slideType = SlideType.IMAGE_ONLY;
                     break;
                 case SlideType.IMAGE_TITLE:
-                        slideType = SlideType.IMAGE_TITLE;
+                    slideType = SlideType.IMAGE_TITLE;
                     break;
             }
-            slideVO.type = slideType;
+            //slideVO.type = slideType;
         }
     }
 

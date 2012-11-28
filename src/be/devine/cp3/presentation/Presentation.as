@@ -13,7 +13,6 @@ import flash.ui.Keyboard;
 
 import starling.display.Sprite;
 import starling.events.Event;
-import starling.events.KeyboardEvent;
 
 public class Presentation extends Sprite {
 
@@ -22,6 +21,7 @@ public class Presentation extends Sprite {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
+    private var _dataParser:DataParser;
 
     //Constructor
     public function Presentation() {
@@ -50,10 +50,12 @@ public class Presentation extends Sprite {
     }
 
     private function init():void {
-
+        _dataParser = new DataParser();
+        _appModel.xmlPath = "assets/slides.xml";
     }
 
     private function xmlChangedHandler(event:starling.events.Event):void {
+        _dataParser.parse(_appModel.xmlPath);
     }
 
     public function resize(w:Number, h:Number):void{
