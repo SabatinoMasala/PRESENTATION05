@@ -10,6 +10,11 @@ import be.devine.cp3.presentation.model.AppModel;
 
 import flash.events.Event;
 
+import starling.animation.Tween;
+import starling.core.Starling;
+
+import starling.display.Quad;
+
 import starling.display.Sprite;
 
 public class MenuControlView extends Sprite {
@@ -19,6 +24,7 @@ public class MenuControlView extends Sprite {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
+    private var _container:Sprite = new Sprite();
 
     //Constructor
     public function MenuControlView() {
@@ -33,7 +39,15 @@ public class MenuControlView extends Sprite {
      **************************************************************************************************************************************/
 
     public function display(event:flash.events.Event):void{
-
+        if(_appModel.menuVisible == true){
+            var t:Tween = new Tween(_container, 1);
+            t.animate("y", stage.stageHeight);
+            Starling.juggler.add(t);
+        } else {
+            var t:Tween = new Tween(_container, 1);
+            t.animate("y", stage.stageHeight - 100);
+            Starling.juggler.add(t);
+        }
     }
 
     /**************************************************************************************************************************************
@@ -41,6 +55,14 @@ public class MenuControlView extends Sprite {
      **************************************************************************************************************************************/
     private function addedToStageHandler(e:flash.events.Event):void {
         stage.addEventListener(AppModel.MENU_STATE_CHANGED, display);
+
+        var background:Quad = new Quad(stage.stageWidth, 100);
+        background.color = 0x000000;
+
+        _container.addChild(background);
+        stage.addChild(_container);
+
+        _container.y = stage.stageHeight;
     }
 }
 }
