@@ -7,7 +7,6 @@
  */
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideVO;
-
 import flash.events.Event;
 import flash.events.EventDispatcher;
 
@@ -68,6 +67,17 @@ public class AppModel extends flash.events.EventDispatcher {
             //dispatchen
 
             dispatchEvent(new flash.events.Event(MENU_STATE_CHANGED, true));
+        }
+    }
+
+    public function get xmlPath():String {
+        return _xmlPath;
+    }
+
+    public function set xmlPath(value:String):void {
+        if(_xmlPath != value){
+            _xmlPath = value;
+            dispatchEvent(new Event(XML_CHANGED));
         }
     }
 }
