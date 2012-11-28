@@ -61,6 +61,7 @@ public class AppModel extends starling.events.EventDispatcher {
     public function goToPrev():void{
 
         if(this.currentIndex > 0){
+            trace(this.currentIndex)
             //er is een vorige
             currentSlide = _vectorSlides[this.currentIndex-1];
             dispatchEvent(new Event(SLIDE_CHANGED));
