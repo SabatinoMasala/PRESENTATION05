@@ -9,6 +9,7 @@ package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
 import flash.events.Event;
+import flash.events.KeyboardEvent;
 
 import starling.display.Sprite;
 
@@ -36,6 +37,11 @@ public class Presentation extends Sprite {
      **************************************************************************************************************************************/
 
     private function addedToStageHandler(event:Event):void {
+        stage.addEventListener(starling.events.KeyboardEvent.KEY_DOWN, keyDownHandler);
+    }
+
+    private function keyDownHandler(starling.events:KeyboardEvent):void {
+
     }
 
     private function init():void {
