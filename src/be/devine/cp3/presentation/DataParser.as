@@ -43,10 +43,12 @@ public class DataParser {
     private function parseXML():void{
         for each(var slide:XML in _xml.slide){
             var slideType:String;
+            var slideVO:SlideVO = new SlideVO();
             switch(slide.@type){
                 default:
                 case SlideType.TITLE:
                         slideType = SlideType.TITLE;
+                        trace(slide);
                     break;
                 case SlideType.BULLETS:
                         slideType = SlideType.BULLETS;
@@ -58,7 +60,6 @@ public class DataParser {
                         slideType = SlideType.IMAGE_TITLE;
                     break;
             }
-            var slideVO:SlideVO = new SlideVO();
             slideVO.type = slideType;
         }
     }

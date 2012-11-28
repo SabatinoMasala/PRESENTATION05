@@ -77,7 +77,7 @@ public class AppModel extends flash.events.EventDispatcher {
     public function set xmlPath(value:String):void {
         if(_xmlPath != value){
             _xmlPath = value;
-            dispatchEvent(new Event(XML_CHANGED));
+            dispatchEvent(new flash.events.Event(XML_CHANGED));
         }
     }
 }

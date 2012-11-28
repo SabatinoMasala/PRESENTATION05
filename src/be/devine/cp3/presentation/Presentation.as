@@ -9,9 +9,9 @@ package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
 import flash.events.Event;
-import flash.events.KeyboardEvent;
 
 import starling.display.Sprite;
+import starling.events.Event;
 
 public class Presentation extends Sprite {
 
@@ -25,7 +25,7 @@ public class Presentation extends Sprite {
     public function Presentation() {
         trace("[Presentation] Construct");
         _appModel = AppModel.getInstance();
-        this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+        this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
         
         _appModel.addEventListener(AppModel.XML_CHANGED, xmlChangedHandler);
 
@@ -36,19 +36,14 @@ public class Presentation extends Sprite {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    private function addedToStageHandler(event:Event):void {
-        stage.addEventListener(starling.events.KeyboardEvent.KEY_DOWN, keyDownHandler);
-    }
-
-    private function keyDownHandler(starling.events:KeyboardEvent):void {
-
+    private function addedToStageHandler(event:starling.events.Event):void {
     }
 
     private function init():void {
 
     }
 
-    private function xmlChangedHandler(event:Event):void {
+    private function xmlChangedHandler(event:starling.events.Event):void {
     }
 
     public function resize(w:Number, h:Number):void{
