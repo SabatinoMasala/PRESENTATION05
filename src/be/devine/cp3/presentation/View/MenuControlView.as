@@ -8,9 +8,11 @@
 package be.devine.cp3.presentation.View {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.events.Event;
+
 import starling.display.Sprite;
 
-public class MenuControlView extends starling.display.Sprite {
+public class MenuControlView extends Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -22,18 +24,23 @@ public class MenuControlView extends starling.display.Sprite {
     public function MenuControlView() {
         trace("[MenuControlView] Construct");
         _appModel = AppModel.getInstance();
+
+        this.addEventListener(flash.events.Event.ADDED_TO_STAGE, addedToStageHandler);
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function display():void{
+    public function display(event:flash.events.Event):void{
 
     }
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+    private function addedToStageHandler(e:flash.events.Event):void {
+        stage.addEventListener(AppModel.MENU_STATE_CHANGED, display);
+    }
 }
 }

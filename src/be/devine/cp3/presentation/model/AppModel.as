@@ -8,7 +8,10 @@
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideVO;
 
-public class AppModel {
+import flash.events.Event;
+import flash.events.EventDispatcher;
+
+public class AppModel extends flash.events.EventDispatcher {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -54,6 +57,19 @@ public class AppModel {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+    public function get menuVisible():Boolean {
+        return _menuVisible;
+    }
+
+    public function set menuVisible(value:Boolean):void {
+        if(_menuVisible != value){
+            _menuVisible = value;
+
+            //dispatchen
+
+            dispatchEvent(new flash.events.Event(MENU_STATE_CHANGED, true));
+        }
+    }
 }
 }
 
