@@ -19,10 +19,15 @@ public class AppModel extends starling.events.EventDispatcher {
     public static const DATA_CHANGED:String = "dataChanged";
     public static const MENU_STATE_CHANGED:String = "menuStringChanged";
     public static const XML_CHANGED:String = "xmlChanged";
+    public static const SLIDE_CHANGED:String = "slideChanged";
 
     private var _vectorSlides:Vector.<SlideVO>;
     private var _menuVisible:Boolean = false;
     private var _xmlPath:String;
+
+    private var _currentIndex:uint;
+
+    private var _currentSlide:SlideVO;
 
     private static var _instance:AppModel;
 
@@ -46,11 +51,20 @@ public class AppModel extends starling.events.EventDispatcher {
     }
 
     public function goToNext():void{
-
+        if(this.currentIndex < _vectorSlides.length){
+            // Er is een volgende
+            currentSlide = _vectorSlides[this.currentIndex+1];
+            dispatchEvent(new Event(SLIDE_CHANGED));
+        }
     }
 
     public function goToPrev():void{
 
+        if(this.currentIndex > 0){
+            //er is een vorige
+            currentSlide = _vectorSlides[this.currentIndex-1];
+            dispatchEvent(new Event(SLIDE_CHANGED));
+        }
     }
 
     /**************************************************************************************************************************************
@@ -89,6 +103,21 @@ public class AppModel extends starling.events.EventDispatcher {
             _vectorSlides = value;
             dispatchEvent(new Event(DATA_CHANGED));
         }
+    }
+
+    public function get currentSlide():SlideVO {
+        return _currentSlide;
+    }
+
+    public function set currentSlide(value:SlideVO):void {
+        if(_currentSlide != value){
+            _currentSlide = value;
+            dispatchEvent(new Event(SLIDE_CHANGED));
+        }
+    }
+
+    public function get currentIndex():uint {
+        return _vectorSlides.indexOf(_currentSlide);
     }
 }
 }

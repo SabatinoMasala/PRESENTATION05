@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
+import be.devine.cp3.presentation.View.MenuControlView;
 import be.devine.cp3.presentation.View.SlideView;
 import be.devine.cp3.presentation.model.AppModel;
 
@@ -24,13 +25,17 @@ public class Presentation extends Sprite {
     private var _appModel:AppModel;
     private var _dataParser:DataParser;
     private var _slideView:SlideView;
+    private var _menuControlView:MenuControlView;
 
     //Constructor
     public function Presentation() {
         trace("[Presentation] Construct");
         _appModel = AppModel.getInstance();
         _slideView = new SlideView();
+        _menuControlView = new MenuControlView();
+
         addChild(_slideView);
+        addChild(_menuControlView);
 
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 
@@ -49,6 +54,10 @@ public class Presentation extends Sprite {
         if(event.keyCode == Keyboard.SPACE)
         {
             _appModel.menuVisible = !_appModel.menuVisible;
+        } else if (event.keyCode == Keyboard.RIGHT){
+            _appModel.goToNext();
+        } else if (event.keyCode == Keyboard.LEFT){
+           _appModel.goToPrev();
         }
     }
 

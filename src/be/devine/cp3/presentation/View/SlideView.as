@@ -29,6 +29,7 @@ public class SlideView extends Sprite {
 
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
+        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangeHandler);
     }
 
     /**************************************************************************************************************************************
@@ -43,6 +44,11 @@ public class SlideView extends Sprite {
         reset();
         makeSlides();
     }
+
+    private function slideChangeHandler(event:AppModel):void {
+
+    }
+
 
     private function makeSlides():void {
         var tempVector:Vector.<Slide> = new Vector.<Slide>();
