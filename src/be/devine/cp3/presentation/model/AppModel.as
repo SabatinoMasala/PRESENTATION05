@@ -7,10 +7,10 @@
  */
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideVO;
+import flash.events.Event;
+import flash.events.EventDispatcher;
 
-import starling.events.EventDispatcher;
-
-public class AppModel extends EventDispatcher {
+public class AppModel extends flash.events.EventDispatcher {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -65,8 +65,7 @@ public class AppModel extends EventDispatcher {
             _menuVisible = value;
 
             //dispatchen
-
-            dispatchEvent(new starling.events.Event(MENU_STATE_CHANGED, true));
+            dispatchEvent(new flash.events.Event(MENU_STATE_CHANGED, true));
         }
     }
 
@@ -77,7 +76,7 @@ public class AppModel extends EventDispatcher {
     public function set xmlPath(value:String):void {
         if(_xmlPath != value){
             _xmlPath = value;
-            dispatchEvent(new starling.events.Event(XML_CHANGED));
+            dispatchEvent(new flash.events.Event(XML_CHANGED));
         }
     }
 }
