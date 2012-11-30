@@ -10,14 +10,11 @@ import be.devine.cp3.presentation.model.AppModel;
 
 import flash.display.BitmapData;
 
-import flash.events.Event;
 import flash.geom.Point;
 
 import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.Image;
-
-import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.display.Stage;
@@ -82,14 +79,14 @@ public class MenuControlView extends Sprite {
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
     private function addedToStageHandler(e:starling.events.Event):void {
-        _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
+        /*_appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
 
-        imageBoxTexture = new imageBox();
+        imageBoxTexture = imageBox();
 
         texture = Texture.fromBitmapData(imageBoxTexture);
         texture.repeat = true;
 
-        background = new Image(texture);
+        background = new starling.display.Image(texture);
         stageResizeHandler(null);
 
         _container.addChild(background);
@@ -97,12 +94,11 @@ public class MenuControlView extends Sprite {
 
         _container.y = stage.stageHeight;
 
-        stage.addEventListener(starling.events.Event.RESIZE, stageResizeHandler);
+        stage.addEventListener(starling.events.Event.RESIZE, stageResizeHandler);*/
     }
 
         private function stageResizeHandler(e:starling.events.Event):void{
-            background.width = stage.stageWidth;
-
+            /*background.width = stage.stageWidth;
             background.setTexCoords(1,new Point(stage.stageWidth/324,0));
             background.setTexCoords(2,new Point(0,1));
             background.setTexCoords(3,new Point(stage.stageWidth/324,1));
@@ -111,7 +107,7 @@ public class MenuControlView extends Sprite {
                 _container.y = stage.stageHeight - _container.height;
             } else {
                 _container.y = stage.stageHeight;
-            }
+            }*/
         }
 }
 }
