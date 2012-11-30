@@ -5,7 +5,7 @@
  * Time: 00:28
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.presentation.viewTest {
+package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
 import be.devine.cp3.presentation.model.AppModel;
