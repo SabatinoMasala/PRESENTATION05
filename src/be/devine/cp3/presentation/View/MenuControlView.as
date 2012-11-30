@@ -8,15 +8,21 @@
 package be.devine.cp3.presentation.View {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.display.BitmapData;
+
 import flash.events.Event;
+import flash.geom.Point;
 
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.Image;
 
 import starling.display.Quad;
 
 import starling.display.Sprite;
+import starling.display.Stage;
 import starling.events.Event;
+import starling.textures.Texture;
 
 public class MenuControlView extends Sprite {
 
@@ -27,6 +33,10 @@ public class MenuControlView extends Sprite {
     private var _appModel:AppModel;
     private var _container:Sprite = new Sprite();
     private var _tween:Tween;
+
+    private var imageBoxTexture:BitmapData;
+    private var texture:Texture;
+    private var background:Image;
 
     //Constructor
     public function MenuControlView() {
@@ -74,13 +84,27 @@ public class MenuControlView extends Sprite {
     private function addedToStageHandler(e:starling.events.Event):void {
         _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
 
-        var background:Quad = new Quad(stage.stageWidth, 100);
+        imageBoxTexture = new imageBox();
+
+        texture = Texture.fromBitmapData(imageBoxTexture);
+        texture.repeat = true;
+
+        background = new Image(texture);
         background.color = 0x000000;
 
         _container.addChild(background);
         stage.addChild(_container);
 
         _container.y = stage.stageHeight;
+
+        stage.addEventListener(starling.events.Event.RESIZE, stageResizeHandler);
     }
+
+        private function stageResizeHandler(e:starling.events.Event):void{
+            background.setTexCoords(1,new Point(Math.ceil(stage.stageWidth/300),0));
+            background.setTexCoords(2,new Point(0,1));
+            background.setTexCoords(3,new Point(Math.ceil(stage.stageWidth/300),1));
+
+        }
 }
 }
