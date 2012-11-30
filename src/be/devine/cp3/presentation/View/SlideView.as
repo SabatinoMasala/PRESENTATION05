@@ -20,6 +20,7 @@ public class SlideView extends Sprite {
 
     private var _appModel:AppModel;
     private var _slides:Vector.<Slide>;
+    private var _currentSlideDisplayObject:starling.display.Sprite;
 
     //Constructor
     public function SlideView() {
@@ -45,8 +46,12 @@ public class SlideView extends Sprite {
         makeSlides();
     }
 
-    private function slideChangeHandler(event:AppModel):void {
-
+    private function slideChangeHandler(event:starling.events.Event):void {
+        if(_currentSlideDisplayObject != null){
+            removeChild(_currentSlideDisplayObject);
+        }
+        _currentSlideDisplayObject = _slides[_appModel.currentIndex];
+        addChild(_currentSlideDisplayObject);
     }
 
 
@@ -57,14 +62,7 @@ public class SlideView extends Sprite {
             tempVector.push(s);
         }
         _slides = tempVector;
-        goToSlide(1);
-    }
-
-    private function goToSlide(slideNum:uint):void {
-        if(slideNum < 1) slideNum = 1;
-        if(slideNum > _slides.length) slideNum = _slides.length;
-        var index = slideNum - 1;
-        addChild(_slides[index]);
+        _appModel.currentSlide = _appModel.vectorSlides[0];
     }
 
     /**************************************************************************************************************************************

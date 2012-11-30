@@ -26,6 +26,7 @@ public class MenuControlView extends Sprite {
 
     private var _appModel:AppModel;
     private var _container:Sprite = new Sprite();
+    private var _tween:Tween;
 
     //Constructor
     public function MenuControlView() {
@@ -40,18 +41,31 @@ public class MenuControlView extends Sprite {
      **************************************************************************************************************************************/
 
     public function display(event:starling.events.Event):void{
-        trace("[MenuControlView] Spacebar handler");
+        trace("[MenuControlView] Animating menu ", _appModel.menuVisible);
 
-        if(_appModel.menuVisible == true){
-            var t:Tween = new Tween(_container,.3, starling.animation.Transitions.EASE_OUT);
-            t.animate("y", stage.stageHeight - 100);
-            Starling.juggler.add(t);
+        if(_appModel.menuVisible){
+
+            Starling.juggler.remove(_tween);
+
+            _container.visible = true;
+            _tween = new Tween(_container,.3, starling.animation.Transitions.EASE_OUT);
+            _tween.animate("y", stage.stageHeight - _container.height);
+            Starling.juggler.add(_tween);
+
         } else {
-            var t:Tween = new Tween(_container,.3, starling.animation.Transitions.EASE_IN);
 
-            t.animate("y", stage.stageHeight);
-            Starling.juggler.add(t);
+            Starling.juggler.remove(_tween);
+
+            _tween = new Tween(_container,.3, starling.animation.Transitions.EASE_IN);
+            _tween.animate("y", stage.stageHeight);
+            _tween.onComplete = hide;
+            Starling.juggler.add(_tween);
+
         }
+    }
+
+    private function hide():void {
+        _container.visible = false;
     }
 
     /**************************************************************************************************************************************

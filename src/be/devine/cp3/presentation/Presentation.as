@@ -47,7 +47,7 @@ public class Presentation extends Sprite {
      **************************************************************************************************************************************/
 
     private function addedToStageHandler(event:starling.events.Event):void {
-        stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+        stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
     }
 
     private function keyDownHandler(event:KeyboardEvent):void {
