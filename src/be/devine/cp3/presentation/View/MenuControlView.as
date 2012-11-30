@@ -90,7 +90,7 @@ public class MenuControlView extends Sprite {
         texture.repeat = true;
 
         background = new Image(texture);
-        background.color = 0x000000;
+        stageResizeHandler(null);
 
         _container.addChild(background);
         stage.addChild(_container);
@@ -101,10 +101,17 @@ public class MenuControlView extends Sprite {
     }
 
         private function stageResizeHandler(e:starling.events.Event):void{
-            background.setTexCoords(1,new Point(Math.ceil(stage.stageWidth/300),0));
-            background.setTexCoords(2,new Point(0,1));
-            background.setTexCoords(3,new Point(Math.ceil(stage.stageWidth/300),1));
+            background.width = stage.stageWidth;
 
+            background.setTexCoords(1,new Point(stage.stageWidth/324,0));
+            background.setTexCoords(2,new Point(0,1));
+            background.setTexCoords(3,new Point(stage.stageWidth/324,1));
+
+            if(_appModel.menuVisible){
+                _container.y = stage.stageHeight - _container.height;
+            } else {
+                _container.y = stage.stageHeight;
+            }
         }
 }
 }
