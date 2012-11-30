@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
-import be.devine.cp3.presentation.View.MenuControlView;
-import be.devine.cp3.presentation.View.SlideView;
+import be.devine.cp3.presentation.viewTest.MenuControlView;
+import be.devine.cp3.presentation.viewTest.SlideView;
 import be.devine.cp3.presentation.model.AppModel;
 
 import flash.ui.Keyboard;
