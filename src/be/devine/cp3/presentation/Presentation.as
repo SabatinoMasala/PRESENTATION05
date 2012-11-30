@@ -29,7 +29,10 @@ public class Presentation extends Sprite {
 
     //Constructor
     public function Presentation() {
+
         trace("[Presentation] Construct");
+
+        var fc:FontContainer = new FontContainer();
         _appModel = AppModel.getInstance();
         _slideView = new SlideView();
         _menuControlView = new MenuControlView();
@@ -46,8 +49,9 @@ public class Presentation extends Sprite {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    private function addedToStageHandler(event:starling.events.Event):void {
+    private function addedToStageHandler(event:Event):void {
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
+        stage.addEventListener(Event.RESIZE, resizeHandler);
     }
 
     private function keyDownHandler(event:KeyboardEvent):void {
@@ -70,8 +74,8 @@ public class Presentation extends Sprite {
         trace("starting presentation");
     }
 
-    public function resize(w:Number, h:Number):void{
-
+    private function resizeHandler(event:starling.events.Event):void {
+        //_slideView.resize(stage.stageWidth, stage.stageHeight);
     }
 
     /**************************************************************************************************************************************

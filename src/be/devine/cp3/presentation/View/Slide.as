@@ -30,13 +30,16 @@ public class Slide extends Sprite {
 
     private var _slideVO:SlideVO;
     private var _image:Image;
+    private var _title:Titel;
 
     //Constructor
     public function Slide(slideVO:SlideVO) {
 
+        trace("[slide] construct");
+
         var q:Quad = new Quad(100, 100, 0xFFFFFF*Math.random());
         addChild(q);
-        trace("[slide] construct");
+
         this._slideVO = slideVO;
         switch(this._slideVO.type){
             case SlideType.BULLETS:
@@ -52,10 +55,6 @@ public class Slide extends Sprite {
                     title();
                 break;
         }
-
-        var tf:TextField = new TextField(200, 100, this._slideVO.title);
-        tf.color = 0x000000;
-        addChild(tf);
     }
 
     /**************************************************************************************************************************************
@@ -87,11 +86,16 @@ public class Slide extends Sprite {
     }
 
     private function title():void {
-
+        _title = new Titel(_slideVO.title);
+        addChild(_title);
     }
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+
+    public function resize(w:Number, h:Number):void{
+
+    }
 }
 }
