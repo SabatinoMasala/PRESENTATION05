@@ -70,12 +70,8 @@ public class Presentation extends Sprite {
         _appModel.xmlPath = "assets/slides.xml";
     }
 
-    private function startPresentation():void{
-        trace("starting presentation");
-    }
-
-    private function resizeHandler(event:starling.events.Event):void {
-        //_slideView.resize(stage.stageWidth, stage.stageHeight);
+    private function resizeHandler(event:starling.events.Event = null):void {
+        _slideView.resize(stage.stageWidth, stage.stageHeight);
     }
 
     /**************************************************************************************************************************************

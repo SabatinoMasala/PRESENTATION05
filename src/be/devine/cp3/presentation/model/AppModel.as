@@ -52,18 +52,14 @@ public class AppModel extends starling.events.EventDispatcher {
 
     public function goToNext():void{
         if(this.currentIndex < _vectorSlides.length - 1){
-            // Er is een volgende
             currentSlide = _vectorSlides[this.currentIndex+1];
-            dispatchEvent(new Event(SLIDE_CHANGED));
         }
     }
 
     public function goToPrev():void{
 
         if(this.currentIndex > 0){
-            //er is een vorige
             currentSlide = _vectorSlides[this.currentIndex-1];
-            dispatchEvent(new Event(SLIDE_CHANGED));
         }
     }
 
@@ -113,6 +109,7 @@ public class AppModel extends starling.events.EventDispatcher {
         if(_currentSlide != value){
             _currentSlide = value;
             dispatchEvent(new Event(SLIDE_CHANGED));
+            trace("dispatching slide_changed");
         }
     }
 

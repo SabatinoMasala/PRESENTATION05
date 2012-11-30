@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.View {
+import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
 import be.devine.cp3.presentation.model.AppModel;
 
@@ -47,11 +48,13 @@ public class SlideView extends Sprite {
     }
 
     private function slideChangeHandler(event:starling.events.Event):void {
+        trace("changed", event.currentTarget);
         if(_currentSlideDisplayObject != null){
             removeChild(_currentSlideDisplayObject);
         }
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
         addChild(_currentSlideDisplayObject);
+        resize(stage.stageWidth, stage.stageHeight);
     }
 
 
@@ -63,6 +66,11 @@ public class SlideView extends Sprite {
         }
         _slides = tempVector;
         _appModel.currentSlide = _appModel.vectorSlides[0];
+    }
+
+    public function resize(w:Number, h:Number):void {
+        var current:Slide = _currentSlideDisplayObject as Slide;
+        current.resize(w, h);
     }
 
     /**************************************************************************************************************************************
