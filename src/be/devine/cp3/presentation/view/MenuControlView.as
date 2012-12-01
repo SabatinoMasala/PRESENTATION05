@@ -32,9 +32,6 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _appModel:AppModel;
     private var _container:Sprite = new Sprite();
     private var _tween:Tween;
-    private var _background:Image;
-    private var _btnLeft:Image;
-    private var _btnRight:Image;
     private var _menuStateChanged:Boolean;
 
     //Constructor
@@ -44,26 +41,6 @@ public class MenuControlView extends Sprite implements IResizable {
 
         _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, menuStateChangedHandler);
 
-        var t:Texture = Texture.fromBitmap(new Bitmap(new ImageBox()));
-        t.repeat = true;
-
-        _background = new Image(t);
-        _container.addChild(_background);
-
-        var btnL:Bitmap = new Bitmap(new BtnLeft());
-        _btnLeft = Image.fromBitmap(btnL);
-        _btnLeft.y = (_background.height>>1) - (_btnLeft.height>>1);
-        _btnLeft.x = 50;
-        _container.addChild(_btnLeft);
-
-        var btnR:Bitmap = new Bitmap(new BtnRight());
-        _btnRight = Image.fromBitmap(btnR);
-        _btnRight.y = (_background.height>>1) - (_btnRight.height>>1);
-        _container.addChild(_btnRight);
-
-        _btnLeft.addEventListener(TouchEvent.TOUCH, touchHandler);
-        _btnRight.addEventListener(TouchEvent.TOUCH, touchHandler);
-
         addChild(_container);
 
     }
@@ -71,18 +48,6 @@ public class MenuControlView extends Sprite implements IResizable {
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
-
-    private function touchHandler(event:TouchEvent):void {
-        var t:Touch = event.getTouch(stage);
-        if(t.phase == TouchPhase.ENDED){
-            if(event.currentTarget == _btnLeft){
-                _appModel.goToPrev();
-            }
-            else if(event.currentTarget == _btnRight){
-                _appModel.goToNext();
-            }
-        }
-    }
 
     public function display():void{
 
@@ -122,18 +87,7 @@ public class MenuControlView extends Sprite implements IResizable {
 
         trace("[MenuController] resizing");
 
-        _background.width = w;
-        _background.setTexCoords(1,new Point(w/324,0));
-        _background.setTexCoords(2,new Point(0,1));
-        _background.setTexCoords(3,new Point(w/324,1));
 
-        _btnRight.x = w - _btnRight.width - 50;
-
-        if(_appModel.menuVisible){
-            _container.y = h - _container.height;
-        } else {
-            _container.y = h;
-        }
     }
 
     private function menuStateChangedHandler(event:Event):void {

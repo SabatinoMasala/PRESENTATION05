@@ -44,7 +44,6 @@ public class Presentation extends Sprite implements IResizable {
 
         trace("[Presentation] Construct");
 
-        var fc:FontContainer = new FontContainer();
         _appModel = AppModel.getInstance();
         _slideView = new SlideView();
         _menuControlView = new MenuControlView();
