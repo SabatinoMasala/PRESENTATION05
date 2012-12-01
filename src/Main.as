@@ -10,12 +10,21 @@ import flash.geom.Rectangle;
 
 import starling.core.Starling;
 
-[SWF(width=800, height=600, frameRate=60)]
+[SWF(width=1024, height=768, frameRate=60)]
+
+/**
+ * Main
+ *
+ * Entry point voor applicatie
+ */
 
 public class Main extends Sprite {
 
     private var _starling:Starling;
 
+    /**
+     * Zet de stage align en stage scalemode juist
+     */
     public function Main() {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -25,11 +34,22 @@ public class Main extends Sprite {
         stage.addEventListener(flash.events.Event.RESIZE, resizeHandler);
     }
 
+    /**
+     * Zal een nieuwe Starling instantie aanmaken & starten
+     *
+     * @private
+     */
     private function init():void{
         _starling = new Starling(Presentation, stage);
         _starling.start();
     }
 
+    /**
+     * Verantwoordelijk voor de resize functionaliteit van de applicatie
+     *
+     * @param event flash.events.Event
+     * @private
+     */
     private function resizeHandler(event:flash.events.Event = null):void {
 
         trace("[Main] resizing");
