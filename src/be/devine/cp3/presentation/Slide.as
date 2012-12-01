@@ -7,6 +7,8 @@
  */
 package be.devine.cp3.presentation {
 
+import be.devine.cp3.presentation.interfaces.IResizable;
+
 import flash.display.Bitmap;
 
 import flash.display.Loader;
@@ -14,12 +16,11 @@ import flash.events.Event;
 import flash.net.URLRequest;
 
 import starling.display.Image;
-import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.textures.Texture;
 
-public class Slide extends Sprite {
+public class Slide extends Sprite implements IResizable {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************

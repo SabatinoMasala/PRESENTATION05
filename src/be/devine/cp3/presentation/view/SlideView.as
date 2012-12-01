@@ -8,15 +8,13 @@
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
-
-import starling.animation.Tween;
-import starling.core.Starling;
 
 import starling.display.Sprite;
 import starling.events.Event;
 
-public class SlideView extends Sprite {
+public class SlideView extends Sprite implements IResizable{
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************

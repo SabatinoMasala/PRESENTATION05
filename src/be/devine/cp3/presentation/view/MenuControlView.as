@@ -6,10 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.view {
+import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 
 import flash.display.Bitmap;
-import flash.display.BitmapData;
 import flash.geom.Point;
 
 import starling.animation.Transitions;
@@ -20,9 +20,10 @@ import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
+import starling.events.TouchPhase;
 import starling.textures.Texture;
 
-public class MenuControlView extends Sprite {
+public class MenuControlView extends Sprite implements IResizable {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -31,36 +32,33 @@ public class MenuControlView extends Sprite {
     private var _appModel:AppModel;
     private var _container:Sprite = new Sprite();
     private var _tween:Tween;
-
-    private var imageBoxTexture:BitmapData;
-    private var texture:Texture;
-    private var background:Image;
-
+    private var _background:Image;
     private var _btnLeft:Image;
     private var _btnRight:Image;
+    private var _menuStateChanged:Boolean;
 
     //Constructor
     public function MenuControlView() {
         trace("[MenuControlView] Construct");
         _appModel = AppModel.getInstance();
 
-        _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
+        _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, menuStateChangedHandler);
 
-        texture = Texture.fromBitmap(new Bitmap(new ImageBox()));
-        texture.repeat = true;
+        var t:Texture = Texture.fromBitmap(new Bitmap(new ImageBox()));
+        t.repeat = true;
 
-        background = new Image(texture);
-        _container.addChild(background);
+        _background = new Image(t);
+        _container.addChild(_background);
 
         var btnL:Bitmap = new Bitmap(new BtnLeft());
         _btnLeft = Image.fromBitmap(btnL);
-        _btnLeft.y = (background.height>>1) - (_btnLeft.height>>1);
+        _btnLeft.y = (_background.height>>1) - (_btnLeft.height>>1);
         _btnLeft.x = 50;
         _container.addChild(_btnLeft);
 
         var btnR:Bitmap = new Bitmap(new BtnRight());
         _btnRight = Image.fromBitmap(btnR);
-        _btnRight.y = (background.height>>1) - (_btnRight.height>>1);
+        _btnRight.y = (_background.height>>1) - (_btnRight.height>>1);
         _container.addChild(_btnRight);
 
         _btnLeft.addEventListener(TouchEvent.TOUCH, touchHandler);
@@ -76,7 +74,7 @@ public class MenuControlView extends Sprite {
 
     private function touchHandler(event:TouchEvent):void {
         var t:Touch = event.getTouch(stage);
-        if(t.phase == starling.events.TouchPhase.ENDED){
+        if(t.phase == TouchPhase.ENDED){
             if(event.currentTarget == _btnLeft){
                 _appModel.goToPrev();
             }
@@ -86,54 +84,65 @@ public class MenuControlView extends Sprite {
         }
     }
 
-    public function display(event:Event):void{
-        trace("[MenuControlView] Animating menu ", _appModel.menuVisible);
+    public function display():void{
 
-        if(_appModel.menuVisible){
+        if(_menuStateChanged){
+            _menuStateChanged = false;
 
-            Starling.juggler.remove(_tween);
+            trace("[MenuControlView] Animating menu ", _appModel.menuVisible);
 
-            _container.visible = true;
-            _tween = new Tween(_container,.3, Transitions.EASE_OUT);
-            _tween.animate("y", stage.stageHeight - _container.height);
-            Starling.juggler.add(_tween);
+            if(_appModel.menuVisible){
 
-        } else {
+                Starling.juggler.remove(_tween);
 
-            Starling.juggler.remove(_tween);
+                _container.visible = true;
+                _tween = new Tween(_container,.3, Transitions.EASE_OUT);
+                _tween.animate("y", stage.stageHeight - _container.height);
+                Starling.juggler.add(_tween);
 
-            _tween = new Tween(_container,.3, Transitions.EASE_IN);
-            _tween.animate("y", stage.stageHeight);
-            _tween.onComplete = hide;
-            Starling.juggler.add(_tween);
+            } else {
 
+                Starling.juggler.remove(_tween);
+
+                _tween = new Tween(_container,.3, Transitions.EASE_IN);
+                _tween.animate("y", stage.stageHeight);
+                _tween.onComplete = hide;
+                Starling.juggler.add(_tween);
+
+            }
         }
+
     }
 
     private function hide():void {
         _container.visible = false;
     }
 
+    public function resize(w:Number, h:Number):void{
+
+        trace("[MenuController] resizing");
+
+        _background.width = w;
+        _background.setTexCoords(1,new Point(w/324,0));
+        _background.setTexCoords(2,new Point(0,1));
+        _background.setTexCoords(3,new Point(w/324,1));
+
+        _btnRight.x = w - _btnRight.width - 50;
+
+        if(_appModel.menuVisible){
+            _container.y = h - _container.height;
+        } else {
+            _container.y = h;
+        }
+    }
+
+    private function menuStateChangedHandler(event:Event):void {
+        _menuStateChanged = true;
+        display();
+    }
+
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
-
-        public function resize(w:Number, h:Number):void{
-
-            trace("[MenuController] resizing");
-
-            background.width = w;
-            background.setTexCoords(1,new Point(w/324,0));
-            background.setTexCoords(2,new Point(0,1));
-            background.setTexCoords(3,new Point(w/324,1));
-
-            _btnRight.x = w - _btnRight.width - 50;
-
-            if(_appModel.menuVisible){
-                _container.y = h - _container.height;
-            } else {
-                _container.y = h;
-            }
-        }
 }
 }

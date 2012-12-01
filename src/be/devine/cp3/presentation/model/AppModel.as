@@ -14,11 +14,15 @@ import flash.events.Event;
 import flash.net.URLLoader;
 import flash.net.URLRequest;
 
-import starling.display.Image;
-
 import starling.events.Event;
 
 import starling.events.EventDispatcher;
+
+/**
+ * AppModel
+ *
+ * AppModel voor de applicatie. Deze klasse is een singleton, instanties worden via getInstance() aangemaakt.
+ */
 
 public class AppModel extends starling.events.EventDispatcher {
 
@@ -28,7 +32,6 @@ public class AppModel extends starling.events.EventDispatcher {
 
     public static const DATA_CHANGED:String = "dataChanged";
     public static const MENU_STATE_CHANGED:String = "menuStringChanged";
-    public static const XML_CHANGED:String = "xmlChanged";
     public static const SLIDE_CHANGED:String = "slideChanged";
 
     private var _vectorSlides:Vector.<SlideVO>;
@@ -37,6 +40,11 @@ public class AppModel extends starling.events.EventDispatcher {
     private var _currentSlide:SlideVO;
 
     private static var _instance:AppModel;
+
+    /**
+     * Instantieren van AppModel. Door een Enforcer te vragen als argument kan deze klasse niet van buitenaf worden aangemaakt.
+     * @param e Enforcer (interne klasse in AppModel)
+     */
 
     //Constructor
     public function AppModel(e:Enforcer) {
@@ -50,6 +58,11 @@ public class AppModel extends starling.events.EventDispatcher {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
+    /**
+     * Maakt een nieuwe instantie aan van AppModel als er nog geen bestaat en returnt hem.
+     * @return AppModel instantie
+     */
+
     public static function getInstance():AppModel{
         if(_instance == null){
             _instance = new AppModel(new Enforcer());
@@ -57,11 +70,19 @@ public class AppModel extends starling.events.EventDispatcher {
         return _instance;
     }
 
+    /**
+     * Checkt of er een volgende slide is en er naartoe gaat.
+     */
+
     public function goToNext():void{
         if(this.currentIndex < _vectorSlides.length - 1){
             currentSlide = _vectorSlides[this.currentIndex+1];
         }
     }
+
+    /**
+     * Checkt of er een vorige slide is en er naartoe gaat.
+     */
 
     public function goToPrev():void{
 
@@ -70,6 +91,11 @@ public class AppModel extends starling.events.EventDispatcher {
         }
     }
 
+    /**
+     * Zal een XML beginnen inladen
+     * @param pathToXml path naar XML bestand
+     */
+
     public function load(pathToXml:String):void{
         trace("loading xml at path ", pathToXml);
         _vectorSlides = new Vector.<SlideVO>();
@@ -77,6 +103,11 @@ public class AppModel extends starling.events.EventDispatcher {
         urlLoader.load(new URLRequest(pathToXml));
         urlLoader.addEventListener(flash.events.Event.COMPLETE, loadedHandler);
     }
+
+    /**
+     * Als de XML ingeladen is zal de XML geparsed worden
+     * @param e flash.events.Event
+     */
 
     private function loadedHandler(e:flash.events.Event):void {
         trace("xml loaded");
@@ -121,6 +152,14 @@ public class AppModel extends starling.events.EventDispatcher {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+
+    /**
+     * Getter en Setter voor zichtbaarheid van menu
+     *
+     * @param value Boolean
+     * @return Boolean
+     */
+
     public function get menuVisible():Boolean {
         return _menuVisible;
     }
@@ -134,6 +173,13 @@ public class AppModel extends starling.events.EventDispatcher {
         }
     }
 
+    /**
+     * Getter & Setter voor de Vector met slides
+     *
+     * @param value Vector
+     * @return Vector met slides
+     */
+
     public function get vectorSlides():Vector.<SlideVO> {
         return _vectorSlides;
     }
@@ -145,6 +191,13 @@ public class AppModel extends starling.events.EventDispatcher {
             trace("dispatching data_changed");
         }
     }
+
+    /**
+     * Getter / Setter voor huidige slide
+     *
+     * @param value SlideVO
+     * @return Huidige slide
+     */
 
     public function get currentSlide():SlideVO {
         return _currentSlide;
@@ -158,11 +211,19 @@ public class AppModel extends starling.events.EventDispatcher {
         }
     }
 
+    /**
+     * Huidige slide index opvragen
+     *
+     * @return uint
+     */
+
     public function get currentIndex():uint {
         return _vectorSlides.indexOf(_currentSlide);
     }
 }
 }
 
-// Singleton enforcer
+/**
+ * Internal klasse die gebruikt wordt om instantiering van de AppModel van buitenaf te vermijden
+ */
 internal class Enforcer{}
