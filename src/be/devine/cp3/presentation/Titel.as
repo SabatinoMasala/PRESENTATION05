@@ -27,12 +27,7 @@ public class Titel extends starling.display.Sprite {
     public function Titel(str:String) {
         trace("[Titel] Construct");
 
-        var flashTitel:BasisTitel = new BasisTitel();
-
-        var bmd:BitmapData = new BitmapData(flashTitel.width, flashTitel.height, true, 0x00FFFF);
-        bmd.draw(flashTitel);
-
-        var b:Bitmap = new Bitmap(bmd);
+        var b:Bitmap = new Bitmap(new BitmapTitel());
 
         _basisTitel = Image.fromBitmap(b);
 

@@ -10,6 +10,9 @@ import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
 import be.devine.cp3.presentation.model.AppModel;
 
+import starling.animation.Tween;
+import starling.core.Starling;
+
 import starling.display.Sprite;
 import starling.events.Event;
 
@@ -50,10 +53,10 @@ public class SlideView extends Sprite {
     private function slideChangeHandler(event:starling.events.Event):void {
         trace("changed", event.currentTarget);
         if(_currentSlideDisplayObject != null){
-            removeChild(_currentSlideDisplayObject);
+            _currentSlideDisplayObject.visible = false;
         }
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
-        addChild(_currentSlideDisplayObject);
+        _currentSlideDisplayObject.visible = true;
         resize(stage.stageWidth, stage.stageHeight);
     }
 
@@ -63,6 +66,8 @@ public class SlideView extends Sprite {
         for each(var slideVO:SlideVO in _appModel.vectorSlides){
             var s:Slide = new Slide(slideVO);
             tempVector.push(s);
+            addChild(s);
+            s.visible = false;
         }
         _slides = tempVector;
         _appModel.currentSlide = _appModel.vectorSlides[0];
@@ -70,7 +75,9 @@ public class SlideView extends Sprite {
 
     public function resize(w:Number, h:Number):void {
         var current:Slide = _currentSlideDisplayObject as Slide;
-        current.resize(w, h);
+        if(current){
+            current.resize(w, h);
+        }
     }
 
     /**************************************************************************************************************************************

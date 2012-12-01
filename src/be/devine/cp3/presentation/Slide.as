@@ -35,9 +35,6 @@ public class Slide extends Sprite {
 
         trace("[slide] construct");
 
-        var q:Quad = new Quad(100, 100, 0xFFFFFF*Math.random());
-        addChild(q);
-
         this._slideVO = slideVO;
         switch(this._slideVO.type){
             case SlideType.BULLETS:
@@ -73,6 +70,7 @@ public class Slide extends Sprite {
         var loadedBitmap:Bitmap = event.currentTarget.loader.content as Bitmap;
         _image = new Image(starling.textures.Texture.fromBitmap(loadedBitmap));
         addChild(_image);
+        resize(stage.stageWidth, stage.stageHeight);
     }
 
     private function bullets():void {
@@ -96,6 +94,11 @@ public class Slide extends Sprite {
         }
         if(_bullets){
             _bullets.x = (w>>1) - (_bullets.width>>1);
+            _bullets.y = (h>>1) - (_bullets.height>>1);
+        }
+        if(_image){
+            _image.x = (w>>1) - (_image.width>>1);
+            _image.y = (h>>1) - (_image.height>>1);
         }
     }
 

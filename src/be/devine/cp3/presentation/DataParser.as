@@ -41,9 +41,6 @@ public class DataParser {
      **************************************************************************************************************************************/
 
     private function parse():void {
-        var urlLoader:URLLoader = new URLLoader();
-        urlLoader.load(new URLRequest(_appModel.xmlPath));
-        urlLoader.addEventListener(flash.events.Event.COMPLETE, loadedHandler);
     }
 
     private function parseXML():void{

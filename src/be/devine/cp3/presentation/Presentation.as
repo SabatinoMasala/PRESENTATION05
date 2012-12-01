@@ -6,9 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
+import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.view.MenuControlView;
 import be.devine.cp3.presentation.view.SlideView;
-import be.devine.cp3.presentation.model.AppModel;
 
 import flash.ui.Keyboard;
 
@@ -23,7 +23,6 @@ public class Presentation extends Sprite {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
-    private var _dataParser:DataParser;
     private var _slideView:SlideView;
     private var _menuControlView:MenuControlView;
 
@@ -50,28 +49,35 @@ public class Presentation extends Sprite {
      **************************************************************************************************************************************/
 
     private function addedToStageHandler(event:Event):void {
+
+        resize(stage.stageWidth, stage.stageHeight);
+
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
-        stage.addEventListener(Event.RESIZE, resizeHandler);
+        // Touch event aan stage koppelen
     }
 
     private function keyDownHandler(event:KeyboardEvent):void {
-        if(event.keyCode == Keyboard.SPACE)
-        {
-            _appModel.menuVisible = !_appModel.menuVisible;
-        } else if (event.keyCode == Keyboard.RIGHT){
-            _appModel.goToNext();
-        } else if (event.keyCode == Keyboard.LEFT){
-           _appModel.goToPrev();
+        switch (event.keyCode){
+            case Keyboard.SPACE:
+                    _appModel.menuVisible = !_appModel.menuVisible;
+                break;
+            case Keyboard.LEFT:
+                    _appModel.goToPrev();
+                break;
+            case Keyboard.RIGHT:
+                    _appModel.goToNext();
+                break;
         }
     }
 
     private function init():void {
-        _dataParser = new DataParser();
-        _appModel.xmlPath = "assets/slides.xml";
+        _appModel.load("assets/slides.xml");
     }
 
-    private function resizeHandler(event:starling.events.Event = null):void {
-        _slideView.resize(stage.stageWidth, stage.stageHeight);
+    public function resize(w:Number, h:Number):void {
+        trace("[Presentation] resizing");
+        _menuControlView.resize(w, h);
+        _slideView.resize(w, h);
     }
 
     /**************************************************************************************************************************************

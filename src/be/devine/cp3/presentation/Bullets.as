@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
+import flash.display.Bitmap;
+
 import starling.display.Image;
 import starling.display.Sprite;
+import starling.text.TextField;
 
 public class Bullets extends starling.display.Sprite {
 
@@ -23,7 +26,9 @@ public class Bullets extends starling.display.Sprite {
         trace("[Bullets] Construct");
         _arrBullets = arrBullets;
 
-        // bitmapdata, bitmap, image
+        var bitmap:Bitmap = new Bitmap(new BasisBullet());
+        _background = Image.fromBitmap(bitmap);
+        addChild(_background);
 
         makeBullets();
     }
@@ -33,9 +38,13 @@ public class Bullets extends starling.display.Sprite {
      **************************************************************************************************************************************/
 
     private function makeBullets():void {
-        var maxNum:uint = (_arrBullets.length-1 < 5) ? _arrBullets.length : 5;
+        var maxNum:uint = (_arrBullets.length-1 < 9) ? _arrBullets.length : 9;
+        var yPos:Number = 10;
         for(var i:uint = 0; i<maxNum; i++){
-            trace("making bullet", _arrBullets[i]);
+            var tf:starling.text.TextField = new starling.text.TextField(_background.width, 40, _arrBullets[i], "Pecita", 40);
+            addChild(tf);
+            tf.y = yPos;
+            yPos += tf.height + 10;
         }
     }
 

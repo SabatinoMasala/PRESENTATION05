@@ -19,7 +19,6 @@ public class SlideVO {
 
     //Constructor
     public function SlideVO() {
-        trace("[SlideVO] Construct");
     }
 
     /**************************************************************************************************************************************

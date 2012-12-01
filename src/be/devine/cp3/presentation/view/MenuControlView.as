@@ -8,17 +8,18 @@
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.display.Bitmap;
 import flash.display.BitmapData;
-
 import flash.geom.Point;
 
+import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.Image;
-
 import starling.display.Sprite;
-import starling.display.Stage;
 import starling.events.Event;
+import starling.events.Touch;
+import starling.events.TouchEvent;
 import starling.textures.Texture;
 
 public class MenuControlView extends Sprite {
@@ -35,19 +36,57 @@ public class MenuControlView extends Sprite {
     private var texture:Texture;
     private var background:Image;
 
+    private var _btnLeft:Image;
+    private var _btnRight:Image;
+
     //Constructor
     public function MenuControlView() {
         trace("[MenuControlView] Construct");
         _appModel = AppModel.getInstance();
 
-        this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
+        _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
+
+        texture = Texture.fromBitmap(new Bitmap(new ImageBox()));
+        texture.repeat = true;
+
+        background = new Image(texture);
+        _container.addChild(background);
+
+        var btnL:Bitmap = new Bitmap(new BtnLeft());
+        _btnLeft = Image.fromBitmap(btnL);
+        _btnLeft.y = (background.height>>1) - (_btnLeft.height>>1);
+        _btnLeft.x = 50;
+        _container.addChild(_btnLeft);
+
+        var btnR:Bitmap = new Bitmap(new BtnRight());
+        _btnRight = Image.fromBitmap(btnR);
+        _btnRight.y = (background.height>>1) - (_btnRight.height>>1);
+        _container.addChild(_btnRight);
+
+        _btnLeft.addEventListener(TouchEvent.TOUCH, touchHandler);
+        _btnRight.addEventListener(TouchEvent.TOUCH, touchHandler);
+
+        addChild(_container);
+
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function display(event:starling.events.Event):void{
+    private function touchHandler(event:TouchEvent):void {
+        var t:Touch = event.getTouch(stage);
+        if(t.phase == starling.events.TouchPhase.ENDED){
+            if(event.currentTarget == _btnLeft){
+                _appModel.goToPrev();
+            }
+            else if(event.currentTarget == _btnRight){
+                _appModel.goToNext();
+            }
+        }
+    }
+
+    public function display(event:Event):void{
         trace("[MenuControlView] Animating menu ", _appModel.menuVisible);
 
         if(_appModel.menuVisible){
@@ -55,7 +94,7 @@ public class MenuControlView extends Sprite {
             Starling.juggler.remove(_tween);
 
             _container.visible = true;
-            _tween = new Tween(_container,.3, starling.animation.Transitions.EASE_OUT);
+            _tween = new Tween(_container,.3, Transitions.EASE_OUT);
             _tween.animate("y", stage.stageHeight - _container.height);
             Starling.juggler.add(_tween);
 
@@ -63,7 +102,7 @@ public class MenuControlView extends Sprite {
 
             Starling.juggler.remove(_tween);
 
-            _tween = new Tween(_container,.3, starling.animation.Transitions.EASE_IN);
+            _tween = new Tween(_container,.3, Transitions.EASE_IN);
             _tween.animate("y", stage.stageHeight);
             _tween.onComplete = hide;
             Starling.juggler.add(_tween);
@@ -78,36 +117,23 @@ public class MenuControlView extends Sprite {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
-    private function addedToStageHandler(e:starling.events.Event):void {
-        /*_appModel.addEventListener(AppModel.MENU_STATE_CHANGED, display);
 
-        imageBoxTexture = imageBox();
+        public function resize(w:Number, h:Number):void{
 
-        texture = Texture.fromBitmapData(imageBoxTexture);
-        texture.repeat = true;
+            trace("[MenuController] resizing");
 
-        background = new starling.display.Image(texture);
-        stageResizeHandler(null);
-
-        _container.addChild(background);
-        stage.addChild(_container);
-
-        _container.y = stage.stageHeight;
-
-        stage.addEventListener(starling.events.Event.RESIZE, stageResizeHandler);*/
-    }
-
-        private function stageResizeHandler(e:starling.events.Event):void{
-            /*background.width = stage.stageWidth;
-            background.setTexCoords(1,new Point(stage.stageWidth/324,0));
+            background.width = w;
+            background.setTexCoords(1,new Point(w/324,0));
             background.setTexCoords(2,new Point(0,1));
-            background.setTexCoords(3,new Point(stage.stageWidth/324,1));
+            background.setTexCoords(3,new Point(w/324,1));
+
+            _btnRight.x = w - _btnRight.width - 50;
 
             if(_appModel.menuVisible){
-                _container.y = stage.stageHeight - _container.height;
+                _container.y = h - _container.height;
             } else {
-                _container.y = stage.stageHeight;
-            }*/
+                _container.y = h;
+            }
         }
 }
 }
