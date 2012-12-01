@@ -1,16 +1,19 @@
 package {
 
 import be.devine.cp3.presentation.Presentation;
+import be.devine.cp3.presentation.model.AppModel;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.events.TransformGestureEvent;
 import flash.geom.Rectangle;
+import flash.ui.Multitouch;
+import flash.ui.MultitouchInputMode;
 
 import starling.core.Starling;
-
-[SWF(width=1024, height=768, frameRate=60)]
 
 /**
  * Main
@@ -20,7 +23,11 @@ import starling.core.Starling;
 
 public class Main extends Sprite {
 
+    [Embed(source="/assets/slides.xml", mimeType="application/octet-stream")]
+    public static const SlideXml:Class;
+
     private var _starling:Starling;
+    private var _appModel:AppModel;
 
     /**
      * Zet de stage align en stage scalemode juist
@@ -31,7 +38,18 @@ public class Main extends Sprite {
 
         init();
 
-        stage.addEventListener(flash.events.Event.RESIZE, resizeHandler);
+        stage.addEventListener(Event.RESIZE, resizeHandler);
+    }
+
+    private function swipeHandler(event:TransformGestureEvent):void {
+        switch (event.offsetX){
+            case 1:
+                trace("rechts");
+                break;
+            case -1:
+                trace("links");
+                break;
+        }
     }
 
     /**
@@ -50,9 +68,7 @@ public class Main extends Sprite {
      * @param event flash.events.Event
      * @private
      */
-    private function resizeHandler(event:flash.events.Event = null):void {
-
-        trace("[Main] resizing");
+    private function resizeHandler(event:Event = null):void {
 
         var rect:Rectangle = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
         _starling.viewPort = rect;
@@ -65,5 +81,6 @@ public class Main extends Sprite {
             p.resize(stage.stageWidth, stage.stageHeight);
         };
     }
+
 }
 }

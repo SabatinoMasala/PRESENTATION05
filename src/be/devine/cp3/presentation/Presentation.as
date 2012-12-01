@@ -11,11 +11,21 @@ import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.view.MenuControlView;
 import be.devine.cp3.presentation.view.SlideView;
 
+import flash.events.TouchEvent;
+import flash.events.TransformGestureEvent;
+
+import flash.text.Font;
+
 import flash.ui.Keyboard;
+import flash.ui.Multitouch;
+import flash.ui.MultitouchInputMode;
+
+import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
+import starling.events.TouchEvent;
 
 /**
  * Presentation
@@ -42,7 +52,7 @@ public class Presentation extends Sprite implements IResizable {
 
     public function Presentation() {
 
-        trace("[Presentation] Construct");
+        var fc:FontContainer = new FontContainer();
 
         _appModel = AppModel.getInstance();
         _slideView = new SlideView();
@@ -51,9 +61,10 @@ public class Presentation extends Sprite implements IResizable {
         addChild(_slideView);
         addChild(_menuControlView);
 
+        init();
+
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 
-        init();
     }
 
     /**************************************************************************************************************************************
@@ -70,7 +81,9 @@ public class Presentation extends Sprite implements IResizable {
         resize(stage.stageWidth, stage.stageHeight);
 
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
-        // Touch event aan stage koppelen
+
+        Multitouch.inputMode = MultitouchInputMode.GESTURE;
+
     }
 
     /**
@@ -97,20 +110,26 @@ public class Presentation extends Sprite implements IResizable {
      */
 
     private function init():void {
-        _appModel.load("assets/slides.xml");
+        //_appModel.load("assets/slides.xml");
+        var xmlClass:Class = Main.SlideXml;
+        var xml:XML = new XML(new xmlClass());
+        _appModel.parse(xml);
     }
 
     /**
-     * Resize functie zal in MenuControlView & SlideView de resize() functie oproepen
+     * Resize funtie zal in MenuControlView & SlideView de resize() functie oproepen
      * @param w Number (stage.stageWidth)
      * @param h Number (stage.StageHeight)
      */
 
     public function resize(w:Number, h:Number):void {
-        trace("[Presentation] resizing");
+
         _menuControlView.resize(w, h);
         _slideView.resize(w, h);
+
     }
+
+
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************

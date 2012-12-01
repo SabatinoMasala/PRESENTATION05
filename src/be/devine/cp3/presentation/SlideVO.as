@@ -6,16 +6,16 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation {
+import be.devine.cp3.presentation.interfaces.ISlideElement;
+
 public class SlideVO {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
      **************************************************************************************************************************************/
 
-    public var type:String;
-    public var imagePath:String;
-    public var bullets:Vector.<String>;
-    public var title:String;
+    public var arrElements:Vector.<ISlideElement>;
+    private var _backgroundColor:uint;
 
     //Constructor
     public function SlideVO() {
@@ -28,5 +28,14 @@ public class SlideVO {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+    public function get backgroundColor():uint {
+        return _backgroundColor;
+    }
+
+    public function set backgroundColor(value:uint):void {
+        if(value != _backgroundColor){
+            _backgroundColor = value;
+        }
+    }
 }
 }

@@ -26,7 +26,6 @@ public class SlideView extends Sprite implements IResizable{
 
     //Constructor
     public function SlideView() {
-        trace("[SlideView] Construct");
 
         _slides = new Vector.<Slide>();
 
@@ -49,13 +48,14 @@ public class SlideView extends Sprite implements IResizable{
     }
 
     private function slideChangeHandler(event:starling.events.Event):void {
-        trace("changed", event.currentTarget);
         if(_currentSlideDisplayObject != null){
             _currentSlideDisplayObject.visible = false;
         }
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
         _currentSlideDisplayObject.visible = true;
-        resize(stage.stageWidth, stage.stageHeight);
+        if(stage){
+            resize(stage.stageWidth, stage.stageHeight);
+        }
     }
 
 
@@ -64,11 +64,11 @@ public class SlideView extends Sprite implements IResizable{
         for each(var slideVO:SlideVO in _appModel.vectorSlides){
             var s:Slide = new Slide(slideVO);
             tempVector.push(s);
+            s.construct();
             addChild(s);
             s.visible = false;
         }
         _slides = tempVector;
-        _appModel.currentSlide = _appModel.vectorSlides[0];
     }
 
     public function resize(w:Number, h:Number):void {

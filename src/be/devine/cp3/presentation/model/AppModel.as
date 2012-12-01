@@ -8,11 +8,18 @@
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideType;
 import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.Utils;
+import be.devine.cp3.presentation.interfaces.ISlideElement;
+import be.devine.cp3.presentation.slide.BulletElement;
+import be.devine.cp3.presentation.slide.ImageElement;
+import be.devine.cp3.presentation.slide.TitleElement;
 
 import flash.events.Event;
 
 import flash.net.URLLoader;
 import flash.net.URLRequest;
+
+import starling.display.Image;
 
 import starling.events.Event;
 
@@ -51,7 +58,6 @@ public class AppModel extends starling.events.EventDispatcher {
         if(e == null){
             throw new Error("Use .getInstance()");
         }
-        trace("[AppModel] Construct");
     }
 
     /**************************************************************************************************************************************
@@ -97,7 +103,6 @@ public class AppModel extends starling.events.EventDispatcher {
      */
 
     public function load(pathToXml:String):void{
-        trace("loading xml at path ", pathToXml);
         _vectorSlides = new Vector.<SlideVO>();
         var urlLoader:URLLoader = new URLLoader();
         urlLoader.load(new URLRequest(pathToXml));
@@ -110,43 +115,46 @@ public class AppModel extends starling.events.EventDispatcher {
      */
 
     private function loadedHandler(e:flash.events.Event):void {
-        trace("xml loaded");
         var l:URLLoader = e.currentTarget as URLLoader;
         var xml:XML = XML(l.data);
+        parse(xml);
+    }
+
+    public function parse(xml:XML):void{
         var tempVector:Vector.<SlideVO> = new Vector.<SlideVO>();
         for each(var slide:XML in xml.slide){
-            var slideType:String;
+
             var slideVO:SlideVO = new SlideVO();
             var type:String = slide.@type;
+
+            var elementVector:Vector.<ISlideElement> = new Vector.<ISlideElement>();
 
             switch (type){
                 default:
                 case SlideType.TITLE:
-                    slideType = SlideType.TITLE;
-                    slideVO.title = slide.title;
+                    elementVector.push(new TitleElement(slide.title, Utils.str_to_uint(slide.title.@backgroundColor), Utils.str_to_uint(slide.title.@textColor), true));
                     break;
                 case SlideType.BULLETS:
                     var vectorBullets:Vector.<String> = new Vector.<String>();
                     for each(var bullet:XML in slide.bullet){
                         vectorBullets.push(bullet);
                     }
-                    slideVO.bullets = vectorBullets;
-                    slideType = SlideType.BULLETS;
+                    elementVector.push(new BulletElement(vectorBullets));
                     break;
                 case SlideType.IMAGE_ONLY:
-                    slideVO.imagePath = slide.image.@src;
-                    slideType = SlideType.IMAGE_ONLY;
+                    elementVector.push(new ImageElement(slide.image.@src));
                     break;
                 case SlideType.IMAGE_TITLE:
-                    slideVO.title = slide.title;
-                    slideVO.imagePath = slide.image.@src;
-                    slideType = SlideType.IMAGE_TITLE;
+                    elementVector.push(new ImageElement(slide.image.@src));
+                    elementVector.push(new TitleElement(slide.title, Utils.str_to_uint(slide.title.@backgroundColor), Utils.str_to_uint(slide.title.@textColor)));
                     break;
             }
-            slideVO.type = slideType;
+            slideVO.arrElements = elementVector;
+            slideVO.backgroundColor = Utils.str_to_uint(slide.@backgroundColor);
             tempVector.push(slideVO);
         }
         this.vectorSlides = tempVector;
+        this.currentSlide = this.vectorSlides[0];
     }
 
     /**************************************************************************************************************************************
@@ -188,7 +196,6 @@ public class AppModel extends starling.events.EventDispatcher {
         if(_vectorSlides != value){
             _vectorSlides = value;
             dispatchEvent(new starling.events.Event(DATA_CHANGED));
-            trace("dispatching data_changed");
         }
     }
 
@@ -207,7 +214,6 @@ public class AppModel extends starling.events.EventDispatcher {
         if(_currentSlide != value){
             _currentSlide = value;
             dispatchEvent(new starling.events.Event(SLIDE_CHANGED));
-            trace("dispatching slide_changed");
         }
     }
 

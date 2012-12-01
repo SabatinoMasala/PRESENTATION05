@@ -1,15 +1,19 @@
 <slides>
+
+    <slide type="title" backgroundColor="#72b5c4">
+        <title backgroundColor="#27648b" textColor="#FFFFFF">Welkom.</title>
+    </slide>
+
     <slide type="imageOnly">
         <image src="/assets/images/icon.png"></image>
     </slide>
 
     <slide type="imageWithTitle">
         <image src="/assets/images/producten.jpg"></image>
-        <title>Dit is een titel</title>
+        <title backgroundColor="#444444">Dit is een titel</title>
     </slide>
 
     <slide type="bullets">
-        <title>Dit is een titel</title>
         <bullet>Dit is een bullet</bullet>
         <bullet>Dit is een bullet</bullet>
         <bullet>Dit is een bullet</bullet>
@@ -22,7 +26,7 @@
     </slide>
 
     <slide type="title">
-        <title>Dit is een titel</title>
+        <title backgroundColor="#444444">Dit is enkel een titel</title>
     </slide>
 
 </slides>
