@@ -65,7 +65,6 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
      **************************************************************************************************************************************/
 
     public function build():void{
-
     }
 
     // Resize functie

@@ -39,9 +39,10 @@ public class Slide extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    // Een slide aanmaken
+    // Slide opbouwen
     public function construct():void{
         for each(var s:ISlideElement in _slideVO.arrElements){
+            s.build();
             var slide:starling.display.Sprite = s as starling.display.Sprite;
             addChild(slide);
             _elements.push(slide);
