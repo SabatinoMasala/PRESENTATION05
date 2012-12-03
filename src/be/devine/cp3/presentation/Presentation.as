@@ -11,21 +11,15 @@ import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.view.MenuControlView;
 import be.devine.cp3.presentation.view.SlideView;
 
-import flash.events.TouchEvent;
-import flash.events.TransformGestureEvent;
-
-import flash.text.Font;
-
 import flash.ui.Keyboard;
-import flash.ui.Multitouch;
-import flash.ui.MultitouchInputMode;
 
-import starling.display.Quad;
+import org.gestouch.events.GestureEvent;
+import org.gestouch.gestures.SwipeGesture;
+import org.gestouch.gestures.SwipeGestureDirection;
 
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
-import starling.events.TouchEvent;
 
 /**
  * Presentation
@@ -45,24 +39,27 @@ public class Presentation extends Sprite implements IResizable {
     private var _menuControlView:MenuControlView;
 
     //Constructor
-
-    /**
-     * Instantieren van FontContainer, SlideView en MenuControlView
-     */
-
     public function Presentation() {
 
+        // Fontcontainer instantieren voor custom fonts (zie fonts.fla)
         var fc:FontContainer = new FontContainer();
 
+        // Appmodel instantie opslaan in private var
         _appModel = AppModel.getInstance();
+
+        // Slideview instantie aanmaken
         _slideView = new SlideView();
+
+        // MenuControlView instantie aanmaken
         _menuControlView = new MenuControlView();
 
         addChild(_slideView);
         addChild(_menuControlView);
 
+        // Initializeren van slideshow
         init();
 
+        // We moeten de stage kunnen aanspreken voor keyboardEvents, dus ADDED_TO_STAGE event koppelen aan this
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 
     }
@@ -71,26 +68,59 @@ public class Presentation extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    /**
-     * Stage is beschikbaar dus koppelen we een KeyboardEvent aan de stage
-     * @param event Event
-     */
-
+    // stage is beschikbaar in deze functie
     private function addedToStageHandler(event:Event):void {
 
+        // Resize functie oproepen
         resize(stage.stageWidth, stage.stageHeight);
 
+        // KEY_UP KeyboardEvent koppelen aan stage
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
 
-        Multitouch.inputMode = MultitouchInputMode.GESTURE;
+        // Swipe gestures voor ipad (swipen naar links)
+        var swipeLeft:SwipeGesture = new SwipeGesture(stage);
+        swipeLeft.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
+        swipeLeft.direction = SwipeGestureDirection.LEFT;
+
+        // Swipe gestures voor ipad (swipen naar rechts)
+        var swipeRight:SwipeGesture = new SwipeGesture(stage);
+        swipeRight.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
+        swipeRight.direction = SwipeGestureDirection.RIGHT;
+
+        // Swipe gestures voor ipad (swipen naar omhoog met 2 vingers)
+        var menuSwipe:SwipeGesture = new SwipeGesture(stage);
+        menuSwipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
+        menuSwipe.direction = SwipeGestureDirection.UP;
+        menuSwipe.numTouchesRequired = 2;
+
+        // Swipe gestures voor ipad (swipen naar omlaag met 2 vingers)
+        var menuHideSwipe:SwipeGesture = new SwipeGesture(stage);
+        menuHideSwipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
+        menuHideSwipe.direction = SwipeGestureDirection.DOWN;
+        menuHideSwipe.numTouchesRequired = 2;
 
     }
 
-    /**
-     * KeyDownHandler checkt op keyCode van de ingedrukte toets, en roept de nodige method op in de AppModel
-     * @param event KeyboardEvent
-     */
+    // Checken welke gesture uitgevoerd werd
+    private function gestureHandler(e:GestureEvent):void {
+        var s:SwipeGesture = e.currentTarget as SwipeGesture;
+        switch (s.direction){
+            case SwipeGestureDirection.LEFT:
+                    _appModel.goToNext();
+                break;
+            case SwipeGestureDirection.RIGHT:
+                    _appModel.goToPrev();
+                break;
+            case SwipeGestureDirection.UP:
+                _appModel.menuVisible = true;
+                break;
+            case SwipeGestureDirection.DOWN:
+                _appModel.menuVisible = false;
+                break;
+        }
+    }
 
+    // Keydownhandler checkt welke toets de gebruiker heeft ingeduwd, en roept eventueel de nodige functies op uit de AppModel
     private function keyDownHandler(event:KeyboardEvent):void {
         switch (event.keyCode){
             case Keyboard.SPACE:
@@ -105,23 +135,15 @@ public class Presentation extends Sprite implements IResizable {
         }
     }
 
-    /**
-     * Initializeren van de applicatie -> xml inladen in AppModel
-     */
-
+    // Initializeren van de applicatie => xml inladen
     private function init():void {
-        //_appModel.load("assets/slides.xml");
         var xmlClass:Class = Main.SlideXml;
         var xml:XML = new XML(new xmlClass());
         _appModel.parse(xml);
     }
 
-    /**
-     * Resize funtie zal in MenuControlView & SlideView de resize() functie oproepen
-     * @param w Number (stage.stageWidth)
-     * @param h Number (stage.StageHeight)
-     */
 
+    // Resize functionaliteit
     public function resize(w:Number, h:Number):void {
 
         _menuControlView.resize(w, h);

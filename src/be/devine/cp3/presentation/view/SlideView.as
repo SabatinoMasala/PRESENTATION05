@@ -38,29 +38,31 @@ public class SlideView extends Sprite implements IResizable{
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    private function reset():void{
-
-    }
-
+    // Data in AppModel is veranderd
     private function dataChangedHandler(event:starling.events.Event):void {
-        reset();
         makeSlides();
     }
 
+    // Slide is aangepast
     private function slideChangeHandler(event:starling.events.Event):void {
+        // Is er een huidige slide zichtbaar?
         if(_currentSlideDisplayObject != null){
+            // Verberg de huidige slide
             _currentSlideDisplayObject.visible = false;
         }
+        // Stel nieuwe slide in
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
+        // Toon nieuwe slide
         _currentSlideDisplayObject.visible = true;
         if(stage){
             resize(stage.stageWidth, stage.stageHeight);
         }
     }
 
-
+    // Maak slides van VO's
     private function makeSlides():void {
         var tempVector:Vector.<Slide> = new Vector.<Slide>();
+        // Door de Vectors in AppModel lussen en slides aanmaken
         for each(var slideVO:SlideVO in _appModel.vectorSlides){
             var s:Slide = new Slide(slideVO);
             tempVector.push(s);
@@ -71,6 +73,7 @@ public class SlideView extends Sprite implements IResizable{
         _slides = tempVector;
     }
 
+    // Resize functie
     public function resize(w:Number, h:Number):void {
         var current:Slide = _currentSlideDisplayObject as Slide;
         if(current){

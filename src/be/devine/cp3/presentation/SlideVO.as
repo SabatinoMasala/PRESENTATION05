@@ -28,10 +28,13 @@ public class SlideVO {
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
+
+    //Achtergrondkleur ophalen
     public function get backgroundColor():uint {
         return _backgroundColor;
     }
 
+    //Achtergrondkleur instellen
     public function set backgroundColor(value:uint):void {
         if(value != _backgroundColor){
             _backgroundColor = value;

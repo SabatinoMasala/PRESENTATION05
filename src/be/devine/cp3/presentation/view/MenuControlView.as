@@ -36,16 +36,21 @@ public class MenuControlView extends Sprite implements IResizable {
     public function MenuControlView() {
         _appModel = AppModel.getInstance();
 
+        // Container aanmaken die menu zal bevatten
         _container = new Sprite();
         addChild(_container);
 
-        _menuBg = new Quad(100, 200, 0x444444);
+        // Menu background tekenen (200 pixels hoog, breedte verandert met stageWidth)
+        _menuBg = new Quad(1, 200, 0x444444);
         _container.addChild(_menuBg);
 
+        // ButtonContainer aanmaken (knopje waar "menu" op staat)
         _buttonContainer = new Sprite();
         _container.addChild(_buttonContainer);
+        // Blokje van 100x35 tekenen
         var q:Quad = new Quad(100, 35, 0x444444);
         _buttonContainer.addChild(q);
+        // Tekstveldje toevoegen
         var tf:TextField = new TextField(q.width, q.height, "Menu", "Bebas Neue", 20, 0xFFFFFF);
         _buttonContainer.addChild(tf);
         _buttonContainer.y = -_buttonContainer.height;
@@ -59,11 +64,14 @@ public class MenuControlView extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
+    // Display functie
     public function display():void{
 
+        // Menu state is veranderd
         if(_menuStateChanged){
             _menuStateChanged = false;
 
+            // Het menu moet getoond worden
             if(_appModel.menuVisible){
 
                 Starling.juggler.remove(_tween);
@@ -72,7 +80,10 @@ public class MenuControlView extends Sprite implements IResizable {
                 _tween.animate("y", stage.stageHeight - (_container.height - _buttonContainer.height));
                 Starling.juggler.add(_tween);
 
-            } else {
+            }
+
+            // Het menu moet moet verborgen worden
+            else {
 
                 Starling.juggler.remove(_tween);
 
@@ -85,22 +96,28 @@ public class MenuControlView extends Sprite implements IResizable {
 
     }
 
+    // Geduwd op de menu knop
     private function buttonTouch(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
+        // Vergelijkbaar met MOUSE_UP
         if(t.phase == starling.events.TouchPhase.ENDED){
             _appModel.menuVisible = !_appModel.menuVisible;
         }
     }
 
+    // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
 
+        // Breedte van menu moet stage.stageWidth worden
         _menuBg.width = w;
+        // _container onderaan buiten scherm plaatsen
         _container.y = h;
 
         _buttonContainer.x = w - _buttonContainer.width - 35;
 
     }
 
+    // EventHandler
     private function menuStateChangedHandler(event:Event):void {
         _menuStateChanged = true;
         display();

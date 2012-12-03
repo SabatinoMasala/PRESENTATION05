@@ -1,25 +1,21 @@
 package {
 
 import be.devine.cp3.presentation.Presentation;
-import be.devine.cp3.presentation.model.AppModel;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.events.TransformGestureEvent;
 import flash.geom.Rectangle;
-import flash.ui.Multitouch;
-import flash.ui.MultitouchInputMode;
+
+import org.gestouch.core.Gestouch;
+
+import org.gestouch.extensions.starling.StarlingDisplayListAdapter;
+import org.gestouch.extensions.starling.StarlingTouchHitTester;
+import org.gestouch.input.NativeInputAdapter;
 
 import starling.core.Starling;
-
-/**
- * Main
- *
- * Entry point voor applicatie
- */
+import starling.display.DisplayObject;
 
 public class Main extends Sprite {
 
@@ -27,55 +23,45 @@ public class Main extends Sprite {
     public static const SlideXml:Class;
 
     private var _starling:Starling;
-    private var _appModel:AppModel;
 
-    /**
-     * Zet de stage align en stage scalemode juist
-     */
+    // Constructor
     public function Main() {
+
+        // Stage juist alignen en scalen
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
+        // Initializeren van applicatie
         init();
 
+        // Resize event koppelen aan stage
         stage.addEventListener(Event.RESIZE, resizeHandler);
     }
 
-    private function swipeHandler(event:TransformGestureEvent):void {
-        switch (event.offsetX){
-            case 1:
-                trace("rechts");
-                break;
-            case -1:
-                trace("links");
-                break;
-        }
-    }
-
-    /**
-     * Zal een nieuwe Starling instantie aanmaken & starten
-     *
-     * @private
-     */
     private function init():void{
+        // Starling instantie aanmaken
         _starling = new Starling(Presentation, stage);
+
+        // Gestures voor iPad
+        Gestouch.inputAdapter ||= new NativeInputAdapter(stage);
+        Gestouch.addDisplayListAdapter(starling.display.DisplayObject, new StarlingDisplayListAdapter());
+        Gestouch.addTouchHitTester(new StarlingTouchHitTester(_starling), -1);
+
+        // Starling starten
         _starling.start();
     }
 
-    /**
-     * Verantwoordelijk voor de resize functionaliteit van de applicatie
-     *
-     * @param event flash.events.Event
-     * @private
-     */
     private function resizeHandler(event:Event = null):void {
 
+        // Rectangle aanmaken voor viewport van starling
         var rect:Rectangle = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
         _starling.viewPort = rect;
 
+        // Starling stage width en height juist instellen
         _starling.stage.stageWidth = stage.stageWidth;
         _starling.stage.stageHeight = stage.stageHeight;
 
+        // Als Starling de rootklasse heeft aangemaakt, zullen we deze ook resizen
         if(Starling.current.stage.numChildren !== 0){
             var p:Presentation = Starling.current.stage.getChildAt(0) as Presentation;
             p.resize(stage.stageWidth, stage.stageHeight);

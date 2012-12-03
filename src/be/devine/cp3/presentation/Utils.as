@@ -20,11 +20,7 @@ public class Utils {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    /**
-     * Converteert een string naar een uint
-     * @param str String #FFFFFF
-     * @return uint 0xFFFFFF
-     */
+    // Converteer een string naar een uint ("#FF0000" naar 0xFF0000)
     public static function str_to_uint(str:String):uint{
         if(str == "") return 0xFFFFFF;
         return uint("0x"+str.substr(1));

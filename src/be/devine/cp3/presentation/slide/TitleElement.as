@@ -27,28 +27,37 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
     private var _textField:starling.text.TextField;
     private var _background:Quad;
     private var _big:Boolean;
+    private var _backgroundColor:uint;
+    private var _textColor:uint;
 
     //Constructor
     public function TitleElement(title:String, backgroundColor:uint, textColor:uint, big:Boolean = false) {
+        // Is het een grote titel?
         _big = big;
         _title = title;
+        _backgroundColor = backgroundColor;
+        _textColor = textColor;
 
+        // Als de titel klein is
         if(!_big){
-            _background = new Quad(1, 60, backgroundColor);
-            _textField = new starling.text.TextField(300, 60, _title, "Bebas Neue", 40, textColor);
+            // quad van 1x60 met backgroundcolor uit VO aanmaken (breedte past aan met stage.stageWidth)
+            _background = new Quad(1, 60, _backgroundColor);
+            _textField = new starling.text.TextField(300, 60, _title, "Bebas Neue", 40, _textColor);
         }
+        // Als de titel groot is
         else{
-            _background = new Quad(1, 120, backgroundColor);
-            _textField = new starling.text.TextField(300, 120, _title, "Bebas Neue", 60, textColor);
+            // quad van 1x120 met backgroundcolor uit VO aanmaken (breedte past aan met stage.stageWidth)
+            _background = new Quad(1, 120, _backgroundColor);
+            _textField = new starling.text.TextField(300, 120, _title, "Bebas Neue", 60, _textColor);
         }
 
+        // Autoscale & verticaal / horizontaal in het midden plaatsen
         _textField.autoScale = true;
         _textField.vAlign = VAlign.CENTER;
         _textField.hAlign = HAlign.CENTER;
 
         addChild(_background);
         addChild(_textField);
-
     }
 
     /**************************************************************************************************************************************
@@ -59,6 +68,7 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
 
     }
 
+    // Resize functie
     public function resize(w:Number, h:Number):void{
         if(_big){
             _background.y = (h>>1) - (_textField.height>>1);
