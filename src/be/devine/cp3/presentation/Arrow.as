@@ -12,6 +12,7 @@ import flash.display.BitmapData;
 import flash.geom.Matrix;
 
 import starling.display.Image;
+import starling.display.Quad;
 
 import starling.display.Sprite;
 
@@ -33,18 +34,22 @@ public class Arrow extends starling.display.Sprite {
         trace("[Arrow] Construct");
 
         var arrow:ArrowRight = new ArrowRight();
-        _arrowBitmapData = new BitmapData(arrow.width, arrow.height);
+        _arrowBitmapData = new BitmapData(arrow.width, arrow.height, true, 0xFF0000);
 
         switch (dir){
             default:
             case LEFT:
-                    _arrowBitmapData.draw(arrow, new Matrix());
-                    _arrow = Image.fromBitmap(new Bitmap(_arrowBitmapData));
+                    var matrix:Matrix = new Matrix();
+                    matrix.scale(-1, 1);
+                    matrix.translate(arrow.width, 0);
+                    _arrowBitmapData.draw(arrow, matrix);
                 break;
             case RIGHT:
-                    _arrow = Image.fromBitmap(new Bitmap(_arrowBitmapData));
+                    _arrowBitmapData.draw(arrow);
                 break;
         }
+        _arrow = Image.fromBitmap(new Bitmap(_arrowBitmapData));
+        addChild(_arrow);
     }
 
     /**************************************************************************************************************************************

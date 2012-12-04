@@ -6,18 +6,19 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.view {
+import be.devine.cp3.presentation.Arrow;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
-import starling.display.Button;
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
+import starling.events.TouchPhase;
 import starling.text.TextField;
 
 public class MenuControlView extends Sprite implements IResizable {
@@ -32,6 +33,8 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _menuStateChanged:Boolean;
     private var _menuBg:Quad;
     private var _buttonContainer;
+    private var _btnLeft:Arrow;
+    private var _btnRight:Arrow;
 
     //Constructor
     public function MenuControlView() {
@@ -44,6 +47,20 @@ public class MenuControlView extends Sprite implements IResizable {
         // Menu background tekenen (200 pixels hoog, breedte verandert met stageWidth)
         _menuBg = new Quad(1, 200, 0x444444);
         _container.addChild(_menuBg);
+
+        _btnLeft = new Arrow(Arrow.LEFT);
+        _btnRight = new Arrow(Arrow.RIGHT);
+
+        _container.addChild(_btnLeft);
+        _container.addChild(_btnRight);
+        _btnLeft.x = 20;
+        _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
+        _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
+
+        _btnLeft.addEventListener(TouchEvent.TOUCH, leftButton);
+        _btnRight.addEventListener(TouchEvent.TOUCH, rightButton);
+        _btnLeft.useHandCursor = true;
+        _btnRight.useHandCursor = true;
 
         // ButtonContainer aanmaken (knopje waar "menu" op staat)
         _buttonContainer = new Sprite();
@@ -99,16 +116,18 @@ public class MenuControlView extends Sprite implements IResizable {
     }
 
     // Geduwd op de menu knop
-    private function buttonTouch(event:starling.events.TouchEvent):void {
+    private function buttonTouch(event:TouchEvent):void {
         var t:Touch = event.getTouch(stage);
         // Vergelijkbaar met MOUSE_UP
-        if(t.phase == starling.events.TouchPhase.ENDED){
+        if(t.phase == TouchPhase.ENDED){
             _appModel.menuVisible = !_appModel.menuVisible;
         }
     }
 
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
+
+        _btnRight.x = w - (_btnRight.width) - 20;
 
         // Breedte van menu moet stage.stageWidth worden
         _menuBg.width = w;
@@ -122,6 +141,24 @@ public class MenuControlView extends Sprite implements IResizable {
 
         _buttonContainer.x = w - _buttonContainer.width - 35;
 
+    }
+
+    private function rightButton(event:starling.events.TouchEvent):void {
+        var t:Touch = event.getTouch(stage);
+        switch (t.phase){
+            case TouchPhase.ENDED:
+                    _appModel.goToNext();
+                break;
+        }
+    }
+
+    private function leftButton(event:starling.events.TouchEvent):void {
+        var t:Touch = event.getTouch(stage);
+        switch (t.phase){
+            case TouchPhase.ENDED:
+                _appModel.goToPrev();
+                break;
+        }
     }
 
     // EventHandler
