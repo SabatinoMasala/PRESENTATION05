@@ -12,6 +12,7 @@ import be.devine.cp3.presentation.model.AppModel;
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.Button;
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.Event;
@@ -112,7 +113,12 @@ public class MenuControlView extends Sprite implements IResizable {
         // Breedte van menu moet stage.stageWidth worden
         _menuBg.width = w;
         // _container onderaan buiten scherm plaatsen
-        _container.y = h;
+        if(!_appModel.menuVisible){
+            _container.y = h;
+        }
+        else{
+            _container.y = h - (_container.height - _buttonContainer.height);
+        }
 
         _buttonContainer.x = w - _buttonContainer.width - 35;
 
