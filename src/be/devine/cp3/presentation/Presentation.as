@@ -16,6 +16,7 @@ import flash.ui.Keyboard;
 import org.gestouch.events.GestureEvent;
 import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
+import org.gestouch.gestures.TapGesture;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -76,6 +77,11 @@ public class Presentation extends Sprite implements IResizable {
 
         // KEY_UP KeyboardEvent koppelen aan stage
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
+
+        // Double tap
+        var tap:TapGesture = new TapGesture(_slideView);
+        tap.addEventListener(GestureEvent.GESTURE_RECOGNIZED, tapHandler);
+        tap.numTapsRequired = 2;
 
         // Swipe gestures voor ipad (swipen naar links)
         var swipeLeft:SwipeGesture = new SwipeGesture(_slideView);
@@ -142,6 +148,10 @@ public class Presentation extends Sprite implements IResizable {
         _appModel.parse(xml);
     }
 
+    private function tapHandler(event:GestureEvent):void {
+        var t:TapGesture = event.currentTarget as TapGesture;
+        _appModel.goToNext();
+    }
 
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void {
