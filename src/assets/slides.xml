@@ -1,3 +1,5 @@
+<!-- TODO type in slide weghalen -->
+
 <slides>
 
     <slide type="title" backgroundColor="#72b5c4">
@@ -5,7 +7,7 @@
     </slide>
 
     <slide type="imageOnly">
-        <image src="/assets/images/icon.png"></image>
+        <image src="/assets/images/Untitled-6.png"></image>
     </slide>
 
     <slide type="imageWithTitle">
@@ -14,6 +16,7 @@
     </slide>
 
     <slide type="bullets">
+        <!-- TODO kleuren nog kunnen instellen -->
         <bullet>Dit is een bullet</bullet>
         <bullet>Dit is een bullet</bullet>
         <bullet>Dit is een bullet</bullet>

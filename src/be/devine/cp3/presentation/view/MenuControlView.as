@@ -46,6 +46,7 @@ public class MenuControlView extends Sprite implements IResizable {
 
         // ButtonContainer aanmaken (knopje waar "menu" op staat)
         _buttonContainer = new Sprite();
+        _buttonContainer.useHandCursor = true;
         _container.addChild(_buttonContainer);
         // Blokje van 100x35 tekenen
         var q:Quad = new Quad(100, 35, 0x444444);
@@ -76,7 +77,7 @@ public class MenuControlView extends Sprite implements IResizable {
 
                 Starling.juggler.remove(_tween);
 
-                _tween = new Tween(_container, .3, Transitions.EASE_OUT);
+                _tween = new Tween(_container, .6, Transitions.EASE_OUT);
                 _tween.animate("y", stage.stageHeight - (_container.height - _buttonContainer.height));
                 Starling.juggler.add(_tween);
 
@@ -87,7 +88,7 @@ public class MenuControlView extends Sprite implements IResizable {
 
                 Starling.juggler.remove(_tween);
 
-                _tween = new Tween(_container, .3, Transitions.EASE_OUT);
+                _tween = new Tween(_container, .6, Transitions.EASE_OUT);
                 _tween.animate("y", stage.stageHeight);
                 Starling.juggler.add(_tween);
 

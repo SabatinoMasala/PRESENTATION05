@@ -78,12 +78,12 @@ public class Presentation extends Sprite implements IResizable {
         stage.addEventListener(KeyboardEvent.KEY_UP, keyDownHandler);
 
         // Swipe gestures voor ipad (swipen naar links)
-        var swipeLeft:SwipeGesture = new SwipeGesture(stage);
+        var swipeLeft:SwipeGesture = new SwipeGesture(_slideView);
         swipeLeft.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
         swipeLeft.direction = SwipeGestureDirection.LEFT;
 
         // Swipe gestures voor ipad (swipen naar rechts)
-        var swipeRight:SwipeGesture = new SwipeGesture(stage);
+        var swipeRight:SwipeGesture = new SwipeGesture(_slideView);
         swipeRight.addEventListener(GestureEvent.GESTURE_RECOGNIZED, gestureHandler);
         swipeRight.direction = SwipeGestureDirection.RIGHT;
 
