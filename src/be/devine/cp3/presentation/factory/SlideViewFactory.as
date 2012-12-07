@@ -6,8 +6,16 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.factory {
+import be.devine.cp3.presentation.Slide;
+
 public class SlideViewFactory {
     public function SlideViewFactory() {
+
+    }
+
+    public static function CreateFromSlideVO(config:Object):Slide{
+
+
     }
 }
 }
