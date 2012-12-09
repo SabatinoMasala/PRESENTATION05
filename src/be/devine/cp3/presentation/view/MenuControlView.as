@@ -34,9 +34,6 @@ public class MenuControlView extends Sprite implements IResizable {
     public function MenuControlView() {
         _appModel = AppModel.getInstance();
 
-        _thumbnailView = new ThumbnailView();
-        addChild(_thumbnailView);
-
         // Container aanmaken die menu zal bevatten
         _container = new Sprite();
         addChild(_container);
@@ -55,6 +52,12 @@ public class MenuControlView extends Sprite implements IResizable {
         _btnLeft.x = 20;
         _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
         _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
+
+        // Thumbnails aanmaken
+        _thumbnailView = new ThumbnailView(200, 150);
+        _thumbnailView.y = (_menuBg.height>>1) - 75;
+        _thumbnailView.x = 100;
+        _container.addChild(_thumbnailView);
 
         // Event listeners
         _btnLeft.addEventListener(TouchEvent.TOUCH, leftButton);

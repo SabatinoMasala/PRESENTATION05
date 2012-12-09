@@ -1,15 +1,9 @@
 package be.devine.cp3.presentation.factory {
 import be.devine.cp3.presentation.Utils;
-import be.devine.cp3.presentation.interfaces.ISlideElement;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
-import be.devine.cp3.presentation.slide.BulletElement;
-import be.devine.cp3.presentation.slide.ImageElement;
-import be.devine.cp3.presentation.slide.TitleElement;
 import be.devine.cp3.presentation.slideVO.BulletVO;
 import be.devine.cp3.presentation.slideVO.ImageVO;
 import be.devine.cp3.presentation.slideVO.TitleVO;
-
-import starling.display.Image;
 
 public class ElementVOFactory {
 
@@ -26,7 +20,11 @@ public class ElementVOFactory {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    // Element creeeren die beschreven wordt in de xml
+    /*
+    Element creeeren die beschreven wordt in de xml
+    We creeeren enkel value objecten (geen visuele dingen) opdat we meerdere slides kunnen aanmaken met 1 value object (thumbnails)
+    Aangezien visuele objecten kunnen niet meerdere keren kunnen worden getoond
+    */
     public static function createElement(xmlNode:XML, only:Boolean = false):ISlideVO {
         var type:String = String(xmlNode.@type);
         switch (type){

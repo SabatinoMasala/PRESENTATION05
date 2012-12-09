@@ -1,15 +1,7 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 09/12/12
- * Time: 14:08
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.factory {
+import be.devine.cp3.presentation.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
 import be.devine.cp3.presentation.slideVO.SlideVO;
-import be.devine.cp3.presentation.Utils;
-import be.devine.cp3.presentation.interfaces.ISlideElement;
 
 public class SlideVOFactory {
 

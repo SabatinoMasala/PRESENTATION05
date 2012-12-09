@@ -7,14 +7,19 @@
  */
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
-import be.devine.cp3.presentation.slideVO.SlideVO;
 import be.devine.cp3.presentation.model.AppModel;
+import be.devine.cp3.presentation.slideVO.SlideVO;
 
+import flash.geom.Rectangle;
+
+import starling.display.Quad;
 import starling.display.Sprite;
-
 import starling.events.Event;
+import starling.events.Touch;
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;
 
-public class ThumbnailView extends starling.display.Sprite {
+public class ThumbnailView extends Sprite {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -22,15 +27,21 @@ public class ThumbnailView extends starling.display.Sprite {
 
     private var _appModel:AppModel;
     private var _vectorThumbs:Vector.<Slide>;
+    private var _mask:Quad;
+
+    private var _dimensions:Rectangle;
 
     //Constructor
-    public function ThumbnailView() {
+    public function ThumbnailView(width:Number, height:Number) {
         trace("[ThumbnailView] Construct");
+
+        _dimensions = new Rectangle(0, 0, width, height);
 
         _vectorThumbs = new Vector.<Slide>();
 
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
+
     }
 
     /**************************************************************************************************************************************
@@ -47,13 +58,26 @@ public class ThumbnailView extends starling.display.Sprite {
             tempVector.push(s);
             s.construct();
             s.x = xPos;
-            xPos += 110;
             addChild(s);
             s.resize(stage.stageWidth, stage.stageHeight);
-            s.width = 150;
-            s.scaleY = s.scaleX;
+            s.width = _dimensions.width;
+            s.height = _dimensions.height;
+            xPos += s.width + 10;
+            s.addEventListener(TouchEvent.TOUCH, touchHandler);
         }
         _vectorThumbs= tempVector;
+
+        /*_mask = new Quad( ((_dimensions.width + 10) * 3) - 10, height, 0xFF0000);
+        _mask.alpha = .3;
+        addChild(_mask);*/
+
+    }
+
+    private function touchHandler(event:TouchEvent):void {
+        var t:Touch = event.getTouch(stage) as Touch;
+        if(t.phase == TouchPhase.ENDED){
+            _appModel.currentSlide = _appModel.vectorSlides[(getChildIndex(event.currentTarget as Sprite))];
+        }
     }
 
     /**************************************************************************************************************************************

@@ -8,6 +8,7 @@ import flash.display.Bitmap;
 import flash.display.Loader;
 import flash.events.Event;
 import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.net.URLRequest;
 
 import starling.display.Image;
@@ -23,7 +24,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _loader:Loader;
     private var _image:Image;
     private var _delayResize:Boolean = false;
-    private var _prevPoint:Point;
+    private var _prevPoint:Rectangle;
 
     private var _slideVO:ImageVO;
 
@@ -46,7 +47,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
         // Als de image nog niet bestond bij de positionering ( zie resize ), werd deze uitgesteld naar hier.
         // De width en height zijn opgeslaan in de Point _prevPoint
         if(_delayResize){
-            resize(_prevPoint.x, _prevPoint.y);
+            resize(_prevPoint.width, _prevPoint.height);
         }
     }
 
@@ -65,7 +66,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
         }
         else{
             _delayResize = true;
-            _prevPoint = new Point(w, h);
+            _prevPoint = new Rectangle(0, 0, w, h);
         }
     }
 }
