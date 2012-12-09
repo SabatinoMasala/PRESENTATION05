@@ -27,7 +27,7 @@ public class Transition {
     }
 
     // Geen transitie
-    public static function none(slide_1, slide_2):void{
+    public static function none(slide_1:Slide, slide_2:Slide):void{
         trace("none");
         slide_1.visible = false;
         slide_2.visible = true;

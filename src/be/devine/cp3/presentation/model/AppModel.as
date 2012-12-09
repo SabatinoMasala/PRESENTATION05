@@ -86,6 +86,8 @@ public class AppModel extends EventDispatcher {
         return _vectorSlides;
     }
 
+    // TODO Slide objecten aanmaken ipv slidevo's
+
     public function set vectorSlides(value:Vector.<SlideVO>):void {
         if(_vectorSlides != value){
             _vectorSlides = value;
