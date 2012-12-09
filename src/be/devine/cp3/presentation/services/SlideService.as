@@ -3,6 +3,7 @@ package be.devine.cp3.presentation.services {
 import be.devine.cp3.presentation.SlideVO;
 
 import be.devine.cp3.presentation.factory.SlideVOFactory;
+import be.devine.cp3.presentation.model.AppModel;
 
 import flash.events.Event;
 import flash.net.URLLoader;
@@ -37,6 +38,9 @@ public class SlideService {
         for each(var slide:XML in xmlObject.slide){
             tempSlides.push(SlideVOFactory.createSlideVOFromXML(slide));
         }
+        var appModel:AppModel = AppModel.getInstance();
+        appModel.vectorSlides = tempSlides;
+        appModel.currentSlide = appModel.vectorSlides[0];
     }
 
     /**************************************************************************************************************************************

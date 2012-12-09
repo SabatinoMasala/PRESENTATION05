@@ -6,23 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.model {
-import be.devine.cp3.presentation.SlideType;
 import be.devine.cp3.presentation.SlideVO;
-import be.devine.cp3.presentation.Utils;
-import be.devine.cp3.presentation.interfaces.ISlideElement;
-import be.devine.cp3.presentation.slide.BulletElement;
-import be.devine.cp3.presentation.slide.ImageElement;
-import be.devine.cp3.presentation.slide.TitleElement;
-
-import flash.events.Event;
-
-import flash.net.URLLoader;
-import flash.net.URLRequest;
-
-import starling.display.Image;
 
 import starling.events.Event;
-
 import starling.events.EventDispatcher;
 
 /**
@@ -31,7 +17,7 @@ import starling.events.EventDispatcher;
  * AppModel voor de applicatie. Deze klasse is een singleton, instanties worden via getInstance() aangemaakt.
  */
 
-public class AppModel extends starling.events.EventDispatcher {
+public class AppModel extends EventDispatcher {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -97,66 +83,6 @@ public class AppModel extends starling.events.EventDispatcher {
         }
     }
 
-    /**
-     * Zal een XML beginnen inladen
-     * @param pathToXml path naar XML bestand
-     */
-
-    public function load(pathToXml:String):void{
-        _vectorSlides = new Vector.<SlideVO>();
-        var urlLoader:URLLoader = new URLLoader();
-        urlLoader.load(new URLRequest(pathToXml));
-        urlLoader.addEventListener(flash.events.Event.COMPLETE, loadedHandler);
-    }
-
-    /**
-     * Als de XML ingeladen is zal de XML geparsed worden
-     * @param e flash.events.Event
-     */
-
-    private function loadedHandler(e:flash.events.Event):void {
-        var l:URLLoader = e.currentTarget as URLLoader;
-        var xml:XML = XML(l.data);
-        parse(xml);
-    }
-
-    public function parse(xml:XML):void{
-        var tempVector:Vector.<SlideVO> = new Vector.<SlideVO>();
-        for each(var slide:XML in xml.slide){
-
-            var slideVO:SlideVO = new SlideVO();
-            var type:String = slide.@type;
-
-            var elementVector:Vector.<ISlideElement> = new Vector.<ISlideElement>();
-
-            switch (type){
-                default:
-                case SlideType.TITLE:
-                    elementVector.push(new TitleElement(slide.title, Utils.str_to_uint(slide.title.@backgroundColor), Utils.str_to_uint(slide.title.@textColor), true));
-                    break;
-                case SlideType.BULLETS:
-                    var vectorBullets:Vector.<String> = new Vector.<String>();
-                    for each(var bullet:XML in slide.bullet){
-                        vectorBullets.push(bullet);
-                    }
-                    elementVector.push(new BulletElement(vectorBullets));
-                    break;
-                case SlideType.IMAGE_ONLY:
-                    elementVector.push(new ImageElement(slide.image.@src));
-                    break;
-                case SlideType.IMAGE_TITLE:
-                    elementVector.push(new ImageElement(slide.image.@src));
-                    elementVector.push(new TitleElement(slide.title, Utils.str_to_uint(slide.title.@backgroundColor), Utils.str_to_uint(slide.title.@textColor)));
-                    break;
-            }
-            slideVO.arrElements = elementVector;
-            slideVO.backgroundColor = Utils.str_to_uint(slide.@backgroundColor);
-            tempVector.push(slideVO);
-        }
-        this.vectorSlides = tempVector;
-        this.currentSlide = this.vectorSlides[0];
-    }
-
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
@@ -177,7 +103,7 @@ public class AppModel extends starling.events.EventDispatcher {
             _menuVisible = value;
 
             //dispatchen
-            dispatchEvent(new starling.events.Event(MENU_STATE_CHANGED));
+            dispatchEvent(new Event(MENU_STATE_CHANGED));
         }
     }
 
@@ -195,7 +121,7 @@ public class AppModel extends starling.events.EventDispatcher {
     public function set vectorSlides(value:Vector.<SlideVO>):void {
         if(_vectorSlides != value){
             _vectorSlides = value;
-            dispatchEvent(new starling.events.Event(DATA_CHANGED));
+            dispatchEvent(new Event(DATA_CHANGED));
         }
     }
 
@@ -213,7 +139,7 @@ public class AppModel extends starling.events.EventDispatcher {
     public function set currentSlide(value:SlideVO):void {
         if(_currentSlide != value){
             _currentSlide = value;
-            dispatchEvent(new starling.events.Event(SLIDE_CHANGED));
+            dispatchEvent(new Event(SLIDE_CHANGED));
         }
     }
 

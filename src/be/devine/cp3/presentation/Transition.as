@@ -1,28 +1,42 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 04/12/12
- * Time: 13:45
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation {
+import starling.animation.Tween;
+import starling.core.Starling;
+
 public class Transition {
 
-    /**************************************************************************************************************************************
-     ************************************* PROPERTIES *************************************************************************************
-     **************************************************************************************************************************************/
+    public static const TIME:Number = .5;
+    private static var t:Tween;
 
-        //Constructor
-    public function Transition() {
-        trace("[Transition] Construct");
+    public static function transition(slide_1:Slide, slide_2:Slide):void{
+        if(slide_1 == null){
+            slide_2.visible = true;
+        }
+        else{
+            switch (slide_2.transition){
+                case "none": none(slide_1, slide_2);
+                case "fade": fade(slide_1, slide_2);
+            }
+        }
     }
 
-    /**************************************************************************************************************************************
-     ************************************* METHODS ****************************************************************************************
-     **************************************************************************************************************************************/
+    public static function none(slide_1, slide_2):void{
+        slide_1.visible = false;
+        slide_2.visible = true;
+    }
 
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
+    public static function fade(slide_1:Slide, slide_2:Slide):void{
+        // Vorige tween stoppen
+        if(t){
+            t.advanceTime(TIME);
+        }
+        slide_1.visible = true;
+        slide_1.alpha = 1;
+        slide_2.alpha = 0;
+        slide_2.visible = true;
+        t = new Tween(slide_2, TIME);
+        t.animate("alpha", 1);
+        t.onComplete = function():void{slide_1.visible = false}
+        Starling.juggler.add(t);
+    }
 }
 }

@@ -1,35 +1,33 @@
-<!-- TODO type in slide weghalen -->
-
 <slides>
 
-    <slide type="title" backgroundColor="#72b5c4">
-        <title backgroundColor="#27648b" textColor="#FFFFFF">Welkom.</title>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
     </slide>
 
-    <slide type="imageOnly">
-        <image src="/assets/images/Untitled-6.png"></image>
+    <slide backgroundColor="#EAD075" transition="fade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
     </slide>
 
-    <slide type="imageWithTitle">
-        <image src="/assets/images/producten.jpg"></image>
-        <title backgroundColor="#444444">Dit is een titel</title>
+    <slide>
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
     </slide>
 
-    <slide type="bullets">
-        <!-- TODO kleuren nog kunnen instellen -->
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
-        <bullet>Dit is een bullet</bullet>
+    <slide>
+        <element type="bullets" backgroundColor="#FF0000" textColor="#00FF00">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
     </slide>
 
-    <slide type="title">
-        <title backgroundColor="#444444">Dit is enkel een titel</title>
+    <slide>
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
     </slide>
 
 </slides>

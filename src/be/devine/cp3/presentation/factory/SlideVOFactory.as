@@ -7,6 +7,7 @@
  */
 package be.devine.cp3.presentation.factory {
 import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 
 public class SlideVOFactory {
@@ -27,9 +28,20 @@ public class SlideVOFactory {
     public static function createSlideVOFromXML(xmlNode:XML):SlideVO{
         var slideVO:SlideVO = new SlideVO();
         var elementVector:Vector.<ISlideElement> = new Vector.<ISlideElement>();
-        slideVO.backgroundColor =
-        trace(xmlNode.@backgroundColor);
-        return null;
+        slideVO.backgroundColor = Utils.str_to_uint(String(xmlNode.@backgroundColor));
+        slideVO.transition = (String(xmlNode.@transition) !== "") ? String(xmlNode.@transition) : "none";
+
+        var num:uint = 0;
+        var length:uint = xmlNode.element.length();
+
+        for each(var x:XML in xmlNode.element){
+            // 2e argument is een boolean die checkt of dit het enige element is of niet
+            elementVector.push( ElementVOFactory.createElement(x, (length==1) ) );
+        }
+
+        slideVO.arrElements = elementVector;
+
+        return slideVO;
     }
 
     /**************************************************************************************************************************************

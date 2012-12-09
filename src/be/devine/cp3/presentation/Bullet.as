@@ -24,7 +24,6 @@ public class Bullet extends starling.display.Sprite {
 
     //Constructor
     public function Bullet(string:String) {
-        trace("[Bullet] Construct");
         _str = string;
         _square = new Quad(10, 10, 0x444444);
         addChild(_square);

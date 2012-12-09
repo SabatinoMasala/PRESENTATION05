@@ -21,9 +21,6 @@ import starling.display.DisplayObject;
 
 public class Main extends Sprite {
 
-    [Embed(source="/assets/slides.xml", mimeType="application/octet-stream")]
-    public static const SlideXml:Class;
-
     private var _starling:Starling;
 
     // Constructor

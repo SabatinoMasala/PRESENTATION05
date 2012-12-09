@@ -8,6 +8,7 @@
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.Transition;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 
@@ -22,7 +23,7 @@ public class SlideView extends Sprite implements IResizable{
 
     private var _appModel:AppModel;
     private var _slides:Vector.<Slide>;
-    private var _currentSlideDisplayObject:starling.display.Sprite;
+    private var _currentSlideDisplayObject:Slide;
 
     //Constructor
     public function SlideView() {
@@ -45,15 +46,17 @@ public class SlideView extends Sprite implements IResizable{
 
     // Slide is aangepast
     private function slideChangeHandler(event:starling.events.Event):void {
-        // Is er een huidige slide zichtbaar?
-        if(_currentSlideDisplayObject != null){
-            // Verberg de huidige slide
-            _currentSlideDisplayObject.visible = false;
+
+        var prevObj:Slide = null;
+
+        if(_currentSlideDisplayObject){
+            prevObj = _currentSlideDisplayObject;
         }
-        // Stel nieuwe slide in
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
-        // Toon nieuwe slide
-        _currentSlideDisplayObject.visible = true;
+        setChildIndex(_currentSlideDisplayObject, numChildren-1);
+
+        Transition.transition(prevObj, _currentSlideDisplayObject);
+
         if(stage){
             resize(stage.stageWidth, stage.stageHeight);
         }

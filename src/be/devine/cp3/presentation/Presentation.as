@@ -18,6 +18,8 @@ import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
 import org.gestouch.gestures.TapGesture;
 
+import be.devine.cp3.presentation.services.SlideService;
+
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
@@ -143,9 +145,9 @@ public class Presentation extends Sprite implements IResizable {
 
     // Initializeren van de applicatie => xml inladen
     private function init():void {
-        var xmlClass:Class = Main.SlideXml;
-        var xml:XML = new XML(new xmlClass());
-        _appModel.parse(xml);
+        //TODO service aanspreken en beginnen met laden
+        var service:SlideService = new SlideService();
+        service.load();
     }
 
     private function tapHandler(event:GestureEvent):void {

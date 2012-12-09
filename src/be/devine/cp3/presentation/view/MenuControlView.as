@@ -32,7 +32,7 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _tween:Tween;
     private var _menuStateChanged:Boolean;
     private var _menuBg:Quad;
-    private var _buttonContainer;
+    private var _buttonContainer:starling.display.Sprite;
     private var _btnLeft:Arrow;
     private var _btnRight:Arrow;
 
