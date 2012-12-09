@@ -74,6 +74,8 @@ public class Presentation extends Sprite implements IResizable {
     // stage is beschikbaar in deze functie
     private function addedToStageHandler(event:Event):void {
 
+        trace("asHAndler");
+
         // Resize functie oproepen
         resize(stage.stageWidth, stage.stageHeight);
 
@@ -145,7 +147,6 @@ public class Presentation extends Sprite implements IResizable {
 
     // Initializeren van de applicatie => xml inladen
     private function init():void {
-        //TODO service aanspreken en beginnen met laden
         var service:SlideService = new SlideService();
         service.load();
     }

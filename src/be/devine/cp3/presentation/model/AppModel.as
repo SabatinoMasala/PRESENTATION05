@@ -26,11 +26,14 @@ public class AppModel extends EventDispatcher {
     public static const DATA_CHANGED:String = "dataChanged";
     public static const MENU_STATE_CHANGED:String = "menuStringChanged";
     public static const SLIDE_CHANGED:String = "slideChanged";
+    public static const LEFT:String = "left";
+    public static const RIGHT:String = "right";
 
     private var _vectorSlides:Vector.<SlideVO>;
     private var _menuVisible:Boolean = false;
     private var _currentIndex:uint;
     private var _currentSlide:SlideVO;
+    private var _direction:String;
 
     private static var _instance:AppModel;
 
@@ -68,6 +71,7 @@ public class AppModel extends EventDispatcher {
 
     public function goToNext():void{
         if(this.currentIndex < _vectorSlides.length - 1){
+            direction = RIGHT;
             currentSlide = _vectorSlides[this.currentIndex+1];
         }
     }
@@ -79,6 +83,7 @@ public class AppModel extends EventDispatcher {
     public function goToPrev():void{
 
         if(this.currentIndex > 0){
+            direction = LEFT;
             currentSlide = _vectorSlides[this.currentIndex-1];
         }
     }
@@ -151,6 +156,14 @@ public class AppModel extends EventDispatcher {
 
     public function get currentIndex():uint {
         return _vectorSlides.indexOf(_currentSlide);
+    }
+
+    public function get direction():String {
+        return _direction;
+    }
+
+    public function set direction(value:String):void {
+        _direction = value;
     }
 }
 }

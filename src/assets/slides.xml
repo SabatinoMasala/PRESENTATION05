@@ -1,21 +1,21 @@
 <slides>
 
-    <slide backgroundColor="#72b5c4" transition="fade">
+    <slide backgroundColor="#72b5c4" transition="none">
         <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
             Welkom.
         </element>
     </slide>
 
-    <slide backgroundColor="#EAD075" transition="fade">
+    <slide backgroundColor="#EAD075" transition="none">
         <element type="image" src="/assets/images/Untitled-6.png"></element>
     </slide>
 
-    <slide>
+    <slide transition="none">
         <element type="image" src="/assets/images/producten.jpg"></element>
         <element type="title" backgroundColor="#444444">Dit is een titel</element>
     </slide>
 
-    <slide>
+    <slide transition="none">
         <element type="bullets" backgroundColor="#FF0000" textColor="#00FF00">
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>
@@ -26,7 +26,7 @@
         </element>
     </slide>
 
-    <slide>
+    <slide transition="fade">
         <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
     </slide>
 
