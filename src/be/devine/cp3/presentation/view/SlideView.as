@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 28/11/12
- * Time: 00:28
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
 import be.devine.cp3.presentation.SlideVO;
@@ -40,21 +33,27 @@ public class SlideView extends Sprite implements IResizable{
      **************************************************************************************************************************************/
 
     // Data in AppModel is veranderd
-    private function dataChangedHandler(event:starling.events.Event):void {
+    private function dataChangedHandler(event:Event):void {
         makeSlides();
     }
 
     // Slide is aangepast
-    private function slideChangeHandler(event:starling.events.Event):void {
+    private function slideChangeHandler(event:Event):void {
 
+        // Vorige slide instellen op null voor als er geen bestaat
         var prevObj:Slide = null;
 
+        // Bestaat de vorige slide?
         if(_currentSlideDisplayObject){
+            // Stel andere variabele in, want _currentSlideDisplayObject wordt overschreven
             prevObj = _currentSlideDisplayObject;
         }
+        // instellen op huidige slide
         _currentSlideDisplayObject = _slides[_appModel.currentIndex];
+        // Bovenaan plaatsen (voor transitions)
         setChildIndex(_currentSlideDisplayObject, numChildren-1);
 
+        // Transitie oproepen
         Transition.transition(prevObj, _currentSlideDisplayObject);
 
         if(stage){
@@ -83,9 +82,5 @@ public class SlideView extends Sprite implements IResizable{
             current.resize(w, h);
         }
     }
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

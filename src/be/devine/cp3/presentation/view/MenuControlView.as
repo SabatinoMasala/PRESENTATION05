@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 28/11/12
- * Time: 00:35
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Arrow;
 import be.devine.cp3.presentation.interfaces.IResizable;
@@ -48,17 +41,21 @@ public class MenuControlView extends Sprite implements IResizable {
         _menuBg = new Quad(1, 200, 0x444444);
         _container.addChild(_menuBg);
 
+        // Pijltjes
         _btnLeft = new Arrow(Arrow.LEFT);
         _btnRight = new Arrow(Arrow.RIGHT);
 
+        // Addchilden & positioneren
         _container.addChild(_btnLeft);
         _container.addChild(_btnRight);
         _btnLeft.x = 20;
         _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
         _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
 
+        // Event listeners
         _btnLeft.addEventListener(TouchEvent.TOUCH, leftButton);
         _btnRight.addEventListener(TouchEvent.TOUCH, rightButton);
+        // Handje als de gebruiker erover hovert
         _btnLeft.useHandCursor = true;
         _btnRight.useHandCursor = true;
 
@@ -66,6 +63,7 @@ public class MenuControlView extends Sprite implements IResizable {
         _buttonContainer = new Sprite();
         _buttonContainer.useHandCursor = true;
         _container.addChild(_buttonContainer);
+
         // Blokje van 100x35 tekenen
         var q:Quad = new Quad(100, 35, 0x444444);
         _buttonContainer.addChild(q);
@@ -143,6 +141,7 @@ public class MenuControlView extends Sprite implements IResizable {
 
     }
 
+    // Geduwd op de rechterknop
     private function rightButton(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
         switch (t.phase){
@@ -152,6 +151,7 @@ public class MenuControlView extends Sprite implements IResizable {
         }
     }
 
+    // Geduwd op de linkerknop
     private function leftButton(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
         switch (t.phase){

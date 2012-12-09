@@ -1,17 +1,9 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 28/11/12
- * Time: 22:55
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation {
 
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 
 import starling.display.Quad;
-
 import starling.display.Sprite;
 
 public class Slide extends Sprite implements IResizable {
@@ -21,7 +13,7 @@ public class Slide extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private var _slideVO:SlideVO;
-    private var _elements:Vector.<starling.display.Sprite>;
+    private var _elements:Vector.<Sprite>;
     private var _background:Quad;
 
     //Constructor
@@ -43,7 +35,7 @@ public class Slide extends Sprite implements IResizable {
     public function construct():void{
         for each(var s:ISlideElement in _slideVO.arrElements){
             s.build();
-            var slide:starling.display.Sprite = s as starling.display.Sprite;
+            var slide:Sprite = s as Sprite;
             addChild(slide);
             _elements.push(slide);
         }
@@ -53,7 +45,7 @@ public class Slide extends Sprite implements IResizable {
     public function resize(w:Number, h:Number):void{
         _background.width = w;
         _background.height = h;
-        for each(var s:starling.display.Sprite in _elements){
+        for each(var s:Sprite in _elements){
             (s as IResizable).resize(w, h);
         }
     }

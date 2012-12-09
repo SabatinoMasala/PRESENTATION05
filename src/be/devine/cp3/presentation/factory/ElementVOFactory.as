@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 09/12/12
- * Time: 14:13
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.factory {
 import be.devine.cp3.presentation.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
@@ -27,6 +20,7 @@ public class ElementVOFactory {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
+    // Element creeeren die beschreven wordt in de xml
     public static function createElement(xmlNode:XML, only:Boolean = false):ISlideElement {
         var type:String = String(xmlNode.@type);
         switch (type){
@@ -38,6 +32,7 @@ public class ElementVOFactory {
         throw new Error("The XML contains an element which is not recognized");
     }
 
+    // Titel element
     public static function createTitle(xmlNode:XML, only:Boolean):ISlideElement{
         var title:TitleElement = new TitleElement(
                 xmlNode,
@@ -48,6 +43,7 @@ public class ElementVOFactory {
         return title;
     }
 
+    // Bullet element
     public static function createBullets(xmlNode:XML, only:Boolean):ISlideElement{
         var vectorString:Vector.<String> = new Vector.<String>();
         for each(var x:XML in xmlNode.bullet){
@@ -57,6 +53,7 @@ public class ElementVOFactory {
         return b;
     }
 
+    // Image element
     public static function createImage(xmlNode:XML, only:Boolean):ISlideElement{
         var i:ImageElement = new ImageElement(xmlNode.@src);
         return i;

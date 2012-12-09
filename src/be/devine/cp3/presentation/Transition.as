@@ -1,6 +1,4 @@
 package be.devine.cp3.presentation {
-import be.devine.cp3.presentation.model.AppModel;
-
 import starling.animation.Tween;
 import starling.core.Starling;
 
@@ -16,6 +14,7 @@ public class Transition {
             t.advanceTime(TIME);
         }
 
+        // Als slide_1 null is (als de presentatie begint) zal deze gewoon zonder transitie getoond worden
         if(slide_1 == null){
             slide_2.visible = true;
         }
@@ -27,12 +26,14 @@ public class Transition {
         }
     }
 
+    // Geen transitie
     public static function none(slide_1, slide_2):void{
         trace("none");
         slide_1.visible = false;
         slide_2.visible = true;
     }
 
+    // Fade out transitie
     public static function fade(slide_1:Slide, slide_2:Slide):void{
         trace("fading");
         slide_1.visible = true;

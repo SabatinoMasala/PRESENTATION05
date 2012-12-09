@@ -1,13 +1,7 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 23/11/12
- * Time: 11:07
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
+import be.devine.cp3.presentation.services.SlideService;
 import be.devine.cp3.presentation.view.MenuControlView;
 import be.devine.cp3.presentation.view.SlideView;
 
@@ -17,8 +11,6 @@ import org.gestouch.events.GestureEvent;
 import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
 import org.gestouch.gestures.TapGesture;
-
-import be.devine.cp3.presentation.services.SlideService;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -73,8 +65,6 @@ public class Presentation extends Sprite implements IResizable {
 
     // stage is beschikbaar in deze functie
     private function addedToStageHandler(event:Event):void {
-
-        trace("asHAndler");
 
         // Resize functie oproepen
         resize(stage.stageWidth, stage.stageHeight);
@@ -163,8 +153,6 @@ public class Presentation extends Sprite implements IResizable {
         _slideView.resize(w, h);
 
     }
-
-
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************

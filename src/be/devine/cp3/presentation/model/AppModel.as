@@ -1,21 +1,8 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 28/11/12
- * Time: 00:26
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.model {
 import be.devine.cp3.presentation.SlideVO;
 
 import starling.events.Event;
 import starling.events.EventDispatcher;
-
-/**
- * AppModel
- *
- * AppModel voor de applicatie. Deze klasse is een singleton, instanties worden via getInstance() aangemaakt.
- */
 
 public class AppModel extends EventDispatcher {
 
@@ -37,10 +24,7 @@ public class AppModel extends EventDispatcher {
 
     private static var _instance:AppModel;
 
-    /**
-     * Instantieren van AppModel. Door een Enforcer te vragen als argument kan deze klasse niet van buitenaf worden aangemaakt.
-     * @param e Enforcer (interne klasse in AppModel)
-     */
+    // Instantieren van AppModel. Door een Enforcer te vragen als argument kan deze klasse niet van buitenaf worden aangemaakt.
 
     //Constructor
     public function AppModel(e:Enforcer) {
@@ -53,11 +37,7 @@ public class AppModel extends EventDispatcher {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    /**
-     * Maakt een nieuwe instantie aan van AppModel als er nog geen bestaat en returnt hem.
-     * @return AppModel instantie
-     */
-
+    // Maakt een nieuwe instantie aan van AppModel als er nog geen bestaat en returnt hem.
     public static function getInstance():AppModel{
         if(_instance == null){
             _instance = new AppModel(new Enforcer());
@@ -65,10 +45,7 @@ public class AppModel extends EventDispatcher {
         return _instance;
     }
 
-    /**
-     * Checkt of er een volgende slide is en er naartoe gaat.
-     */
-
+    // Checkt of er een volgende slide is en er naartoe gaat.
     public function goToNext():void{
         if(this.currentIndex < _vectorSlides.length - 1){
             direction = RIGHT;
@@ -76,10 +53,7 @@ public class AppModel extends EventDispatcher {
         }
     }
 
-    /**
-     * Checkt of er een vorige slide is en er naartoe gaat.
-     */
-
+    // Checkt of er een vorige slide is en er naartoe gaat.
     public function goToPrev():void{
 
         if(this.currentIndex > 0){
@@ -92,17 +66,12 @@ public class AppModel extends EventDispatcher {
      ************************************* GETTERS - SETTERS ******************************************************************************
      **************************************************************************************************************************************/
 
-    /**
-     * Getter en Setter voor zichtbaarheid van menu
-     *
-     * @param value Boolean
-     * @return Boolean
-     */
-
+    // Getter en Setter voor zichtbaarheid van menu
     public function get menuVisible():Boolean {
         return _menuVisible;
     }
 
+    // Zichtbaarheid van menu instellen
     public function set menuVisible(value:Boolean):void {
         if(_menuVisible != value){
             _menuVisible = value;
@@ -112,13 +81,7 @@ public class AppModel extends EventDispatcher {
         }
     }
 
-    /**
-     * Getter & Setter voor de Vector met slides
-     *
-     * @param value Vector
-     * @return Vector met slides
-     */
-
+    // Getter & Setter voor de Vector met slides
     public function get vectorSlides():Vector.<SlideVO> {
         return _vectorSlides;
     }
@@ -130,13 +93,7 @@ public class AppModel extends EventDispatcher {
         }
     }
 
-    /**
-     * Getter / Setter voor huidige slide
-     *
-     * @param value SlideVO
-     * @return Huidige slide
-     */
-
+    // Getter / Setter voor huidige slide
     public function get currentSlide():SlideVO {
         return _currentSlide;
     }
@@ -148,16 +105,12 @@ public class AppModel extends EventDispatcher {
         }
     }
 
-    /**
-     * Huidige slide index opvragen
-     *
-     * @return uint
-     */
-
+    // Huidige slide index opvragen
     public function get currentIndex():uint {
         return _vectorSlides.indexOf(_currentSlide);
     }
 
+    // Richting ophalen & instellen ( voor transitions )
     public function get direction():String {
         return _direction;
     }

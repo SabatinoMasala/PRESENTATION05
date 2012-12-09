@@ -19,7 +19,6 @@ public class SlideService {
 
     //Constructor
     public function SlideService() {
-        trace("[SlideService] Construct");
     }
 
     /**************************************************************************************************************************************
@@ -35,17 +34,17 @@ public class SlideService {
     private function completeHandler(event:Event):void {
         var xmlObject:XML = new XML(event.currentTarget.data);
         var tempSlides:Vector.<SlideVO> = new Vector.<SlideVO>();
+        // Voor elk slide object in de xml gaan we de Factory aanspreken die alles zal regelen
         for each(var slide:XML in xmlObject.slide){
             tempSlides.push(SlideVOFactory.createSlideVOFromXML(slide));
         }
+        // De Vector in AppModel instellen
         var appModel:AppModel = AppModel.getInstance();
         appModel.vectorSlides = tempSlides;
+
+        // De huidige slide op 1 zetten
         appModel.currentSlide = appModel.vectorSlides[0];
     }
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 
 }
 }

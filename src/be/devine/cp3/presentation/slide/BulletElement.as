@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 01/12/12
- * Time: 14:18
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.Bullet;
 import be.devine.cp3.presentation.interfaces.IResizable;
@@ -12,21 +5,22 @@ import be.devine.cp3.presentation.interfaces.ISlideElement;
 
 import starling.display.Sprite;
 
-public class BulletElement extends starling.display.Sprite implements ISlideElement, IResizable{
+public class BulletElement extends Sprite implements ISlideElement, IResizable{
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
      **************************************************************************************************************************************/
 
     private var _vectorBullets:Vector.<String>;
-    private var _vectorContainer:starling.display.Sprite;
+    private var _vectorContainer:Sprite;
 
     //Constructor
     public function BulletElement(bullets:Vector.<String>) {
         _vectorBullets = bullets;
-        _vectorContainer = new starling.display.Sprite();
+        _vectorContainer = new Sprite();
         addChild(_vectorContainer);
         var yPos:uint = 0;
+        // Voor iedere String in de Vector gaan we een Bullet object aanmaken
         for each(var s:String in _vectorBullets){
             var b:Bullet = new Bullet(s);
             b.y = yPos;
@@ -48,8 +42,5 @@ public class BulletElement extends starling.display.Sprite implements ISlideElem
         _vectorContainer.y = (h>>1) - (_vectorContainer.height>>1);
     }
 
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

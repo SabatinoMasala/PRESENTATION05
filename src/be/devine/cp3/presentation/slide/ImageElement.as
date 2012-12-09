@@ -1,23 +1,14 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sabatino
- * Date: 01/12/12
- * Time: 14:18
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 
 import flash.display.Bitmap;
-
 import flash.display.Loader;
 import flash.events.Event;
 import flash.geom.Point;
 import flash.net.URLRequest;
 
 import starling.display.Image;
-
 import starling.display.Sprite;
 
 public class ImageElement extends Sprite implements ISlideElement, IResizable {
@@ -47,7 +38,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private function completeHandler(event:Event):void {
         _image = Image.fromBitmap(Bitmap(_loader.content));
         addChild(_image);
-        // Als de image nog niet bestond bij de positionering, werd deze uitgesteld naar hier.
+        // Als de image nog niet bestond bij de positionering ( zie resize ), werd deze uitgesteld naar hier.
         // De width en height zijn opgeslaan in de Point _prevPoint
         if(_delayResize){
             resize(_prevPoint.x, _prevPoint.y);
@@ -72,9 +63,5 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
             _prevPoint = new Point(w, h);
         }
     }
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }
