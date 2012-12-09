@@ -17,7 +17,7 @@ import org.gestouch.input.NativeInputAdapter;
 import starling.core.Starling;
 import starling.display.DisplayObject;
 
-[SWF(width="800", height="600")]
+[SWF(width="1024", height="768")]
 
 public class Main extends Sprite {
 

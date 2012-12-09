@@ -42,6 +42,11 @@ public class MenuControlView extends Sprite implements IResizable {
         _menuBg = new Quad(1, 200, 0x444444);
         _container.addChild(_menuBg);
 
+        // Thumbnails aanmaken
+        _thumbnailView = new ThumbnailView(200, 150);
+        _thumbnailView.y = (_menuBg.height>>1) - 75;
+        _container.addChild(_thumbnailView);
+
         // Pijltjes
         _btnLeft = new Arrow(Arrow.LEFT);
         _btnRight = new Arrow(Arrow.RIGHT);
@@ -52,12 +57,6 @@ public class MenuControlView extends Sprite implements IResizable {
         _btnLeft.x = 20;
         _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
         _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
-
-        // Thumbnails aanmaken
-        _thumbnailView = new ThumbnailView(200, 150);
-        _thumbnailView.y = (_menuBg.height>>1) - 75;
-        _thumbnailView.x = 100;
-        _container.addChild(_thumbnailView);
 
         // Event listeners
         _btnLeft.addEventListener(TouchEvent.TOUCH, leftButton);
@@ -131,6 +130,9 @@ public class MenuControlView extends Sprite implements IResizable {
 
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
+
+        // Thumbnailview resizen
+        _thumbnailView.resize(w, h);
 
         _btnRight.x = w - (_btnRight.width) - 20;
 

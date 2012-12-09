@@ -7,6 +7,7 @@
  */
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
+import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.slideVO.SlideVO;
 
@@ -19,7 +20,7 @@ import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 
-public class ThumbnailView extends Sprite {
+public class ThumbnailView extends Sprite implements IResizable {
 
     /**************************************************************************************************************************************
      ************************************* PROPERTIES *************************************************************************************
@@ -41,6 +42,12 @@ public class ThumbnailView extends Sprite {
 
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
+        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
+
+        _mask = new Quad(1, height, 0xFF0000);
+        _mask.alpha = 0;
+        _mask.touchable = false;
+        _mask.x = 100;
 
     }
 
@@ -52,7 +59,7 @@ public class ThumbnailView extends Sprite {
         trace("data changed");
         var tempVector:Vector.<Slide> = new Vector.<Slide>();
         // Door de Vectors in AppModel lussen en slides aanmaken
-        var xPos:uint = 0;
+        var xPos:uint = 100;
         for each(var slideVO:SlideVO in _appModel.vectorSlides){
             var s:Slide = new Slide(slideVO);
             tempVector.push(s);
@@ -64,12 +71,10 @@ public class ThumbnailView extends Sprite {
             s.height = _dimensions.height;
             xPos += s.width + 10;
             s.addEventListener(TouchEvent.TOUCH, touchHandler);
+            s.useHandCursor = true;
         }
-        _vectorThumbs= tempVector;
-
-        /*_mask = new Quad( ((_dimensions.width + 10) * 3) - 10, height, 0xFF0000);
-        _mask.alpha = .3;
-        addChild(_mask);*/
+        _vectorThumbs = tempVector;
+        addChild(_mask);
 
     }
 
@@ -79,6 +84,22 @@ public class ThumbnailView extends Sprite {
             _appModel.currentSlide = _appModel.vectorSlides[(getChildIndex(event.currentTarget as Sprite))];
         }
     }
+
+    public function resize(w:Number, h:Number):void{
+        _mask.width = w - 200;
+    }
+
+    private function slideChangedHandler(event:Event):void {
+        for each(var s:Slide in _vectorThumbs){
+            if(getChildIndex(s) == _appModel.currentIndex){
+                s.alpha = 1;
+            }
+            else{
+                s.alpha = .4;
+            }
+        }
+    }
+
 
     /**************************************************************************************************************************************
      ************************************* GETTERS - SETTERS ******************************************************************************
