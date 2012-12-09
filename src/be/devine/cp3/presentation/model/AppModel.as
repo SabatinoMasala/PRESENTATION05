@@ -48,7 +48,6 @@ public class AppModel extends EventDispatcher {
     // Checkt of er een volgende slide is en er naartoe gaat.
     public function goToNext():void{
         if(this.currentIndex < _vectorSlides.length - 1){
-            direction = RIGHT;
             currentSlide = _vectorSlides[this.currentIndex+1];
         }
     }
@@ -57,7 +56,6 @@ public class AppModel extends EventDispatcher {
     public function goToPrev():void{
 
         if(this.currentIndex > 0){
-            direction = LEFT;
             currentSlide = _vectorSlides[this.currentIndex-1];
         }
     }
@@ -86,8 +84,6 @@ public class AppModel extends EventDispatcher {
         return _vectorSlides;
     }
 
-    // TODO Slide objecten aanmaken ipv slidevo's
-
     public function set vectorSlides(value:Vector.<SlideVO>):void {
         if(_vectorSlides != value){
             _vectorSlides = value;
@@ -102,6 +98,14 @@ public class AppModel extends EventDispatcher {
 
     public function set currentSlide(value:SlideVO):void {
         if(_currentSlide != value){
+            if(_currentSlide){
+                if(_vectorSlides.indexOf(value) < _vectorSlides.indexOf(_currentSlide)){
+                    direction = LEFT;
+                }
+                else{
+                    direction = RIGHT;
+                }
+            }
             _currentSlide = value;
             dispatchEvent(new Event(SLIDE_CHANGED));
         }
@@ -118,7 +122,9 @@ public class AppModel extends EventDispatcher {
     }
 
     public function set direction(value:String):void {
-        _direction = value;
+        if(_direction != value){
+            _direction = value;
+        }
     }
 }
 }
