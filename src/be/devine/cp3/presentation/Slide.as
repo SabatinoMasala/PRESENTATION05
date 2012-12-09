@@ -25,6 +25,9 @@ public class Slide extends Sprite implements IResizable {
         _background = new Quad(1, 1, _slideVO.backgroundColor);
         addChild(_background);
 
+        var q:Quad = new Quad(10, 10, 0xFF00FF);
+        addChild(q);
+
     }
 
     /**************************************************************************************************************************************

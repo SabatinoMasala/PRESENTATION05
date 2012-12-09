@@ -5,8 +5,13 @@ import be.devine.cp3.presentation.Transition;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.display.Bitmap;
+
+import flash.display.BitmapData;
+
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.textures.Texture;
 
 public class SlideView extends Sprite implements IResizable{
 

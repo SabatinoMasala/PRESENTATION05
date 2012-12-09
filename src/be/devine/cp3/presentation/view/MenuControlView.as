@@ -21,6 +21,7 @@ public class MenuControlView extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
+    private var _thumbnailView:ThumbnailView;
     private var _container:Sprite;
     private var _tween:Tween;
     private var _menuStateChanged:Boolean;
@@ -32,6 +33,9 @@ public class MenuControlView extends Sprite implements IResizable {
     //Constructor
     public function MenuControlView() {
         _appModel = AppModel.getInstance();
+
+        _thumbnailView = new ThumbnailView();
+        addChild(_thumbnailView);
 
         // Container aanmaken die menu zal bevatten
         _container = new Sprite();
