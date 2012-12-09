@@ -1,6 +1,7 @@
 package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
+import be.devine.cp3.presentation.slideVO.TitleVO;
 
 import starling.display.Quad;
 
@@ -23,13 +24,18 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
     private var _backgroundColor:uint;
     private var _textColor:uint;
 
+    private var _titleVO:TitleVO;
+
     //Constructor
-    public function TitleElement(title:String, backgroundColor:uint, textColor:uint, big:Boolean = false) {
+    public function TitleElement(titleVO:TitleVO) {
+
+        this._titleVO = titleVO;
+
         // Is het een grote titel?
-        _big = big;
-        _title = title;
-        _backgroundColor = backgroundColor;
-        _textColor = textColor;
+        _big = this._titleVO.big;
+        _title = this._titleVO.title;
+        _backgroundColor = this._titleVO.backgroundColor;
+        _textColor = this._titleVO.textColor;
 
         // Als de titel klein is
         if(!_big){

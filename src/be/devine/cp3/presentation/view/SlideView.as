@@ -1,17 +1,12 @@
 package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.Slide;
-import be.devine.cp3.presentation.SlideVO;
 import be.devine.cp3.presentation.Transition;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
-
-import flash.display.Bitmap;
-
-import flash.display.BitmapData;
+import be.devine.cp3.presentation.slideVO.SlideVO;
 
 import starling.display.Sprite;
 import starling.events.Event;
-import starling.textures.Texture;
 
 public class SlideView extends Sprite implements IResizable{
 

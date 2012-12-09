@@ -1,6 +1,8 @@
 package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
+import be.devine.cp3.presentation.interfaces.ISlideVO;
+import be.devine.cp3.presentation.slideVO.ImageVO;
 
 import flash.display.Bitmap;
 import flash.display.Loader;
@@ -23,9 +25,12 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _delayResize:Boolean = false;
     private var _prevPoint:Point;
 
+    private var _slideVO:ImageVO;
+
     //Constructor
-    public function ImageElement(path:String) {
-        _imagePath = path;
+    public function ImageElement(slideVO:ImageVO) {
+        this._slideVO = slideVO;
+        _imagePath = slideVO.path;
         _loader = new Loader();
         _loader.load(new URLRequest(_imagePath));
         _loader.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);

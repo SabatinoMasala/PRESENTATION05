@@ -6,7 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.factory {
-import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.interfaces.ISlideVO;
+import be.devine.cp3.presentation.slideVO.SlideVO;
 import be.devine.cp3.presentation.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 
@@ -27,7 +28,7 @@ public class SlideVOFactory {
 
     public static function createSlideVOFromXML(xmlNode:XML):SlideVO{
         var slideVO:SlideVO = new SlideVO();
-        var elementVector:Vector.<ISlideElement> = new Vector.<ISlideElement>();
+        var elementVector:Vector.<ISlideVO> = new Vector.<ISlideVO>();
         slideVO.backgroundColor = Utils.str_to_uint(String(xmlNode.@backgroundColor));
         slideVO.transition = (String(xmlNode.@transition) !== "") ? String(xmlNode.@transition) : "none";
 
@@ -44,8 +45,5 @@ public class SlideVOFactory {
         return slideVO;
     }
 
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

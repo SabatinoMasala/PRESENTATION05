@@ -1,6 +1,6 @@
 package be.devine.cp3.presentation.services {
 
-import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.slideVO.SlideVO;
 
 import be.devine.cp3.presentation.factory.SlideVOFactory;
 import be.devine.cp3.presentation.model.AppModel;

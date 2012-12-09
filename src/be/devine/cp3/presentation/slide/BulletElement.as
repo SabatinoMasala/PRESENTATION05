@@ -2,6 +2,7 @@ package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.Bullet;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
+import be.devine.cp3.presentation.slideVO.BulletVO;
 
 import starling.display.Sprite;
 
@@ -14,9 +15,11 @@ public class BulletElement extends Sprite implements ISlideElement, IResizable{
     private var _vectorBullets:Vector.<String>;
     private var _vectorContainer:Sprite;
 
+    private var bulletVO:BulletVO;
+
     //Constructor
-    public function BulletElement(bullets:Vector.<String>) {
-        _vectorBullets = bullets;
+    public function BulletElement(bulletVO:BulletVO) {
+        _vectorBullets = bulletVO.bullets;
         _vectorContainer = new Sprite();
         addChild(_vectorContainer);
         var yPos:uint = 0;

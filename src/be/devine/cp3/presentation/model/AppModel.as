@@ -1,5 +1,5 @@
 package be.devine.cp3.presentation.model {
-import be.devine.cp3.presentation.SlideVO;
+import be.devine.cp3.presentation.slideVO.SlideVO;
 
 import starling.events.Event;
 import starling.events.EventDispatcher;
