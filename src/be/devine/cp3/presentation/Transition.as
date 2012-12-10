@@ -39,11 +39,33 @@ public class Transition {
                 case "none": return none(slide_1, slide_2);
                 case "fade": return fade(slide_1, slide_2);
                 case "slide_horizontal": return slideH(slide_1, slide_2);
+                case "slide_vertical": return slideV(slide_1, slide_2);
             }
         }
     }
 
-    public static function slideH(slide_1:Slide, slide_2:Slide):void {
+    // Geen transitie
+    private static function none(slide_1:Slide, slide_2:Slide):void{
+        trace("none");
+        slide_1.visible = false;
+        slide_2.visible = true;
+    }
+
+    // Fade out transitie
+    private static function fade(slide_1:Slide, slide_2:Slide):void{
+        trace("fading");
+        slide_1.visible = true;
+        slide_1.alpha = 1;
+        slide_2.alpha = 0;
+        slide_2.visible = true;
+        tween_1 = new Tween(slide_2, TIME);
+        tween_1.animate("alpha", 1);
+        tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null;}
+        Starling.juggler.add(tween_1);
+    }
+
+    // Slide horizontaal
+    private static function slideH(slide_1:Slide, slide_2:Slide):void {
 
         trace("horizontal slide");
 
@@ -85,24 +107,46 @@ public class Transition {
         Starling.juggler.add(tween_2);
     }
 
-    // Geen transitie
-    public static function none(slide_1:Slide, slide_2:Slide):void{
-        trace("none");
-        slide_1.visible = false;
+    private static function slideV(slide_1:Slide, slide_2:Slide):void{
+        trace("vertical slide");
+
+        // Zichtbaar zetten beide slides
+        slide_1.visible = true;
         slide_2.visible = true;
+
+        // Tween voor slide die nu zichtbaar is
+        tween_2 = new Tween(slide_1, TIME, starling.animation.Transitions.EASE_OUT);
+
+        // Welke kant gaan we op?
+        if(AppModel.getInstance().direction == AppModel.RIGHT){
+
+            // Slide 2 staat rechts buiten scherm en animaart naar links
+            slide_2.y = Starling.current.stage.stageHeight;
+
+            // Slide 1 animeert naar boven
+            tween_2.animate("y", -200);
+        }
+        else{
+
+            // Slide 2 staat links buiten scherm
+            slide_2.y = -Starling.current.stage.stageHeight;
+
+            // Slide 1 animeert naar onder
+            tween_2.animate("y", 200);
+        }
+
+        // Slide 2 moet op x-positie 0 komen in elk geval
+        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_1.animate("y", 0);
+
+        /// Bij oncomplete wordt de eerste slide terug onzichtbaar gezet en de x-positie terug naar 0
+        tween_1.onComplete = function():void{slide_1.visible = false; tween_1 = null;}
+        tween_2.onComplete = function():void{tween_2 = null}
+
+        // toevoegen aan de juggler
+        Starling.juggler.add(tween_1);
+        Starling.juggler.add(tween_2);
     }
 
-    // Fade out transitie
-    public static function fade(slide_1:Slide, slide_2:Slide):void{
-        trace("fading");
-        slide_1.visible = true;
-        slide_1.alpha = 1;
-        slide_2.alpha = 0;
-        slide_2.visible = true;
-        tween_1 = new Tween(slide_2, TIME);
-        tween_1.animate("alpha", 1);
-        tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null;}
-        Starling.juggler.add(tween_1);
-    }
 }
 }

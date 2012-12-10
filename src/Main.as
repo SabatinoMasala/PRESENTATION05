@@ -8,6 +8,8 @@ import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.geom.Rectangle;
 
+import net.hires.debug.Stats;
+
 import org.gestouch.core.Gestouch;
 
 import org.gestouch.extensions.starling.StarlingDisplayListAdapter;
@@ -17,7 +19,7 @@ import org.gestouch.input.NativeInputAdapter;
 import starling.core.Starling;
 import starling.display.DisplayObject;
 
-[SWF(width="1024", height="768")]
+[SWF(width="1024", height="768", frameRate="60")]
 
 public class Main extends Sprite {
 
@@ -35,6 +37,8 @@ public class Main extends Sprite {
 
         // Resize event koppelen aan stage
         stage.addEventListener(Event.RESIZE, resizeHandler);
+
+        addChild(new Stats());
     }
 
     private function init():void{

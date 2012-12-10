@@ -15,7 +15,7 @@
         <element type="title" backgroundColor="#444444">Dit is een titel</element>
     </slide>
 
-    <slide transition="none">
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
         <element type="bullets" backgroundColor="#FF0000" textColor="#00FF00">
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>
@@ -26,7 +26,7 @@
         </element>
     </slide>
 
-    <slide transition="fade">
+    <slide transition="slide_vertical">
         <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
     </slide>
 

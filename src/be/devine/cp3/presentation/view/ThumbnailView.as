@@ -11,7 +11,10 @@ import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.slideVO.SlideVO;
 
+import flash.events.TimerEvent;
+
 import flash.geom.Rectangle;
+import flash.utils.Timer;
 
 import starling.core.RenderSupport;
 import starling.core.Starling;
@@ -36,7 +39,6 @@ public class ThumbnailView extends Sprite implements IResizable {
 
     //Constructor
     public function ThumbnailView(width:Number, height:Number) {
-        trace("[ThumbnailView] Construct");
 
         dimensions = new Rectangle(0, 0, width, height);
 
@@ -44,7 +46,6 @@ public class ThumbnailView extends Sprite implements IResizable {
 
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
-        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
 
     }
 
@@ -53,7 +54,14 @@ public class ThumbnailView extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private function dataChangedHandler(event:Event):void {
-        trace("data changed");
+        // Even uitstellen van aanmaken thumbs voor performance
+        var t:Timer = new Timer(500, 1);
+        t.start();
+        t.addEventListener(TimerEvent.TIMER_COMPLETE, create);
+    }
+
+    private function create(e:TimerEvent):void {
+        _appModel.removeEventListener(AppModel.SLIDE_CHANGED, create);
         var tempVector:Vector.<Slide> = new Vector.<Slide>();
         // Door de Vectors in AppModel lussen en slides aanmaken
         var xPos:uint = 0;
@@ -71,7 +79,8 @@ public class ThumbnailView extends Sprite implements IResizable {
             s.useHandCursor = true;
         }
         _vectorThumbs = tempVector;
-
+        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
+        slideChangedHandler();
     }
 
     private function touchHandler(event:TouchEvent):void {
@@ -84,7 +93,7 @@ public class ThumbnailView extends Sprite implements IResizable {
     public function resize(w:Number, h:Number):void{
     }
 
-    private function slideChangedHandler(event:Event):void {
+    private function slideChangedHandler(event:Event = null):void {
         for each(var s:Slide in _vectorThumbs){
             if(getChildIndex(s) == _appModel.currentIndex){
                 s.alpha = 1;
