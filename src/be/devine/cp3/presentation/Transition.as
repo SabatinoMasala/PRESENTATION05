@@ -60,16 +60,16 @@ public class Transition {
             // Slide 2 staat rechts buiten scherm en animaart naar links
             slide_2.x = Starling.current.stage.stageWidth;
 
-            // Slide 1 animeert naar links buiten scherm
-            tween_2.animate("x", -Starling.current.stage.stageWidth);
+            // Slide 1 animeert naar links
+            tween_2.animate("x", -200);
         }
         else{
 
             // Slide 2 staat links buiten scherm
             slide_2.x = -Starling.current.stage.stageWidth;
 
-            // Slide 1 animeert naar rechts buiten scherm
-            tween_2.animate("x", Starling.current.stage.stageWidth);
+            // Slide 1 animeert naar rechts
+            tween_2.animate("x", 200);
         }
 
         // Slide 2 moet op x-positie 0 komen in elk geval

@@ -1,6 +1,6 @@
 <slides>
 
-    <slide backgroundColor="#72b5c4" transition="none">
+    <slide backgroundColor="#72b5c4" transition="fade">
         <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
             Welkom.
         </element>
@@ -10,7 +10,7 @@
         <element type="image" src="/assets/images/Untitled-6.png"></element>
     </slide>
 
-    <slide transition="none">
+    <slide transition="slide_horizontal">
         <element type="image" src="/assets/images/producten.jpg"></element>
         <element type="title" backgroundColor="#444444">Dit is een titel</element>
     </slide>
