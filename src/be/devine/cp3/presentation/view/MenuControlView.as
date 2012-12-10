@@ -6,6 +6,7 @@ import be.devine.cp3.presentation.model.AppModel;
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.DisplayObject;
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.Event;
@@ -31,6 +32,8 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _btnRight:Arrow;
     private var _thumbnailViewMaskDisplayObject:PixelMaskDisplayObject;
     private var _thumbnailViewMask:Quad;
+    private var _arrowUnderlayLeft:Quad;
+    private var _arrowUnderlayRight:Quad;
 
     //Constructor
     public function MenuControlView() {
@@ -45,7 +48,7 @@ public class MenuControlView extends Sprite implements IResizable {
         _container.addChild(_menuBg);
 
         // Thumbnails aanmaken
-        var thumbnailView = new ThumbnailView(200, 150);
+        var thumbnailView:ThumbnailView = new ThumbnailView(200, 150);
         thumbnailView.y = (_menuBg.height>>1) - (thumbnailView.dimensions.height >> 1);
 
         _thumbnailViewMask = new Quad(1, 200, 0xFF0000);
@@ -56,6 +59,18 @@ public class MenuControlView extends Sprite implements IResizable {
         _thumbnailViewMaskDisplayObject.x = 100;
         _container.addChild(_thumbnailViewMaskDisplayObject);
 
+        // Onzichtbare delen van mask blokkeren
+        _arrowUnderlayLeft = new Quad(90, 200, 0xFFFFFF);
+        _arrowUnderlayLeft.alpha = .1;
+        _container.addChild(_arrowUnderlayLeft);
+
+        _arrowUnderlayRight = new Quad(90, 200, 0xFFFFFF);
+        _arrowUnderlayRight.alpha = .1;
+        _container.addChild(_arrowUnderlayRight);
+
+        // Handje als de gebruiker erover hovert
+        _arrowUnderlayLeft.useHandCursor = true;
+        _arrowUnderlayRight.useHandCursor = true;
 
         // Pijltjes
         _btnLeft = new Arrow(Arrow.LEFT);
@@ -68,12 +83,16 @@ public class MenuControlView extends Sprite implements IResizable {
         _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
         _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
 
+        _btnLeft.alpha = .5;
+        _btnRight.alpha = .5;
+
+        // Element non-touchable maken
+        _btnLeft.touchable = false;
+        _btnRight.touchable = false;
+
         // Event listeners
-        _btnLeft.addEventListener(TouchEvent.TOUCH, leftButton);
-        _btnRight.addEventListener(TouchEvent.TOUCH, rightButton);
-        // Handje als de gebruiker erover hovert
-        _btnLeft.useHandCursor = true;
-        _btnRight.useHandCursor = true;
+        _arrowUnderlayLeft.addEventListener(TouchEvent.TOUCH, leftButton);
+        _arrowUnderlayRight.addEventListener(TouchEvent.TOUCH, rightButton);
 
         // ButtonContainer aanmaken (knopje waar "menu" op staat)
         _buttonContainer = new Sprite();
@@ -141,6 +160,8 @@ public class MenuControlView extends Sprite implements IResizable {
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
 
+        _arrowUnderlayRight.x = w - _arrowUnderlayRight.width;
+
         _thumbnailViewMask.width = w-200;
         _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
 
@@ -163,6 +184,16 @@ public class MenuControlView extends Sprite implements IResizable {
     // Geduwd op de rechterknop
     private function rightButton(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
+        var dO:DisplayObject = event.target as starling.display.DisplayObject;
+        var tw:Tween = new Tween(_btnRight, .3);
+        if(event.getTouch(dO, TouchPhase.HOVER) || event.getTouch(dO, TouchPhase.BEGAN) || event.getTouch(dO, TouchPhase.ENDED)){
+            tw.animate("alpha", 1)
+            Starling.juggler.add(tw);
+        }
+        else{
+            tw.animate("alpha", .5)
+            Starling.juggler.add(tw);
+        }
         switch (t.phase){
             case TouchPhase.ENDED:
                     _appModel.goToNext();
@@ -173,6 +204,16 @@ public class MenuControlView extends Sprite implements IResizable {
     // Geduwd op de linkerknop
     private function leftButton(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
+        var dO:DisplayObject = event.target as starling.display.DisplayObject;
+        var tw:Tween = new Tween(_btnLeft, .3);
+        if(event.getTouch(dO, TouchPhase.HOVER) || event.getTouch(dO, TouchPhase.BEGAN) || event.getTouch(dO, TouchPhase.ENDED)){
+            tw.animate("alpha", 1)
+            Starling.juggler.add(tw);
+        }
+        else{
+            tw.animate("alpha",.5)
+            Starling.juggler.add(tw);
+        }
         switch (t.phase){
             case TouchPhase.ENDED:
                 _appModel.goToPrev();

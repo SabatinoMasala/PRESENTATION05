@@ -6,7 +6,7 @@
         </element>
     </slide>
 
-    <slide backgroundColor="#EAD075" transition="none">
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
         <element type="image" src="/assets/images/Untitled-6.png"></element>
     </slide>
 
