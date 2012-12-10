@@ -12,6 +12,7 @@ import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
+import starling.extensions.pixelmask.PixelMaskDisplayObject;
 import starling.text.TextField;
 
 public class MenuControlView extends Sprite implements IResizable {
@@ -21,7 +22,6 @@ public class MenuControlView extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
-    private var _thumbnailView:ThumbnailView;
     private var _container:Sprite;
     private var _tween:Tween;
     private var _menuStateChanged:Boolean;
@@ -29,6 +29,8 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _buttonContainer:starling.display.Sprite;
     private var _btnLeft:Arrow;
     private var _btnRight:Arrow;
+    private var _thumbnailViewMaskDisplayObject:PixelMaskDisplayObject;
+    private var _thumbnailViewMask:Quad;
 
     //Constructor
     public function MenuControlView() {
@@ -43,9 +45,17 @@ public class MenuControlView extends Sprite implements IResizable {
         _container.addChild(_menuBg);
 
         // Thumbnails aanmaken
-        _thumbnailView = new ThumbnailView(200, 150);
-        _thumbnailView.y = (_menuBg.height>>1) - 75;
-        _container.addChild(_thumbnailView);
+        var thumbnailView = new ThumbnailView(200, 150);
+        thumbnailView.y = (_menuBg.height>>1) - (thumbnailView.dimensions.height >> 1);
+
+        _thumbnailViewMask = new Quad(1, 200, 0xFF0000);
+
+        _thumbnailViewMaskDisplayObject = new PixelMaskDisplayObject();
+        _thumbnailViewMaskDisplayObject.addChild(thumbnailView);
+        _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
+        _thumbnailViewMaskDisplayObject.x = 100;
+        _container.addChild(_thumbnailViewMaskDisplayObject);
+
 
         // Pijltjes
         _btnLeft = new Arrow(Arrow.LEFT);
@@ -131,8 +141,8 @@ public class MenuControlView extends Sprite implements IResizable {
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
 
-        // Thumbnailview resizen
-        _thumbnailView.resize(w, h);
+        _thumbnailViewMask.width = w-200;
+        _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
 
         _btnRight.x = w - (_btnRight.width) - 20;
 
@@ -176,8 +186,5 @@ public class MenuControlView extends Sprite implements IResizable {
         display();
     }
 
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

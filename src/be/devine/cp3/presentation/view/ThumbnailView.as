@@ -13,6 +13,9 @@ import be.devine.cp3.presentation.slideVO.SlideVO;
 
 import flash.geom.Rectangle;
 
+import starling.core.RenderSupport;
+import starling.core.Starling;
+
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.Event;
@@ -28,26 +31,20 @@ public class ThumbnailView extends Sprite implements IResizable {
 
     private var _appModel:AppModel;
     private var _vectorThumbs:Vector.<Slide>;
-    private var _mask:Quad;
 
-    private var _dimensions:Rectangle;
+    public var dimensions:Rectangle;
 
     //Constructor
     public function ThumbnailView(width:Number, height:Number) {
         trace("[ThumbnailView] Construct");
 
-        _dimensions = new Rectangle(0, 0, width, height);
+        dimensions = new Rectangle(0, 0, width, height);
 
         _vectorThumbs = new Vector.<Slide>();
 
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
         _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
-
-        _mask = new Quad(1, height, 0xFF0000);
-        _mask.alpha = 0;
-        _mask.touchable = false;
-        _mask.x = 100;
 
     }
 
@@ -59,7 +56,7 @@ public class ThumbnailView extends Sprite implements IResizable {
         trace("data changed");
         var tempVector:Vector.<Slide> = new Vector.<Slide>();
         // Door de Vectors in AppModel lussen en slides aanmaken
-        var xPos:uint = 100;
+        var xPos:uint = 0;
         for each(var slideVO:SlideVO in _appModel.vectorSlides){
             var s:Slide = new Slide(slideVO);
             tempVector.push(s);
@@ -67,14 +64,13 @@ public class ThumbnailView extends Sprite implements IResizable {
             s.x = xPos;
             addChild(s);
             s.resize(stage.stageWidth, stage.stageHeight);
-            s.width = _dimensions.width;
-            s.height = _dimensions.height;
+            s.width = dimensions.width;
+            s.height = dimensions.height;
             xPos += s.width + 10;
             s.addEventListener(TouchEvent.TOUCH, touchHandler);
             s.useHandCursor = true;
         }
         _vectorThumbs = tempVector;
-        addChild(_mask);
 
     }
 
@@ -86,7 +82,6 @@ public class ThumbnailView extends Sprite implements IResizable {
     }
 
     public function resize(w:Number, h:Number):void{
-        _mask.width = w - 200;
     }
 
     private function slideChangedHandler(event:Event):void {
