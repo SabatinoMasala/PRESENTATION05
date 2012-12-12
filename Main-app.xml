@@ -130,10 +130,8 @@
   <!--</fileTypes>-->
   <!-- iOS specific capabilities -->
   <iPhone>
-  <!-- A list of plist key/value pairs to be added to the application Info.plist -->
-  <InfoAdditions>
-  <![CDATA[
-      <key>UIDeviceFamily</key>
+    <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+    <InfoAdditions><![CDATA[<key>UIDeviceFamily</key>
       <array>
        <!--iPhone and iPod touch devices-->
       <string>1</string>
@@ -143,11 +141,9 @@
       <!--<key>UIStatusBarStyle</key>-->
       <!--<string>UIStatusBarStyleBlackOpaque</string>-->
       <!--<key>UIRequiresPersistentWiFi</key>-->
-      <!--<string>YES</string>-->
-      ]]>
-  </InfoAdditions>
-  <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
-  <!--<Entitlements>
+      <!--<string>YES</string>-->]]></InfoAdditions>
+    <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
+    <!--<Entitlements>
             <![CDATA[
             <key>keychain-access-groups</key>
             <array>
@@ -156,8 +152,8 @@
             </array>
             ]]>
         </Entitlements>-->
-  <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
-  <!--<requestedDisplayResolution>high</requestedDisplayResolution>-->
+    <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
+    <!--<requestedDisplayResolution>high</requestedDisplayResolution>-->
   </iPhone>
   <!-- Android specific tags that get passed to AndroidManifest.xml file. -->
   <!--<android>-->
