@@ -1,5 +1,6 @@
 package be.devine.cp3.presentation.factory {
 import be.devine.cp3.presentation.Utils;
+import be.devine.cp3.presentation.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
 import be.devine.cp3.presentation.slideVO.BulletVO;
 import be.devine.cp3.presentation.slideVO.ImageVO;
@@ -59,8 +60,8 @@ public class ElementVOFactory {
             vectorString.push(x);
         }
         var bulletVO:BulletVO = new BulletVO(
-                vectorString
-        )
+                vectorString, Utils.str_to_uint(xmlNode.@textColor)
+        );
         return bulletVO;
     }
 

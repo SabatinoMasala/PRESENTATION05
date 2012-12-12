@@ -16,7 +16,7 @@
     </slide>
 
     <slide transition="slide_vertical" backgroundColor="#8bd6a4">
-        <element type="bullets" backgroundColor="#FF0000" textColor="#00FF00">
+        <element type="bullets" textColor="#00FF00">
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>

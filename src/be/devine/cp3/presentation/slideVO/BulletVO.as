@@ -15,10 +15,12 @@ public class BulletVO implements ISlideVO {
      **************************************************************************************************************************************/
 
     public var bullets:Vector.<String>;
+    public var textColor:uint;
 
     //Constructor
-    public function BulletVO(bullets:Vector.<String>) {
+    public function BulletVO(bullets:Vector.<String>, textColor:uint) {
         this.bullets = bullets;
+        this.textColor = textColor;
     }
 
     /**************************************************************************************************************************************

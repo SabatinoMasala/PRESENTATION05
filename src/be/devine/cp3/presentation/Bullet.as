@@ -14,18 +14,20 @@ public class Bullet extends Sprite {
     private var _str:String;
     private var _square:Quad;
     private var _textField:TextField;
+    private var _textColor:uint;
 
     //Constructor
-    public function Bullet(string:String) {
+    public function Bullet(string:String, textColor:uint) {
         // String instellen
         _str = string;
+        _textColor = textColor;
 
         // Vierkantje tekenen
-        _square = new Quad(10, 10, 0x444444);
+        _square = new Quad(10, 10, textColor);
         addChild(_square);
 
         // Tekstveldje aanmaken
-        _textField = new TextField(300, 20, _str, "Bebas Neue", 20, 0xFF0000);
+        _textField = new TextField(300, 20, _str, "Bebas Neue", 20, textColor);
         _textField.hAlign = HAlign.LEFT; // Horizontaal links alignen
         _textField.vAlign = VAlign.CENTER; // Verticaal in het midden alignen
         _textField.x = _square.width + 5;
