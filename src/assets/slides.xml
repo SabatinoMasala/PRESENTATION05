@@ -30,4 +30,13 @@
         <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
     </slide>
 
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
 </slides>

@@ -1,13 +1,9 @@
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
-import flash.utils.Timer;
-
+import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
-import starling.display.Quad;
-import starling.display.Sprite;
-import starling.extensions.pixelmask.PixelMaskDisplayObject;
 
 public class Transition {
 
@@ -43,27 +39,26 @@ public class Transition {
             switch (slide_2.transition){
                 case "none": return none(slide_1, slide_2);
                 case "fade": return fade(slide_1, slide_2);
-                case "slide_horizontal": return zoomfade(slide_1, slide_2);
+                case "slide_horizontal": return slideH(slide_1, slide_2);
                 case "slide_vertical": return slideV(slide_1, slide_2);
+                case "zoomFade": return zoomFade(slide_1, slide_2);
             }
         }
     }
 
     // Geen transitie
     private static function none(slide_1:Slide, slide_2:Slide):void{
-        trace("none");
         slide_1.visible = false;
         slide_2.visible = true;
     }
 
     // Fade out transitie
     private static function fade(slide_1:Slide, slide_2:Slide):void{
-        trace("fading");
         slide_1.visible = true;
         slide_1.alpha = 1;
         slide_2.alpha = 0;
         slide_2.visible = true;
-        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_1 = new Tween(slide_2, TIME, Transitions.EASE_OUT);
         tween_1.animate("alpha", 1);
         tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null;}
         Starling.juggler.add(tween_1);
@@ -71,15 +66,12 @@ public class Transition {
 
     // Slide horizontaal
     private static function slideH(slide_1:Slide, slide_2:Slide):void {
-
-        trace("horizontal slide");
-
         // Zichtbaar zetten beide slides
         slide_1.visible = true;
         slide_2.visible = true;
 
         // Tween voor slide die nu zichtbaar is
-        tween_2 = new Tween(slide_1, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_2 = new Tween(slide_1, TIME, Transitions.EASE_OUT);
 
         // Welke kant gaan we op?
         if(AppModel.getInstance().direction == AppModel.RIGHT){
@@ -100,7 +92,7 @@ public class Transition {
         }
 
         // Slide 2 moet op x-positie 0 komen in elk geval
-        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_1 = new Tween(slide_2, TIME, Transitions.EASE_OUT);
         tween_1.animate("x", 0);
 
         /// Bij oncomplete wordt de eerste slide terug onzichtbaar gezet en de x-positie terug naar 0
@@ -113,14 +105,12 @@ public class Transition {
     }
 
     private static function slideV(slide_1:Slide, slide_2:Slide):void{
-        trace("vertical slide");
-
         // Zichtbaar zetten beide slides
         slide_1.visible = true;
         slide_2.visible = true;
 
         // Tween voor slide die nu zichtbaar is
-        tween_2 = new Tween(slide_1, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_2 = new Tween(slide_1, TIME, Transitions.EASE_OUT);
 
         // Welke kant gaan we op?
         if(AppModel.getInstance().direction == AppModel.RIGHT){
@@ -141,7 +131,7 @@ public class Transition {
         }
 
         // Slide 2 moet op x-positie 0 komen in elk geval
-        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_1 = new Tween(slide_2, TIME, Transitions.EASE_OUT);
         tween_1.animate("y", 0);
 
         /// Bij oncomplete wordt de eerste slide terug onzichtbaar gezet en de x-positie terug naar 0
@@ -153,19 +143,22 @@ public class Transition {
         Starling.juggler.add(tween_2);
     }
 
-    public static function zoomfade(slide_1:Slide, slide_2:Slide):void{
+    public static function zoomFade(slide_1:Slide, slide_2:Slide):void{
 
+        // Zichtbaar zetten beide slides
         slide_1.visible = true;
         slide_2.visible = true;
 
+        // Scale * 2.5
         slide_2.scaleX = slide_2.scaleY = 2.5;
 
+        // Een beetje herpositioneren & onzichtbaar zetten
         slide_2.x = -900;
         slide_2.y = -400;
-
         slide_2.alpha = 0;
 
-        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        // Alles naar correcte waarden tweenen
+        tween_1 = new Tween(slide_2, TIME, Transitions.EASE_OUT);
         tween_1.animate("x", 0);
         tween_1.animate("y", 0);
         tween_1.animate("alpha", 1);
