@@ -25,7 +25,7 @@ public class BulletElement extends Sprite implements ISlideElement, IResizable{
         var yPos:uint = 0;
         // Voor iedere String in de Vector gaan we een Bullet object aanmaken
         for each(var s:String in _vectorBullets){
-            var b:Bullet = new Bullet(s);
+            var b:Bullet = new Bullet(s, bulletVO.textColor);
             b.y = yPos;
             yPos += b.height + 15;
             _vectorContainer.addChild(b);
