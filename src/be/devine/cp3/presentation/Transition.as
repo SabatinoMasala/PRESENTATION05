@@ -1,8 +1,13 @@
 package be.devine.cp3.presentation {
 import be.devine.cp3.presentation.model.AppModel;
 
+import flash.utils.Timer;
+
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.Quad;
+import starling.display.Sprite;
+import starling.extensions.pixelmask.PixelMaskDisplayObject;
 
 public class Transition {
 
@@ -38,7 +43,7 @@ public class Transition {
             switch (slide_2.transition){
                 case "none": return none(slide_1, slide_2);
                 case "fade": return fade(slide_1, slide_2);
-                case "slide_horizontal": return slideH(slide_1, slide_2);
+                case "slide_horizontal": return zoomfade(slide_1, slide_2);
                 case "slide_vertical": return slideV(slide_1, slide_2);
             }
         }
@@ -58,7 +63,7 @@ public class Transition {
         slide_1.alpha = 1;
         slide_2.alpha = 0;
         slide_2.visible = true;
-        tween_1 = new Tween(slide_2, TIME);
+        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
         tween_1.animate("alpha", 1);
         tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null;}
         Starling.juggler.add(tween_1);
@@ -146,6 +151,29 @@ public class Transition {
         // toevoegen aan de juggler
         Starling.juggler.add(tween_1);
         Starling.juggler.add(tween_2);
+    }
+
+    public static function zoomfade(slide_1:Slide, slide_2:Slide):void{
+
+        slide_1.visible = true;
+        slide_2.visible = true;
+
+        slide_2.scaleX = slide_2.scaleY = 2.5;
+
+        slide_2.x = -900;
+        slide_2.y = -400;
+
+        slide_2.alpha = 0;
+
+        tween_1 = new Tween(slide_2, TIME, starling.animation.Transitions.EASE_OUT);
+        tween_1.animate("x", 0);
+        tween_1.animate("y", 0);
+        tween_1.animate("alpha", 1);
+        tween_1.animate("scaleX", 1);
+        tween_1.animate("scaleY", 1);
+
+        Starling.juggler.add(tween_1);
+
     }
 
 }
