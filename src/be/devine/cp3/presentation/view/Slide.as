@@ -1,4 +1,4 @@
-package be.devine.cp3.presentation {
+package be.devine.cp3.presentation.view {
 
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
@@ -41,6 +41,9 @@ public class Slide extends Sprite implements IResizable {
 
     // Slide opbouwen
     public function construct():void{
+        if(!contains(_background)){
+            addChild(_background);
+        }
         for each(var s:ISlideVO in _slideVO.arrElements){
             var element:ISlideElement;
             if(s is ImageVO){
@@ -55,6 +58,17 @@ public class Slide extends Sprite implements IResizable {
             element.build();
             addChild(element as starling.display.Sprite);
             _elements.push(element);
+        }
+    }
+
+    // Destruct functie
+    public function destruct():void{
+        for each(var s:ISlideElement in _elements){
+            if(s is ImageElement){
+                (s as ImageElement).destruct();
+            }
+            removeChild((s as Sprite));
+            (s as Sprite).dispose();
         }
     }
 

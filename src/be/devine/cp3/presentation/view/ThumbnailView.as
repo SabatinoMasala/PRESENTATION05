@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.presentation.view {
-import be.devine.cp3.presentation.Slide;
+import be.devine.cp3.presentation.view.Slide;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.slideVO.SlideVO;
@@ -45,7 +45,7 @@ public class ThumbnailView extends Sprite implements IResizable {
         _vectorThumbs = new Vector.<Slide>();
 
         _appModel = AppModel.getInstance();
-        _appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
+        //_appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
 
     }
 

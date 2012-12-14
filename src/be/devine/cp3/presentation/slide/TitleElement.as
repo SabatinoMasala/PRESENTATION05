@@ -2,6 +2,7 @@ package be.devine.cp3.presentation.slide {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 import be.devine.cp3.presentation.slideVO.TitleVO;
+import be.devine.cp3.presentation.utils.Utils;
 
 import starling.display.Quad;
 
@@ -40,14 +41,14 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
         // Als de titel klein is
         if(!_big){
             // quad van 1x60 met backgroundcolor uit VO aanmaken (breedte past aan met stage.stageWidth)
-            _background = new Quad(1, 60, _backgroundColor);
-            _textField = new starling.text.TextField(300, 60, _title, "Bebas Neue", 40, _textColor);
+            _background = new Quad(1, 60*Utils.multiplicationFactor, _backgroundColor);
+            _textField = new starling.text.TextField(300*Utils.multiplicationFactor, 60*Utils.multiplicationFactor, _title, "Bebas Neue", 40*Utils.multiplicationFactor, _textColor);
         }
         // Als de titel groot is
         else{
             // quad van 1x120 met backgroundcolor uit VO aanmaken (breedte past aan met stage.stageWidth)
-            _background = new Quad(1, 120, _backgroundColor);
-            _textField = new starling.text.TextField(300, 120, _title, "Bebas Neue", 60, _textColor);
+            _background = new Quad(1, 120*Utils.multiplicationFactor, _backgroundColor);
+            _textField = new starling.text.TextField(300*Utils.multiplicationFactor, 120*Utils.multiplicationFactor, _title, "Bebas Neue", 60*Utils.multiplicationFactor, _textColor);
         }
 
         // Autoscale & verticaal / horizontaal in het midden plaatsen

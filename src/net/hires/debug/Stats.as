@@ -13,6 +13,8 @@
 
 package net.hires.debug {
 
+import be.devine.cp3.presentation.utils.Utils;
+
 import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.events.Event;
@@ -54,6 +56,8 @@ public class Stats extends Sprite {
      * <b>Stats</b> FPS, MS and MEM, all in one.
      */
     public function Stats() : void {
+
+        this.scaleX = this.scaleY = Utils.multiplicationFactor * 2;
 
         mem_max = 0;
 

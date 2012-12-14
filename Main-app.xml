@@ -65,7 +65,7 @@
     <!-- The aspect ratio of the app ("portrait" or "landscape" or "any"). Optional. Mobile only. Default is the natural orientation of the device -->
     <aspectRatio>landscape</aspectRatio>
     <!-- Whether the app will begin auto-orienting on launch. Optional. Mobile only. Default false -->
-    <autoOrients>false</autoOrients>
+    <autoOrients>true</autoOrients>
     <!-- Whether the app launches in full screen. Optional. Mobile only. Default false -->
     <!--<fullScreen></fullScreen>-->
     <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
@@ -86,10 +86,10 @@
   <!--<programMenuFolder></programMenuFolder>-->
   <!-- The icon the system uses for the application. For at least one resolution, specify the path to a PNG file included in the AIR package. Optional. -->
     <icon>
-        <image512x512>assets/apple-touch-icon-512x512.png</image512x512>
-        <image114x114>assets/apple-touch-icon-114x114.png</image114x114>
-        <image57x57>assets/apple-touch-icon-57x57.png</image57x57>
-        <image29x29>assets/apple-touch-icon-29x29.png</image29x29>
+        <image512x512>icons/apple-touch-icon-512x512.png</image512x512>
+        <image114x114>icons/apple-touch-icon-114x114.png</image114x114>
+        <image57x57>icons/apple-touch-icon-57x57.png</image57x57>
+        <image29x29>icons/apple-touch-icon-29x29.png</image29x29>
     </icon>
   <!-- Whether the application handles the update when a user double-clicks an update version of the AIR file (true),
          or the default AIR application installer handles the update (false). Optional. Default false. -->

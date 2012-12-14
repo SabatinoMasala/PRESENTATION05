@@ -1,12 +1,15 @@
 package {
 
-import be.devine.cp3.presentation.Presentation;
+import be.devine.cp3.presentation.utils.Utils;
+import be.devine.cp3.presentation.view.Presentation;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+import flash.events.KeyboardEvent;
 import flash.geom.Rectangle;
+import flash.system.Capabilities;
 
 import net.hires.debug.Stats;
 
@@ -32,6 +35,10 @@ public class Main extends Sprite {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
+        if(Capabilities.screenDPI == 264){
+            Utils.multiplicationFactor = 2;
+        }
+
         // Initializeren van applicatie
         init();
 
@@ -47,7 +54,7 @@ public class Main extends Sprite {
 
         // Gestures voor iPad
         Gestouch.inputAdapter ||= new NativeInputAdapter(stage);
-        Gestouch.addDisplayListAdapter(starling.display.DisplayObject, new StarlingDisplayListAdapter());
+        Gestouch.addDisplayListAdapter(DisplayObject, new StarlingDisplayListAdapter());
         Gestouch.addTouchHitTester(new StarlingTouchHitTester(_starling), -1);
 
         // Starling starten

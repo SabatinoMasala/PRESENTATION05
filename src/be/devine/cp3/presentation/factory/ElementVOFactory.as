@@ -1,6 +1,6 @@
 package be.devine.cp3.presentation.factory {
-import be.devine.cp3.presentation.Utils;
-import be.devine.cp3.presentation.Utils;
+import be.devine.cp3.presentation.utils.Utils;
+import be.devine.cp3.presentation.utils.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
 import be.devine.cp3.presentation.slideVO.BulletVO;
 import be.devine.cp3.presentation.slideVO.ImageVO;

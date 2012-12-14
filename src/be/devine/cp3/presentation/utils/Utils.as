@@ -1,5 +1,7 @@
-package be.devine.cp3.presentation {
+package be.devine.cp3.presentation.utils {
 public class Utils {
+
+    public static var multiplicationFactor:uint = 1;
 
     // Converteer een string naar een uint ("#FF0000" naar 0xFF0000)
     public static function str_to_uint(str:String):uint{

@@ -1,5 +1,5 @@
 package be.devine.cp3.presentation.slide {
-import be.devine.cp3.presentation.Bullet;
+import be.devine.cp3.presentation.view.Bullet;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.interfaces.ISlideElement;
 import be.devine.cp3.presentation.slideVO.BulletVO;

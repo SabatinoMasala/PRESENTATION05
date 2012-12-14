@@ -1,5 +1,6 @@
-package be.devine.cp3.presentation {
+package be.devine.cp3.presentation.utils {
 import be.devine.cp3.presentation.model.AppModel;
+import be.devine.cp3.presentation.view.Slide;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
@@ -15,10 +16,14 @@ public class Transition {
 
         // Vorige tween(s) (eventueel) stoppen
         if(tween_1){
-            tween_1.advanceTime(TIME);
+            var s:Slide = tween_1.target as Slide;
+            s.destruct();
+            Starling.juggler.remove(tween_1);
         }
         if(tween_2){
-            tween_2.advanceTime(TIME);
+            var s:Slide = tween_2.target as Slide;
+            s.destruct();
+            Starling.juggler.remove(tween_2);
         }
 
         // Slides terug op 0,0 zetten
@@ -60,7 +65,7 @@ public class Transition {
         slide_2.visible = true;
         tween_1 = new Tween(slide_2, TIME, Transitions.EASE_OUT);
         tween_1.animate("alpha", 1);
-        tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null;}
+        tween_1.onComplete = function():void{slide_1.visible = false; tween_1=null; slide_1.destruct();}
         Starling.juggler.add(tween_1);
     }
 
@@ -96,7 +101,7 @@ public class Transition {
         tween_1.animate("x", 0);
 
         /// Bij oncomplete wordt de eerste slide terug onzichtbaar gezet en de x-positie terug naar 0
-        tween_1.onComplete = function():void{slide_1.visible = false; tween_1 = null;}
+        tween_1.onComplete = function():void{slide_1.visible = false; tween_1 = null; slide_1.destruct()}
         tween_2.onComplete = function():void{tween_2 = null}
 
         // toevoegen aan de juggler
@@ -135,7 +140,7 @@ public class Transition {
         tween_1.animate("y", 0);
 
         /// Bij oncomplete wordt de eerste slide terug onzichtbaar gezet en de x-positie terug naar 0
-        tween_1.onComplete = function():void{slide_1.visible = false; tween_1 = null;}
+        tween_1.onComplete = function():void{slide_1.visible = false; tween_1 = null; slide_1.destruct();}
         tween_2.onComplete = function():void{tween_2 = null}
 
         // toevoegen aan de juggler
@@ -164,6 +169,8 @@ public class Transition {
         tween_1.animate("alpha", 1);
         tween_1.animate("scaleX", 1);
         tween_1.animate("scaleY", 1);
+
+        tween_1.onComplete = function():void{ slide_1.destruct(); };
 
         Starling.juggler.add(tween_1);
 

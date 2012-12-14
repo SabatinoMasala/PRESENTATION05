@@ -1,4 +1,6 @@
-package be.devine.cp3.presentation {
+package be.devine.cp3.presentation.view {
+
+import be.devine.cp3.presentation.utils.Utils;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -23,6 +25,7 @@ public class Arrow extends Sprite {
     public function Arrow(dir:String = "right") {
         // Flash asset in SWC aanmaken
         var arrow:ArrowRight = new ArrowRight();
+        arrow.scaleX = arrow.scaleY = Utils.multiplicationFactor;
 
         // Bitmapdata aanmaken voor pijltje
         _arrowBitmapData = new BitmapData(arrow.width, arrow.height, true, 0xFF0000);

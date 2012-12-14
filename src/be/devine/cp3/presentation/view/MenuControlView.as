@@ -1,5 +1,6 @@
 package be.devine.cp3.presentation.view {
-import be.devine.cp3.presentation.Arrow;
+import be.devine.cp3.presentation.utils.Utils;
+import be.devine.cp3.presentation.view.Arrow;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 
@@ -44,14 +45,14 @@ public class MenuControlView extends Sprite implements IResizable {
         addChild(_container);
 
         // Menu background tekenen (200 pixels hoog, breedte verandert met stageWidth)
-        _menuBg = new Quad(1, 200, 0x444444);
+        _menuBg = new Quad(1, 200*Utils.multiplicationFactor, 0x444444);
         _container.addChild(_menuBg);
 
         // Thumbnails aanmaken
         var thumbnailView:ThumbnailView = new ThumbnailView(200, 150);
         thumbnailView.y = (_menuBg.height>>1) - (thumbnailView.dimensions.height >> 1);
 
-        _thumbnailViewMask = new Quad(1, 200, 0xFF0000);
+        _thumbnailViewMask = new Quad(1, 200*Utils.multiplicationFactor, 0xFF0000);
 
         _thumbnailViewMaskDisplayObject = new PixelMaskDisplayObject();
         _thumbnailViewMaskDisplayObject.addChild(thumbnailView);
@@ -60,11 +61,11 @@ public class MenuControlView extends Sprite implements IResizable {
         _container.addChild(_thumbnailViewMaskDisplayObject);
 
         // Onzichtbare delen van mask blokkeren
-        _arrowUnderlayLeft = new Quad(90, 200, 0xFFFFFF);
+        _arrowUnderlayLeft = new Quad(90*Utils.multiplicationFactor, 200*Utils.multiplicationFactor, 0xFFFFFF);
         _arrowUnderlayLeft.alpha = .1;
         _container.addChild(_arrowUnderlayLeft);
 
-        _arrowUnderlayRight = new Quad(90, 200, 0xFFFFFF);
+        _arrowUnderlayRight = new Quad(90*Utils.multiplicationFactor, 200*Utils.multiplicationFactor, 0xFFFFFF);
         _arrowUnderlayRight.alpha = .1;
         _container.addChild(_arrowUnderlayRight);
 
@@ -100,10 +101,10 @@ public class MenuControlView extends Sprite implements IResizable {
         _container.addChild(_buttonContainer);
 
         // Blokje van 100x35 tekenen
-        var q:Quad = new Quad(100, 35, 0x444444);
+        var q:Quad = new Quad(100*Utils.multiplicationFactor, 35*Utils.multiplicationFactor, 0x444444);
         _buttonContainer.addChild(q);
         // Tekstveldje toevoegen
-        var tf:TextField = new TextField(q.width, q.height, "Menu", "Bebas Neue", 20, 0xFFFFFF);
+        var tf:TextField = new TextField(q.width, q.height, "Menu", "Bebas Neue", 20*Utils.multiplicationFactor, 0xFFFFFF);
         _buttonContainer.addChild(tf);
         _buttonContainer.y = -_buttonContainer.height;
         _buttonContainer.addEventListener(TouchEvent.TOUCH, buttonTouch);

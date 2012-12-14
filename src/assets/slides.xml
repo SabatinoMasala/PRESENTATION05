@@ -16,7 +16,7 @@
     </slide>
 
     <slide transition="slide_vertical" backgroundColor="#8bd6a4">
-        <element type="bullets" textColor="#00FF00">
+        <element type="bullets" textColor="#444444">
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>
             <bullet>Dit is een bullet</bullet>
@@ -38,5 +38,497 @@
         <element type="image" src="/assets/images/producten.jpg"></element>
         <element type="title" backgroundColor="#444444">Dit is een titel</element>
     </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
 
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+    <slide backgroundColor="#72b5c4" transition="fade">
+        <element type="title" backgroundColor="#27648b" textColor="#FFFFFF">
+            Welkom.
+        </element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="slide_horizontal">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="slide_horizontal">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+
+    <slide transition="slide_vertical" backgroundColor="#8bd6a4">
+        <element type="bullets" textColor="#444444">
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+            <bullet>Dit is een bullet</bullet>
+        </element>
+    </slide>
+
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
+
+    <slide backgroundColor="#EAD075" transition="zoomFade">
+        <element type="image" src="/assets/images/Untitled-6.png"></element>
+    </slide>
+
+    <slide transition="zoomFade">
+        <element type="image" src="/assets/images/producten.jpg"></element>
+        <element type="title" backgroundColor="#444444">Dit is een titel</element>
+    </slide>
+    <slide transition="slide_vertical">
+        <element type="title" backgroundColor="#444444">Dit is enkel een titel</element>
+    </slide>
 </slides>
