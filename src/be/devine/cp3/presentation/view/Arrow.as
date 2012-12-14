@@ -25,7 +25,6 @@ public class Arrow extends Sprite {
     public function Arrow(dir:String = "right") {
         // Flash asset in SWC aanmaken
         var arrow:ArrowRight = new ArrowRight();
-        arrow.scaleX = arrow.scaleY = Utils.multiplicationFactor;
 
         // Bitmapdata aanmaken voor pijltje
         _arrowBitmapData = new BitmapData(arrow.width, arrow.height, true, 0xFF0000);
@@ -42,9 +41,11 @@ public class Arrow extends Sprite {
                 break;
             case RIGHT:
                     _arrowBitmapData.draw(arrow);
+                    _arrowBitmapData.draw(arrow);
                 break;
         }
         _arrow = Image.fromBitmap(new Bitmap(_arrowBitmapData));
+        _arrowBitmapData.dispose();
         addChild(_arrow);
     }
 

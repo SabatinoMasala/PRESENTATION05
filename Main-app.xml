@@ -86,10 +86,9 @@
   <!--<programMenuFolder></programMenuFolder>-->
   <!-- The icon the system uses for the application. For at least one resolution, specify the path to a PNG file included in the AIR package. Optional. -->
     <icon>
-        <image512x512>icons/apple-touch-icon-512x512.png</image512x512>
-        <image114x114>icons/apple-touch-icon-114x114.png</image114x114>
-        <image57x57>icons/apple-touch-icon-57x57.png</image57x57>
-        <image29x29>icons/apple-touch-icon-29x29.png</image29x29>
+        <image114x114>icons/Icon@2x.png</image114x114>
+        <image57x57>icons/Icon.png</image57x57>
+        <image72x72>icons/Icon-72.png</image72x72>
     </icon>
   <!-- Whether the application handles the update when a user double-clicks an update version of the AIR file (true),
          or the default AIR application installer handles the update (false). Optional. Default false. -->
@@ -122,6 +121,8 @@
   <!-- A list of plist key/value pairs to be added to the application Info.plist -->
   <InfoAdditions>
   <![CDATA[
+      <key>UIPrerenderedIcon</key>
+      <true/>
       <key>UIDeviceFamily</key>
       <array>
        <!--iPhone and iPod touch devices-->

@@ -53,6 +53,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
         _texture = Texture.fromBitmap(b);
         _image = new Image(_texture);
         addChild(_image);
+        b = null;
         // Als de image nog niet bestond bij de positionering ( zie resize ), werd deze uitgesteld naar hier.
         // De width en height zijn opgeslaan in de Point _prevPoint
         if(_delayResize){

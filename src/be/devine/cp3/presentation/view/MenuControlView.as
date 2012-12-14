@@ -80,7 +80,7 @@ public class MenuControlView extends Sprite implements IResizable {
         // Addchilden & positioneren
         _container.addChild(_btnLeft);
         _container.addChild(_btnRight);
-        _btnLeft.x = 20;
+        _btnLeft.x = 20 * Utils.multiplicationFactor;
         _btnLeft.y = (_menuBg.height>>1) - (_btnLeft.height>>1);
         _btnRight.y = (_menuBg.height>>1) - (_btnRight.height>>1);
 
@@ -166,7 +166,7 @@ public class MenuControlView extends Sprite implements IResizable {
         _thumbnailViewMask.width = w-200;
         _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
 
-        _btnRight.x = w - (_btnRight.width) - 20;
+        _btnRight.x = w - (_btnRight.width) - 20 * Utils.multiplicationFactor;
 
         // Breedte van menu moet stage.stageWidth worden
         _menuBg.width = w;
@@ -188,8 +188,14 @@ public class MenuControlView extends Sprite implements IResizable {
         var dO:DisplayObject = event.target as starling.display.DisplayObject;
         var tw:Tween = new Tween(_btnRight, .3);
         if(event.getTouch(dO, TouchPhase.HOVER) || event.getTouch(dO, TouchPhase.BEGAN) || event.getTouch(dO, TouchPhase.ENDED)){
-            tw.animate("alpha", 1)
-            Starling.juggler.add(tw);
+            if(t.phase == TouchPhase.ENDED && Utils.multiplicationFactor == 2){
+                tw.animate("alpha", .5)
+                Starling.juggler.add(tw);
+            }
+            else{
+                tw.animate("alpha", 1)
+                Starling.juggler.add(tw);
+            }
         }
         else{
             tw.animate("alpha", .5)
@@ -208,11 +214,17 @@ public class MenuControlView extends Sprite implements IResizable {
         var dO:DisplayObject = event.target as starling.display.DisplayObject;
         var tw:Tween = new Tween(_btnLeft, .3);
         if(event.getTouch(dO, TouchPhase.HOVER) || event.getTouch(dO, TouchPhase.BEGAN) || event.getTouch(dO, TouchPhase.ENDED)){
-            tw.animate("alpha", 1)
-            Starling.juggler.add(tw);
+            if(t.phase == TouchPhase.ENDED && Utils.multiplicationFactor == 2){
+                tw.animate("alpha", .5)
+                Starling.juggler.add(tw);
+            }
+            else{
+                tw.animate("alpha", 1)
+                Starling.juggler.add(tw);
+            }
         }
         else{
-            tw.animate("alpha",.5)
+            tw.animate("alpha", .5)
             Starling.juggler.add(tw);
         }
         switch (t.phase){
