@@ -10,6 +10,7 @@ import starling.display.DisplayObject;
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
@@ -34,6 +35,19 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _thumbnailViewMask:Quad;
     private var _arrowUnderlayLeft:Quad;
     private var _arrowUnderlayRight:Quad;
+    private var _thumbnailView:ThumbnailView;
+
+    var track;
+    var thumb = new Quad(10, 10, 0xFFFFFF);
+
+    var xOffset:Number;
+    var leftLimit:Number;
+    var thumbRange:Number;
+    var rightLimit:Number;
+    var scrollPercent:Number;
+    var contentRange:Number;
+
+
 
     //Constructor
     public function MenuControlView() {
@@ -48,13 +62,12 @@ public class MenuControlView extends Sprite implements IResizable {
         _container.addChild(_menuBg);
 
         // Thumbnails aanmaken
-        var thumbnailView:ThumbnailView = new ThumbnailView(200, 150);
-        thumbnailView.y = (_menuBg.height>>1) - (thumbnailView.dimensions.height >> 1);
+        _thumbnailView = new ThumbnailView(200, 150);
+        _thumbnailView.y = (_menuBg.height>>1) - (_thumbnailView.dimensions.height >> 1);
 
         _thumbnailViewMask = new Quad(1, 200, 0xFF0000);
-
         _thumbnailViewMaskDisplayObject = new PixelMaskDisplayObject();
-        _thumbnailViewMaskDisplayObject.addChild(thumbnailView);
+        _thumbnailViewMaskDisplayObject.addChild(_thumbnailView);
         _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
         _thumbnailViewMaskDisplayObject.x = 100;
         _container.addChild(_thumbnailViewMaskDisplayObject);
@@ -109,6 +122,8 @@ public class MenuControlView extends Sprite implements IResizable {
         _buttonContainer.addEventListener(TouchEvent.TOUCH, buttonTouch);
 
         _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, menuStateChangedHandler);
+
+        createScrollBar();
 
     }
 
@@ -226,6 +241,48 @@ public class MenuControlView extends Sprite implements IResizable {
         _menuStateChanged = true;
         display();
     }
+
+    private function createScrollBar():void {
+        track = new Quad(800 - 180, 5, 0x000000);
+
+        leftLimit = track.x;
+        thumbRange = track.width - thumb.width;
+        rightLimit = track.width - thumb.width;
+        scrollPercent = 0;
+
+        Starling.current.stage.addEventListener(starling.events.TouchEvent.TOUCH, thumbMoveHandler);
+
+        _container.addChild(track);
+        _container.addChild(thumb);
+    }
+
+    private function thumbMoveHandler(event:starling.events.TouchEvent):void{
+        var t:Touch = event.getTouch(stage);
+
+        if(t.phase == TouchPhase.BEGAN){
+
+        }
+        if(t.phase == TouchPhase.MOVED){
+            thumb.x = event.getTouch(stage).globalX;
+            // restricting movement
+            if(thumb.x < leftLimit) {
+                thumb.x = leftLimit;
+            }
+            if(thumb.x > rightLimit) {
+                thumb.x = rightLimit;
+            }
+        }
+
+        // calculate scrollPercent:
+        scrollPercent = (thumb.x - track.x) / thumbRange;
+        var goToHere:Number = _thumbnailViewMask.x + (scrollPercent * (_thumbnailView.width - Starling.current.stage.width));
+        var tw:Tween = new Tween(_thumbnailView, .1, Transitions.EASE_IN);
+        tw.animate("x", goToHere);
+        Starling.juggler.add(tw);
+        tw.onComplete = function():void {Starling.juggler.remove(tw);};
+    }
+
+
 
 }
 }
