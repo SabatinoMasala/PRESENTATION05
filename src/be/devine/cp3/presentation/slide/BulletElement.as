@@ -36,8 +36,13 @@ public class BulletElement extends Sprite implements ISlideElement, IResizable{
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function build():void{
-
+    public function destruct():void{
+        for each(var b:Bullet in _vectorContainer){
+            removeChild(b);
+            b.dispose();
+            b = null;
+        }
+        this.bulletVO = null;
     }
 
     public function resize(w:Number, h:Number):void{

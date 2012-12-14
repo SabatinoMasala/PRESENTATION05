@@ -27,6 +27,8 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _delayResize:Boolean = false;
     private var _prevPoint:Rectangle;
 
+    private var _loaderContext:LoaderContext;
+
     private var _texture:Texture;
 
     private var _slideVO:ImageVO;
@@ -35,12 +37,12 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     public function ImageElement(slideVO:ImageVO) {
         this._slideVO = slideVO;
 
-        var lc:LoaderContext = new LoaderContext();
-        lc.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+        _loaderContext = new LoaderContext();
+        _loaderContext.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
 
         _imagePath = slideVO.path;
         _loader = new Loader();
-        _loader.load(new URLRequest(_imagePath), lc);
+        _loader.load(new URLRequest(_imagePath), _loaderContext);
         _loader.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);
     }
 
@@ -62,21 +64,38 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     }
 
     public function destruct():void{
+
+        if(_prevPoint){
+            _prevPoint = null;
+        }
+
+        if(_loaderContext){
+            _loaderContext = null;
+        }
+
         if(_loader){
             _loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, completeHandler);
+            _loader.unload();
             _loader = null;
         }
-        if(_texture){
-            _texture.dispose();
-        }
+
         if(_image){
+            if(_image.texture){
+                _image.texture.base.dispose();
+                _image.texture.dispose();
+                _image.texture = null;
+            }
             _image.dispose();
             _image = null;
         }
-    }
 
-    public function build():void{
+        if(_texture){
+            _texture.base.dispose();
+            _texture.dispose();
+            _texture = null;
+        }
 
+        this._slideVO = null;
     }
 
     public function resize(w:Number, h:Number):void{

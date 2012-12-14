@@ -11,6 +11,8 @@ import be.devine.cp3.presentation.slideVO.ImageVO;
 import be.devine.cp3.presentation.slideVO.SlideVO;
 import be.devine.cp3.presentation.slideVO.TitleVO;
 
+import flash.system.System;
+
 import starling.display.Quad;
 import starling.display.Sprite;
 
@@ -27,7 +29,6 @@ public class Slide extends Sprite implements IResizable {
     //Constructor
     public function Slide(slideVO:SlideVO) {
         _slideVO = slideVO;
-        _elements = new Vector.<Sprite>();
 
         //Achtergrond van 1x1 pixels tekenen (in resize functie zal deze de breedte en hoogte van de stage krijgen)
         _background = new Quad(1, 1, _slideVO.backgroundColor);
@@ -41,6 +42,9 @@ public class Slide extends Sprite implements IResizable {
 
     // Slide opbouwen
     public function construct():void{
+
+        _elements = new Vector.<Sprite>();
+
         if(!contains(_background)){
             addChild(_background);
         }
@@ -55,7 +59,6 @@ public class Slide extends Sprite implements IResizable {
             if(s is BulletVO){
                 element = new BulletElement(s as BulletVO);
             }
-            element.build();
             addChild(element as starling.display.Sprite);
             _elements.push(element);
         }
@@ -64,12 +67,16 @@ public class Slide extends Sprite implements IResizable {
     // Destruct functie
     public function destruct():void{
         for each(var s:ISlideElement in _elements){
-            if(s is ImageElement){
-                (s as ImageElement).destruct();
-            }
+            s.destruct();
+            _elements.splice(_elements.indexOf(s as Sprite), 1);
             removeChild((s as Sprite));
             (s as Sprite).dispose();
+            s = null;
         }
+        _elements = null;
+        removeChild(_background);
+        _background.dispose();
+
     }
 
     // Resize functie

@@ -35,5 +35,15 @@ public class Bullet extends Sprite {
         addChild(_textField);
     }
 
+    public function destroy():void{
+        removeChild(_textField);
+        _textField.dispose();
+        _textField = null;
+
+        removeChild(_square);
+        _square.dispose();
+        _square = null;
+    }
+
 }
 }

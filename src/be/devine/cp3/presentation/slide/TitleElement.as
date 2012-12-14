@@ -25,18 +25,18 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
     private var _backgroundColor:uint;
     private var _textColor:uint;
 
-    private var _titleVO:TitleVO;
+    private var _slideVO:TitleVO;
 
     //Constructor
     public function TitleElement(titleVO:TitleVO) {
 
-        this._titleVO = titleVO;
+        this._slideVO = titleVO;
 
         // Is het een grote titel?
-        _big = this._titleVO.big;
-        _title = this._titleVO.title;
-        _backgroundColor = this._titleVO.backgroundColor;
-        _textColor = this._titleVO.textColor;
+        _big = this._slideVO.big;
+        _title = this._slideVO.title;
+        _backgroundColor = this._slideVO.backgroundColor;
+        _textColor = this._slideVO.textColor;
 
         // Als de titel klein is
         if(!_big){
@@ -64,7 +64,16 @@ public class TitleElement extends starling.display.Sprite implements ISlideEleme
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    public function build():void{
+    public function destruct():void{
+        removeChild(_background);
+        _background.dispose();
+        _background = null;
+
+        removeChild(_textField);
+        _textField.dispose();
+        _textField = null;
+
+        this._slideVO = null;
     }
 
     // Resize functie

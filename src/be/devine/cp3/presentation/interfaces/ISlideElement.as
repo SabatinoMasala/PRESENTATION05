@@ -7,6 +7,6 @@
  */
 package be.devine.cp3.presentation.interfaces {
 public interface ISlideElement {
-    function build():void;
+    function destruct():void;
 }
 }

@@ -8,6 +8,7 @@ import be.devine.cp3.presentation.model.AppModel;
 import flash.events.Event;
 import flash.net.URLLoader;
 import flash.net.URLRequest;
+import flash.system.System;
 
 public class SlideService {
 
@@ -44,6 +45,8 @@ public class SlideService {
 
         // De huidige slide op 1 zetten
         appModel.currentSlide = appModel.vectorSlides[0];
+
+        System.disposeXML(xmlObject);
     }
 
 }

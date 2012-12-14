@@ -90,10 +90,10 @@ public class SlideView extends Sprite implements IResizable{
 
         var disposeArray:Vector.<Slide> = new Vector.<Slide>();
 
-        for each(var s:Slide in _renderedSlides){
+        for each(var sl:Slide in _renderedSlides){
 
-            if(isDisposable(_slides.indexOf(s), startIndex)){
-                disposeArray.push(s);
+            if(isDisposable(_slides.indexOf(sl), startIndex)){
+                disposeArray.push(sl);
             };
 
         }
@@ -126,8 +126,10 @@ public class SlideView extends Sprite implements IResizable{
         }
 
         if(renders.indexOf(index) == -1){
+            renders = null;
             return true;
         }
+        renders = null;
 
         return false;
 
