@@ -4,14 +4,12 @@ import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.services.SlideService;
 
 import flash.display.StageDisplayState;
-
 import flash.ui.Keyboard;
 
 import org.gestouch.events.GestureEvent;
 import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
 import org.gestouch.gestures.TapGesture;
-import org.osmf.layout.ScaleMode;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -33,6 +31,7 @@ public class Presentation extends Sprite implements IResizable {
     private var _appModel:AppModel;
     private var _slideView:SlideView;
     private var _menuControlView:MenuControlView;
+    private var _slideCounter:SlideCounter;
 
     //Constructor
     public function Presentation() {
@@ -57,6 +56,9 @@ public class Presentation extends Sprite implements IResizable {
 
         // We moeten de stage kunnen aanspreken voor keyboardEvents, dus ADDED_TO_STAGE event koppelen aan this
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+
+        _slideCounter = new SlideCounter();
+        addChild(_slideCounter);
 
     }
 
@@ -136,6 +138,9 @@ public class Presentation extends Sprite implements IResizable {
             case Keyboard.F:
                     Main.instance.fullScreen = (Main.instance.stage.displayState == StageDisplayState.NORMAL);
                 break;
+            case Keyboard.D:
+                    Main.instance.debugMode = !Main.instance.debugMode;
+                break;
         }
     }
 
@@ -152,6 +157,9 @@ public class Presentation extends Sprite implements IResizable {
 
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void {
+
+        _slideCounter.x = w - _slideCounter.width - 20;
+        _slideCounter.y = 20;
 
         _menuControlView.resize(w, h);
         _slideView.resize(w, h);

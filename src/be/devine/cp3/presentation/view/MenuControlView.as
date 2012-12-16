@@ -190,7 +190,7 @@ public class MenuControlView extends Sprite implements IResizable {
         var dO:DisplayObject = event.target as starling.display.DisplayObject;
         var tw:Tween = new Tween(_btnRight, .3);
         if(event.getTouch(dO, TouchPhase.HOVER) || event.getTouch(dO, TouchPhase.BEGAN) || event.getTouch(dO, TouchPhase.ENDED)){
-            if(t.phase == TouchPhase.ENDED && Utils.multiplicationFactor == 2){
+            if(t.phase == TouchPhase.ENDED && Utils.device == Utils.IPAD){
                 tw.animate("alpha", .5)
                 Starling.juggler.add(tw);
             }

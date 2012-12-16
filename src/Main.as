@@ -8,15 +8,12 @@ import flash.display.StageAlign;
 import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
-import flash.events.KeyboardEvent;
 import flash.geom.Rectangle;
 import flash.system.Capabilities;
-import flash.ui.Keyboard;
 
 import net.hires.debug.Stats;
 
 import org.gestouch.core.Gestouch;
-
 import org.gestouch.extensions.starling.StarlingDisplayListAdapter;
 import org.gestouch.extensions.starling.StarlingTouchHitTester;
 import org.gestouch.input.NativeInputAdapter;
@@ -30,6 +27,8 @@ public class Main extends Sprite {
 
     private var _starling:Starling;
     private var _fullScreen:Boolean = false;
+    private var _debugMode:Boolean = false;
+    private var _stats:Stats;
 
     public static var instance:Main;
 
@@ -42,8 +41,15 @@ public class Main extends Sprite {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
+        // iPad met retina
         if(Capabilities.screenDPI == 264){
+            Utils.device = Utils.IPAD;
             Utils.multiplicationFactor = 2;
+        }
+
+        // iPad zonder retina
+        if(Capabilities.screenResolutionY == 1024){
+            Utils.device = Utils.IPAD;
         }
 
         // Initializeren van applicatie
@@ -51,8 +57,6 @@ public class Main extends Sprite {
 
         // Resize event koppelen aan stage
         stage.addEventListener(Event.RESIZE, resizeHandler);
-
-        addChild(new Stats());
     }
 
     private function init():void{
@@ -97,6 +101,24 @@ public class Main extends Sprite {
             stage.displayState = StageDisplayState.NORMAL;
         }
         _fullScreen = value;
+    }
+
+    public function get debugMode():Boolean{
+        return _debugMode;
+    }
+
+    public function set debugMode(val:Boolean):void{
+        if(val != _debugMode){
+            _debugMode = val;
+            if(_debugMode){
+                _stats = new Stats();
+                addChild(_stats);
+            }
+            else{
+                removeChild(_stats);
+                _stats = null;
+            }
+        }
     }
 }
 }
