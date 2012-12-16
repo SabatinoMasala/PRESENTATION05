@@ -3,12 +3,15 @@ import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.services.SlideService;
 
+import flash.display.StageDisplayState;
+
 import flash.ui.Keyboard;
 
 import org.gestouch.events.GestureEvent;
 import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
 import org.gestouch.gestures.TapGesture;
+import org.osmf.layout.ScaleMode;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -129,6 +132,9 @@ public class Presentation extends Sprite implements IResizable {
                 break;
             case Keyboard.RIGHT:
                     _appModel.goToNext();
+                break;
+            case Keyboard.F:
+                    Main.instance.fullScreen = (Main.instance.stage.displayState == StageDisplayState.NORMAL);
                 break;
         }
     }

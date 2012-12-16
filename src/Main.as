@@ -5,11 +5,13 @@ import be.devine.cp3.presentation.view.Presentation;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
+import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
 import flash.geom.Rectangle;
 import flash.system.Capabilities;
+import flash.ui.Keyboard;
 
 import net.hires.debug.Stats;
 
@@ -27,9 +29,14 @@ import starling.display.DisplayObject;
 public class Main extends Sprite {
 
     private var _starling:Starling;
+    private var _fullScreen:Boolean = false;
+
+    public static var instance:Main;
 
     // Constructor
     public function Main() {
+
+        instance = this;
 
         // Stage juist alignen en scalen
         stage.align = StageAlign.TOP_LEFT;
@@ -78,5 +85,18 @@ public class Main extends Sprite {
         };
     }
 
+    public function get fullScreen():Boolean {
+        return _fullScreen;
+    }
+
+    public function set fullScreen(value:Boolean):void {
+        if(value){
+            stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+        }
+        else{
+            stage.displayState = StageDisplayState.NORMAL;
+        }
+        _fullScreen = value;
+    }
 }
 }
