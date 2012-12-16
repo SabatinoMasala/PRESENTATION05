@@ -9,6 +9,8 @@ package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.utils.Utils;
 
+import flash.sampler.getSavedThis;
+
 import starling.animation.Tween;
 import starling.core.Starling;
 
@@ -38,12 +40,13 @@ public class SlideCounter extends Sprite {
 
     //Constructor
     public function SlideCounter() {
+
         _container = new Sprite();
 
         _bg = new Quad(100*Utils.multiplicationFactor, 50*Utils.multiplicationFactor, 0x444444);
         _container.addChild(_bg);
 
-        _tf = new TextField(_bg.width - 10, _bg.height, "", "Bebas Neue", 24, 0xFFFFFF);
+        _tf = new TextField(_bg.width - 10, _bg.height, "", "Bebas Neue", 24 * Utils.multiplicationFactor, 0xFFFFFF);
         _tf.hAlign = HAlign.CENTER;
         _tf.vAlign = VAlign.CENTER;
         _tf.x = 5;

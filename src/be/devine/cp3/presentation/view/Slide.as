@@ -10,11 +10,11 @@ import be.devine.cp3.presentation.slideVO.BulletVO;
 import be.devine.cp3.presentation.slideVO.ImageVO;
 import be.devine.cp3.presentation.slideVO.SlideVO;
 import be.devine.cp3.presentation.slideVO.TitleVO;
-
-import flash.system.System;
+import be.devine.cp3.presentation.utils.Utils;
 
 import starling.display.Quad;
 import starling.display.Sprite;
+import starling.events.TouchEvent;
 
 public class Slide extends Sprite implements IResizable {
 
@@ -40,6 +40,10 @@ public class Slide extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
+    private function thandler(e:starling.events.TouchEvent):void {
+        trace( (e.currentTarget as ImageElement).id );
+    }
+
     // Slide opbouwen
     public function construct():void{
 
@@ -51,7 +55,8 @@ public class Slide extends Sprite implements IResizable {
         for each(var s:ISlideVO in _slideVO.arrElements){
             var element:ISlideElement;
             if(s is ImageVO){
-                element = new ImageElement(s as ImageVO);
+                element = new ImageElement(s as ImageVO, Utils.num());
+                (element as Sprite).addEventListener(starling.events.TouchEvent.TOUCH, thandler);
             }
             if(s is TitleVO){
                 element = new TitleElement(s as TitleVO);
@@ -68,7 +73,6 @@ public class Slide extends Sprite implements IResizable {
     public function destruct():void{
         for each(var s:ISlideElement in _elements){
             s.destruct();
-            _elements.splice(_elements.indexOf(s as Sprite), 1);
             removeChild((s as Sprite));
             (s as Sprite).dispose();
             s = null;
