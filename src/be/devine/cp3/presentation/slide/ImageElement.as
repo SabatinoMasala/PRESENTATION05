@@ -83,7 +83,6 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
             if(_image.texture){
                 _image.texture.base.dispose();
                 _image.texture.dispose();
-                _image.texture = null;
             }
             _image.dispose();
             _image = null;
