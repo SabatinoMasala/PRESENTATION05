@@ -161,6 +161,8 @@ public class MenuControlView extends Sprite implements IResizable {
     // Resize functionaliteit
     public function resize(w:Number, h:Number):void{
 
+        Starling.juggler.remove(_tween);
+
         _arrowUnderlayRight.x = w - _arrowUnderlayRight.width;
 
         _thumbnailViewMask.width = w-200;
