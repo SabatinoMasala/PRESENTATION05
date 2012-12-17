@@ -27,8 +27,6 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _delayResize:Boolean = false;
     private var _prevPoint:Rectangle;
 
-    public var id:uint;
-
     private var _loaderContext:LoaderContext;
 
     private var _texture:Texture;
@@ -36,9 +34,7 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _slideVO:ImageVO;
 
     //Constructor
-    public function ImageElement(slideVO:ImageVO, id:uint) {
-
-        this.id = id;
+    public function ImageElement(slideVO:ImageVO) {
 
         this._slideVO = slideVO;
 
@@ -69,8 +65,6 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     }
 
     public function destruct():void{
-
-        trace('destructing image element with id '+id)
 
         if(_prevPoint){
             _prevPoint = null;

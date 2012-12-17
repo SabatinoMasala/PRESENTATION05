@@ -35,6 +35,8 @@ public class Main extends Sprite {
     // Constructor
     public function Main() {
 
+        debugMode = true;
+
         instance = this;
 
         // Stage juist alignen en scalen

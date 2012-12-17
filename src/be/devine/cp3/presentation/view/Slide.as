@@ -40,10 +40,6 @@ public class Slide extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    private function thandler(e:starling.events.TouchEvent):void {
-        trace( (e.currentTarget as ImageElement).id );
-    }
-
     // Slide opbouwen
     public function construct():void{
 
@@ -55,8 +51,7 @@ public class Slide extends Sprite implements IResizable {
         for each(var s:ISlideVO in _slideVO.arrElements){
             var element:ISlideElement;
             if(s is ImageVO){
-                element = new ImageElement(s as ImageVO, Utils.num());
-                (element as Sprite).addEventListener(starling.events.TouchEvent.TOUCH, thandler);
+                element = new ImageElement(s as ImageVO);
             }
             if(s is TitleVO){
                 element = new TitleElement(s as TitleVO);
