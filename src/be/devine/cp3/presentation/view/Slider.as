@@ -31,11 +31,13 @@ public class Slider extends Sprite {
 
     //Constructor
     public function Slider() {
+        // Track tekenen
         _track = new Quad(1, 6, 0xFFFFFF);
         _track.alpha = .3;
         _track.y = 4;
         addChild(_track);
 
+        // Handle tekenen
         _handle = new Quad(16, 16, 0xFFFFFF);
         _handle.useHandCursor = true;
         addChild(_handle);
@@ -48,6 +50,7 @@ public class Slider extends Sprite {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
+    // Checken of de muis wordt losgelaten of ingeduwd
     private function touchHandler(e:TouchEvent):void {
         var t:Touch = e.getTouch(stage);
         if(t.phase == TouchPhase.BEGAN){
@@ -58,6 +61,7 @@ public class Slider extends Sprite {
         }
     }
 
+    // Drag functionaliteit
     private function dragHandler(e:TouchEvent):void {
         var t:Touch = e.getTouch(stage);
         var newXpos:Number = t.globalX - this.x;
@@ -73,16 +77,27 @@ public class Slider extends Sprite {
         pct = _handle.x / (_track.width);
     }
 
+    // Dispatchen
     private function dispatch():void{
         dispatchEvent(new Event(Slider.SLIDER_VALUE_CHANGED));
     }
 
+    // Value updaten zonder te dispatchen
     public function updateValue(value:Number){
         _percentage = value;
         _handleTween = new Tween(_handle, .3, Transitions.EASE_OUT);
         _handleTween.animate("x", _percentage * _track.width);
         Starling.juggler.add(_handleTween);
     }
+
+    public function resize(w:Number, h:Number):void{
+        _track.width = w;
+        _handle.x = _percentage * _track.width;
+    }
+
+    /**************************************************************************************************************************************
+     ************************************* GETTERS - SETTERS ******************************************************************************
+     **************************************************************************************************************************************/
 
     public function get pct():Number{
         return _percentage;
@@ -94,14 +109,5 @@ public class Slider extends Sprite {
             dispatch();
         }
     }
-
-    public function resize(w:Number, h:Number):void{
-        _track.width = w;
-        _handle.x = _percentage * _track.width;
-    }
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

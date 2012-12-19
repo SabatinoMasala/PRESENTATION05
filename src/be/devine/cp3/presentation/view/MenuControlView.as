@@ -205,9 +205,11 @@ public class MenuControlView extends Sprite implements IResizable {
             _container.y = h - (_container.height - _buttonContainer.height);
         }
 
+        // Slider resizen & centreren
         _slider.resize(w - 230,h);
         _slider.x = (w>>1) - (_slider.width>>1);
 
+        // ButtonContainer verplaatsen
         _buttonContainer.x = w - _buttonContainer.width - 35;
 
     }

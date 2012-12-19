@@ -1,5 +1,4 @@
 package be.devine.cp3.presentation.slideVO {
-import be.devine.cp3.presentation.interfaces.ISlideElement;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
 
 public class SlideVO {

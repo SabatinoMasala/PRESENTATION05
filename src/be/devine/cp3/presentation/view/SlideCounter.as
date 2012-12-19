@@ -43,9 +43,11 @@ public class SlideCounter extends Sprite {
 
         _container = new Sprite();
 
+        // Achtergrondje
         _bg = new Quad(100*Utils.multiplicationFactor, 50*Utils.multiplicationFactor, 0x444444);
         _container.addChild(_bg);
 
+        // Tekstveldje
         _tf = new TextField(_bg.width - 10, _bg.height, "", "Bebas Neue", 24 * Utils.multiplicationFactor, 0xFFFFFF);
         _tf.hAlign = HAlign.CENTER;
         _tf.vAlign = VAlign.CENTER;
@@ -71,6 +73,7 @@ public class SlideCounter extends Sprite {
         _tf.text = (_appModel.currentIndex+1)+" van "+_appModel.vectorSlides.length;
     }
 
+    // Infaden bij hover
     private function touchHandler(event:starling.events.TouchEvent):void {
         var t:Touch = event.getTouch(stage);
         var tw:Tween = new Tween(_container, .5);
@@ -89,9 +92,5 @@ public class SlideCounter extends Sprite {
             Starling.juggler.add(tw);
         }
     }
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

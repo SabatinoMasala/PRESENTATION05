@@ -42,17 +42,11 @@ public class Thumb extends Sprite {
         _border.alpha = .8;
         _border.visible = false;
 
-        //var q:Quad = new Quad(_dimensions.width, _dimensions.height, 0x333333);
-        //addChild(q);
-
+        // Loader zal thumb met nummer "n" inladen
         _loader = new Loader();
         _loader.load(new URLRequest("assets/thumbnails/"+n+".png"));
         _loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadedHandler, false, 0, true);
 
-
-        //var tf:TextField = new TextField(q.width, q.height, ""+n, "Bebas Neue", 30, 0xFFFFFF);
-        //tf.autoScale = true;
-        //addChild(tf);
     }
 
     /**************************************************************************************************************************************

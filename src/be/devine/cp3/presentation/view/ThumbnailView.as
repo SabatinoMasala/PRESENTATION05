@@ -56,6 +56,7 @@ public class ThumbnailView extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private function slideChangedHandler(e:Event):void {
+        // Thumb selecteren & deselecteren
         if(_currentSelected != -1){
             _vectorThumbs[_currentSelected].selected = false;
         }
@@ -67,8 +68,8 @@ public class ThumbnailView extends Sprite implements IResizable {
         _vectorThumbs[_currentSelected].selected = true;
     }
 
+    // Thumbs genereren
     private function generateThumbs(e:Event):void {
-        //var xPos:uint = (stage.stageWidth>>1) - (dimensions.width+10);
         var xPos:uint = 5;
         var num:uint = 0;
         for(var i:uint = 0; i<_appModel.vectorSlides.length; i++){
@@ -82,6 +83,7 @@ public class ThumbnailView extends Sprite implements IResizable {
         }
     }
 
+    // Op thumb geklikt
     private function touchHandler(e:TouchEvent):void {
         var t:Touch = e.getTouch(stage);
         if(t){
@@ -97,9 +99,5 @@ public class ThumbnailView extends Sprite implements IResizable {
 
     }
 
-
-    /**************************************************************************************************************************************
-     ************************************* GETTERS - SETTERS ******************************************************************************
-     **************************************************************************************************************************************/
 }
 }

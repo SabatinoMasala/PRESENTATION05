@@ -1,7 +1,7 @@
 package be.devine.cp3.presentation.factory {
-import be.devine.cp3.presentation.utils.Utils;
 import be.devine.cp3.presentation.interfaces.ISlideVO;
 import be.devine.cp3.presentation.slideVO.SlideVO;
+import be.devine.cp3.presentation.utils.Utils;
 
 public class SlideVOFactory {
 
@@ -11,7 +11,6 @@ public class SlideVOFactory {
 
     //Constructor
     public function SlideVOFactory() {
-        trace("[SlideVOFactory] Construct");
     }
 
     /**************************************************************************************************************************************

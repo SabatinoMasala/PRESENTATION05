@@ -71,6 +71,7 @@ public class Presentation extends Sprite implements IResizable {
         // Initializeren van slideshow
         init();
 
+        // Als we thumbs gaan genereren zal de app niets tonen enkel traces
         if(Main.GENERATE_THUMBS){
             Transition.TIME = 0;
             _slideView.visible  = false;
@@ -81,6 +82,7 @@ public class Presentation extends Sprite implements IResizable {
         // We moeten de stage kunnen aanspreken voor keyboardEvents, dus ADDED_TO_STAGE event koppelen aan this
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 
+        // Slide counter objectje toevoegen
         _slideCounter = new SlideCounter();
         addChild(_slideCounter);
 
@@ -191,6 +193,7 @@ public class Presentation extends Sprite implements IResizable {
 
     }
 
+    // Slide is veranderd bij het aanmaken van thumbs -> 100ms wachten -> drawen -> opslaan
     private function slideChangedHandler(event:Event):void {
 
         var t:Timer = new Timer(100,1);
@@ -201,6 +204,7 @@ public class Presentation extends Sprite implements IResizable {
 
     }
 
+    // Functie die de slide naar een bitmap zal drawen
     private function tHandler(e:flash.events.TimerEvent):void {
 
         var bd:BitmapData = Utils.copyAsBitmapData(_slideView.currentSlideDisplayObject);
@@ -211,18 +215,22 @@ public class Presentation extends Sprite implements IResizable {
         m.scale(.195, .195);
         bd.draw(bitmap, m);
 
+        // encoden naar PNG
         var bA:ByteArray = PNGEncoder.encode(bd);
 
+        // Opslaan op bureaublad
         var f:File = File.desktopDirectory.resolvePath("presentation-files/"+_appModel.currentIndex+".png");
         var fs:FileStream = new FileStream();
         fs.open(f, FileMode.WRITE);
         fs.writeBytes(bA);
         fs.close();
 
+        // Disposen
         bitmap = null;
         bd.dispose();
         bd = null;
 
+        // Naar volgende slide gaan
         _appModel.goToNext();
     }
 

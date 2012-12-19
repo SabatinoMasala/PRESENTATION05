@@ -37,8 +37,10 @@ public class Main extends Sprite {
     // Constructor
     public function Main() {
 
+        // Zal de fps monitor tonen
         debugMode = false;
 
+        // Instantie van deze klasse (om later fullscreen functionaliteit te kunnen oproepen via deze klasse)
         instance = this;
 
         // Stage juist alignen en scalen
@@ -97,6 +99,7 @@ public class Main extends Sprite {
         return _fullScreen;
     }
 
+    // Fullscreen functie
     public function set fullScreen(value:Boolean):void {
         if(value){
             stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
@@ -111,6 +114,7 @@ public class Main extends Sprite {
         return _debugMode;
     }
 
+    // Debugger tonen / verbergen
     public function set debugMode(val:Boolean):void{
         if(val != _debugMode){
             _debugMode = val;

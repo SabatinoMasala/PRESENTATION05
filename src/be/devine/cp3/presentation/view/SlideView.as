@@ -84,20 +84,22 @@ public class SlideView extends Sprite implements IResizable{
         _slides = tempVector;
     }
 
+    // Functie die 3 slides zal cachen: vorig - huidig - volgend
+    // Zal alle andere slides destroyen, tenzij hij nu getoond wordt
     private function renderSlides(startIndex:uint = 0):void {
 
         var minus:uint = (startIndex == 0) ? 0 : 1;
-
         var disposeArray:Vector.<Slide> = new Vector.<Slide>();
 
         for each(var sl:Slide in _renderedSlides){
-
+            // Kijken of de slide weg mag
             if(isDisposable(_slides.indexOf(sl), startIndex)){
                 disposeArray.push(sl);
             };
 
         }
 
+        // Elke slides die weg mogen overlopen
         for each(var s:Slide in disposeArray){
             if(_currentSlideDisplayObject != s){
                 _renderedSlides.splice(_renderedSlides.indexOf(s), 1);
@@ -105,6 +107,7 @@ public class SlideView extends Sprite implements IResizable{
             }
         }
 
+        // kijken welke slides gerenderd moeten worden
         for(var i:uint = startIndex - minus; i < startIndex + (3 - minus); i++){
             if(i > _slides.length-1){
                 break;
@@ -117,6 +120,7 @@ public class SlideView extends Sprite implements IResizable{
 
     }
 
+    // Functie die checkt of een slide weg kan
     private function isDisposable(index:uint, startIndex:uint):Boolean {
 
         var renders:Vector.<uint> = new Vector.<uint>();

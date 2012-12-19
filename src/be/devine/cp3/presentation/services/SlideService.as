@@ -27,6 +27,7 @@ public class SlideService {
      **************************************************************************************************************************************/
 
     public function load():void{
+        // Inladen van xml
         var slideLoader:URLLoader = new URLLoader();
         slideLoader.addEventListener(Event.COMPLETE, completeHandler);
         slideLoader.load(new URLRequest("assets/slides.xml"));
