@@ -8,7 +8,7 @@ import starling.core.Starling;
 
 public class Transition {
 
-    public static const TIME:Number = .5;
+    public static var TIME:Number = .5;
     private static var tween_1:Tween;
     private static var tween_2:Tween;
 

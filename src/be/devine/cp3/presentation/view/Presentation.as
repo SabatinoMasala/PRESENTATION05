@@ -2,18 +2,35 @@ package be.devine.cp3.presentation.view {
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.services.SlideService;
+import be.devine.cp3.presentation.utils.Transition;
+import be.devine.cp3.presentation.utils.Utils;
 
+import com.adobe.images.PNGEncoder;
+
+import flash.display.Bitmap;
+
+import flash.display.BitmapData;
 import flash.display.StageDisplayState;
+import flash.events.TimerEvent;
+import flash.filesystem.File;
+import flash.filesystem.FileMode;
+import flash.filesystem.FileStream;
+import flash.geom.Matrix;
 import flash.ui.Keyboard;
+import flash.utils.ByteArray;
+import flash.utils.Timer;
 
 import org.gestouch.events.GestureEvent;
 import org.gestouch.gestures.SwipeGesture;
 import org.gestouch.gestures.SwipeGestureDirection;
 import org.gestouch.gestures.TapGesture;
 
+import starling.display.Image;
+
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
+import starling.textures.Texture;
 
 /**
  * Presentation
@@ -53,6 +70,13 @@ public class Presentation extends Sprite implements IResizable {
 
         // Initializeren van slideshow
         init();
+
+        if(Main.GENERATE_THUMBS){
+            Transition.TIME = 0;
+            _slideView.visible  = false;
+            _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
+            return;
+        }
 
         // We moeten de stage kunnen aanspreken voor keyboardEvents, dus ADDED_TO_STAGE event koppelen aan this
         this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
@@ -162,8 +186,44 @@ public class Presentation extends Sprite implements IResizable {
         _slideCounter.y = 20;
 
         _menuControlView.resize(w, h);
+
         _slideView.resize(w, h);
 
+    }
+
+    private function slideChangedHandler(event:Event):void {
+
+        var t:Timer = new Timer(100,1);
+        t.start();
+        t.addEventListener(TimerEvent.TIMER_COMPLETE, tHandler);
+
+        trace("Converting slide "+(_appModel.currentIndex+1)+" from "+_appModel.vectorSlides.length)
+
+    }
+
+    private function tHandler(e:flash.events.TimerEvent):void {
+
+        var bd:BitmapData = Utils.copyAsBitmapData(_slideView.currentSlideDisplayObject);
+        var bitmap:Bitmap = new Bitmap(bd);
+
+        var bd:BitmapData = new BitmapData(200, 150, false);
+        var m:Matrix = new Matrix();
+        m.scale(.195, .195);
+        bd.draw(bitmap, m);
+
+        var bA:ByteArray = PNGEncoder.encode(bd);
+
+        var f:File = File.desktopDirectory.resolvePath("presentation-files/"+_appModel.currentIndex+".png");
+        var fs:FileStream = new FileStream();
+        fs.open(f, FileMode.WRITE);
+        fs.writeBytes(bA);
+        fs.close();
+
+        bitmap = null;
+        bd.dispose();
+        bd = null;
+
+        _appModel.goToNext();
     }
 
     /**************************************************************************************************************************************

@@ -142,5 +142,9 @@ public class SlideView extends Sprite implements IResizable{
             current.resize(w, h);
         }
     }
+
+    public function get currentSlideDisplayObject():Slide {
+        return _currentSlideDisplayObject;
+    }
 }
 }

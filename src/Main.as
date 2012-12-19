@@ -25,6 +25,8 @@ import starling.display.DisplayObject;
 
 public class Main extends Sprite {
 
+    public static const GENERATE_THUMBS:Boolean = false;
+
     private var _starling:Starling;
     private var _fullScreen:Boolean = false;
     private var _debugMode:Boolean = false;
@@ -35,7 +37,7 @@ public class Main extends Sprite {
     // Constructor
     public function Main() {
 
-        debugMode = true;
+        debugMode = false;
 
         instance = this;
 

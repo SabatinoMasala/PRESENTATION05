@@ -3,6 +3,7 @@ import be.devine.cp3.presentation.utils.Utils;
 import be.devine.cp3.presentation.view.Arrow;
 import be.devine.cp3.presentation.interfaces.IResizable;
 import be.devine.cp3.presentation.model.AppModel;
+import be.devine.cp3.presentation.view.ThumbnailView;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
@@ -35,6 +36,8 @@ public class MenuControlView extends Sprite implements IResizable {
     private var _thumbnailViewMask:Quad;
     private var _arrowUnderlayLeft:Quad;
     private var _arrowUnderlayRight:Quad;
+    private var _slider:Slider;
+    private var _thumbTween:Tween;
 
     //Constructor
     public function MenuControlView() {
@@ -58,7 +61,13 @@ public class MenuControlView extends Sprite implements IResizable {
         _thumbnailViewMaskDisplayObject.addChild(thumbnailView);
         _thumbnailViewMaskDisplayObject.mask = _thumbnailViewMask;
         _thumbnailViewMaskDisplayObject.x = 100;
+        _thumbnailViewMaskDisplayObject.y -= 15;
         _container.addChild(_thumbnailViewMaskDisplayObject);
+
+        _slider = new Slider();
+        _container.addChild(_slider);
+        _slider.y = 175;
+        _slider.addEventListener(Slider.SLIDER_VALUE_CHANGED, sliderChangedHandler);
 
         // Onzichtbare delen van mask blokkeren
         _arrowUnderlayLeft = new Quad(90*Utils.multiplicationFactor, 200*Utils.multiplicationFactor, 0xFFFFFF);
@@ -110,12 +119,28 @@ public class MenuControlView extends Sprite implements IResizable {
         _buttonContainer.addEventListener(TouchEvent.TOUCH, buttonTouch);
 
         _appModel.addEventListener(AppModel.MENU_STATE_CHANGED, menuStateChangedHandler);
+        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
 
     }
 
     /**************************************************************************************************************************************
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
+
+    private function sliderChangedHandler(e:Event):void {
+        var tV:ThumbnailView = _thumbnailViewMaskDisplayObject.getChildAt(0) as ThumbnailView;
+        _thumbTween = new Tween(tV, .4, Transitions.EASE_OUT);
+        _thumbTween.animate("x", -(_slider.pct * (tV.width - 210)));
+        Starling.juggler.add(_thumbTween);
+    }
+
+    private function slideChangedHandler(e:Event):void {
+        var tV:ThumbnailView = _thumbnailViewMaskDisplayObject.getChildAt(0) as ThumbnailView;
+        _thumbTween = new Tween(tV, .4, Transitions.EASE_OUT);
+        _thumbTween.animate("x", -(_appModel.currentIndex * 220));
+        Starling.juggler.add(_thumbTween);
+        _slider.updateValue((_appModel.currentIndex * 220)/(tV.width - 200));
+    }
 
     // Display functie
     public function display():void{
@@ -179,6 +204,9 @@ public class MenuControlView extends Sprite implements IResizable {
         else{
             _container.y = h - (_container.height - _buttonContainer.height);
         }
+
+        _slider.resize(w - 230,h);
+        _slider.x = (w>>1) - (_slider.width>>1);
 
         _buttonContainer.x = w - _buttonContainer.width - 35;
 

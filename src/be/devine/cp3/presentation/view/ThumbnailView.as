@@ -33,7 +33,8 @@ public class ThumbnailView extends Sprite implements IResizable {
      **************************************************************************************************************************************/
 
     private var _appModel:AppModel;
-    private var _vectorThumbs:Vector.<Slide>;
+    private var _vectorThumbs:Vector.<Thumb>;
+    private var _currentSelected:int = -1;
 
     public var dimensions:Rectangle;
 
@@ -42,10 +43,11 @@ public class ThumbnailView extends Sprite implements IResizable {
 
         dimensions = new Rectangle(0, 0, width, height);
 
-        _vectorThumbs = new Vector.<Slide>();
+        _vectorThumbs = new Vector.<Thumb>();
 
         _appModel = AppModel.getInstance();
-        //_appModel.addEventListener(AppModel.DATA_CHANGED, dataChangedHandler);
+        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler)
+        _appModel.addEventListener(AppModel.DATA_CHANGED, generateThumbs);
 
     }
 
@@ -53,55 +55,46 @@ public class ThumbnailView extends Sprite implements IResizable {
      ************************************* METHODS ****************************************************************************************
      **************************************************************************************************************************************/
 
-    private function dataChangedHandler(event:Event):void {
-        // Even uitstellen van aanmaken thumbs voor performance
-        var t:Timer = new Timer(500, 1);
-        t.start();
-        t.addEventListener(TimerEvent.TIMER_COMPLETE, create);
-    }
-
-    private function create(e:TimerEvent):void {
-        _appModel.removeEventListener(AppModel.SLIDE_CHANGED, create);
-        var tempVector:Vector.<Slide> = new Vector.<Slide>();
-        // Door de Vectors in AppModel lussen en slides aanmaken
-        var xPos:uint = 0;
-        for each(var slideVO:SlideVO in _appModel.vectorSlides){
-            var s:Slide = new Slide(slideVO);
-            tempVector.push(s);
-            s.construct();
-            s.x = xPos;
-            addChild(s);
-            s.resize(stage.stageWidth, stage.stageHeight);
-            s.width = dimensions.width;
-            s.height = dimensions.height;
-            xPos += s.width + 10;
-            s.addEventListener(TouchEvent.TOUCH, touchHandler);
-            s.useHandCursor = true;
+    private function slideChangedHandler(e:Event):void {
+        if(_currentSelected != -1){
+            _vectorThumbs[_currentSelected].selected = false;
         }
-        _vectorThumbs = tempVector;
-        _appModel.addEventListener(AppModel.SLIDE_CHANGED, slideChangedHandler);
-        slideChangedHandler();
+        _currentSelected = _appModel.currentIndex;
+        select();
     }
 
-    private function touchHandler(event:TouchEvent):void {
-        var t:Touch = event.getTouch(stage) as Touch;
-        if(t.phase == TouchPhase.ENDED){
-            _appModel.currentSlide = _appModel.vectorSlides[(getChildIndex(event.currentTarget as Sprite))];
+    private function select():void {
+        _vectorThumbs[_currentSelected].selected = true;
+    }
+
+    private function generateThumbs(e:Event):void {
+        //var xPos:uint = (stage.stageWidth>>1) - (dimensions.width+10);
+        var xPos:uint = 5;
+        var num:uint = 0;
+        for(var i:uint = 0; i<_appModel.vectorSlides.length; i++){
+            var t:Thumb = new Thumb(dimensions, num++);
+            t.x = xPos;
+            xPos += t.width + 10;
+            addChild(t);
+            t.useHandCursor = true;
+            _vectorThumbs.push(t);
+            t.addEventListener(TouchEvent.TOUCH, touchHandler);
         }
     }
 
-    public function resize(w:Number, h:Number):void{
-    }
-
-    private function slideChangedHandler(event:Event = null):void {
-        for each(var s:Slide in _vectorThumbs){
-            if(getChildIndex(s) == _appModel.currentIndex){
-                s.alpha = 1;
-            }
-            else{
-                s.alpha = .4;
+    private function touchHandler(e:TouchEvent):void {
+        var t:Touch = e.getTouch(stage);
+        if(t){
+            if(t.phase == TouchPhase.ENDED){
+                var thumb:Thumb = e.currentTarget as Thumb;
+                var index:uint = _vectorThumbs.indexOf(thumb);
+                _appModel.currentSlide = _appModel.vectorSlides[index];
             }
         }
+    }
+
+    public function resize(w:Number, h:Number):void {
+
     }
 
 
