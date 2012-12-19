@@ -1,6 +1,7 @@
 package be.devine.cp3.presentation.utils {
 import be.devine.cp3.presentation.model.AppModel;
 import be.devine.cp3.presentation.view.Slide;
+import be.devine.cp3.presentation.view.SlideView;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
@@ -11,9 +12,6 @@ public class Transition {
     public static var TIME:Number = .5;
     private static var tween_1:Tween;
     private static var tween_2:Tween;
-
-    private static var _newSlide:Slide;
-    private static var _oldSlide:Slide;
 
     public static function transition(slide_1:Slide, slide_2:Slide):void{
 

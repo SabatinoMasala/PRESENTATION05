@@ -99,8 +99,10 @@ public class SlideView extends Sprite implements IResizable{
         }
 
         for each(var s:Slide in disposeArray){
-            _renderedSlides.splice(_renderedSlides.indexOf(s), 1);
-            s.destruct();
+            if(_currentSlideDisplayObject != s){
+                _renderedSlides.splice(_renderedSlides.indexOf(s), 1);
+                s.destruct();
+            }
         }
 
         for(var i:uint = startIndex - minus; i < startIndex + (3 - minus); i++){

@@ -26,11 +26,8 @@ public class ImageElement extends Sprite implements ISlideElement, IResizable {
     private var _image:Image;
     private var _delayResize:Boolean = false;
     private var _prevPoint:Rectangle;
-
     private var _loaderContext:LoaderContext;
-
     private var _texture:Texture;
-
     private var _slideVO:ImageVO;
 
     //Constructor
