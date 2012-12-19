@@ -83,7 +83,7 @@ public class Slider extends Sprite {
     }
 
     // Value updaten zonder te dispatchen
-    public function updateValue(value:Number){
+    public function updateValue(value:Number):void{
         _percentage = value;
         _handleTween = new Tween(_handle, .3, Transitions.EASE_OUT);
         _handleTween.animate("x", _percentage * _track.width);

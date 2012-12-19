@@ -210,7 +210,7 @@ public class Presentation extends Sprite implements IResizable {
         var bd:BitmapData = Utils.copyAsBitmapData(_slideView.currentSlideDisplayObject);
         var bitmap:Bitmap = new Bitmap(bd);
 
-        var bd:BitmapData = new BitmapData(200, 150, false);
+        bd = new BitmapData(200, 150, false);
         var m:Matrix = new Matrix();
         m.scale(.195, .195);
         bd.draw(bitmap, m);
